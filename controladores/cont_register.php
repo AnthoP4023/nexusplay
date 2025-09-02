@@ -1,9 +1,8 @@
 <?php
     session_start();
     require_once '../config_DB/database.php';
-    require_once '../includes/functions.php';
+    require_once '../controladores/functions.php';
 
-    // Habilitar reporte de errores de MySQLi (solo entorno de pruebas)
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
     if (isLoggedIn()) {
@@ -15,12 +14,12 @@
     $success = '';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $username = trim($_POST['username']);
-        $email = trim($_POST['email']);
-        $nombre = trim($_POST['nombre']);
-        $apellido = trim($_POST['apellido']);
-        $password = trim($_POST['password']);
-        $confirm_password = trim($_POST['confirm_password']);
+        $email = trim($_POST['correo_elect']);
+        $username = trim($_POST['nombre_usuario']);
+        $nombre = trim($_POST['nombres']);
+        $apellido = trim($_POST['apellidos']);
+        $password = trim($_POST['clave']);
+        $confirm_password = trim($_POST['confirm_clave']);
         $terms_accepted = isset($_POST['terms']);
 
         if (empty($username) || empty($email) || empty($nombre) || empty($apellido) || empty($password) || empty($confirm_password)) {
@@ -34,7 +33,6 @@
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $error = 'El email no es válido';
         } else {
-            // Verificar si el usuario o email ya existen
             $check_query = "SELECT * FROM usuarios WHERE username = '$username' OR email = '$email'";
             
             try {
@@ -43,21 +41,20 @@
                 if ($check_result && $check_result->num_rows > 0) {
                     $error = 'El usuario o email ya están registrados';
                 } else {
-                    // VULNERABLE: Inserción sin prepared statements
-                    $password_hash = md5($password);
+                    $password_hash = md5($password); // Intencionalmente inseguro 
                     $insert_query = "INSERT INTO usuarios (email, username, password, nombre, apellido, imagen_perfil, tipo_usuario, fecha_registro) 
                                 VALUES ('$email', '$username', '$password_hash', '$nombre', '$apellido', 'default-avatar.png', 'normal', NOW())";
                     
                     if ($conn->query($insert_query)) {
                         $success = 'Usuario registrado exitosamente. Puedes iniciar sesión ahora.';
+                            //header('Location: login.php'); exit();
                     } else {
                         $error = 'Error al registrar usuario';
                     }
                 }
             } catch (mysqli_sql_exception $e) {
-                // Mostrar error de SQL directamente (solo pruebas)
                 die("Error en la consulta: " . $e->getMessage());
             }
         }
-    }
+    }  
 ?>

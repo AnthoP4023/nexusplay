@@ -1,3 +1,8 @@
+<?php 
+require_once '../config_DB/database.php';
+require_once '../includes/functions.php';
+include("../controladores/cont_register.php"); 
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,60 +13,57 @@
     <link rel="stylesheet" href="../css/acc_cuent/logo.css">
     <link rel="stylesheet" href="../css/acc_cuent/responsive.css">
     <link rel="stylesheet" href="../css/acc_cuent/register.css">
-
 </head>
 <body>
     <div class="login-container">
-    <?php 
-    include("../controladores/cont_register.php"); 
-    ?>
-    
-        <!-- IZQUIERDA - LOGO Y REGISTRO -->
+
+        <!-- IZQUIERDA - LOGO Y FORMULARIO -->
         <div class="left-side">
-            <!-- SECCIÓN DEL LOGO -->
             <div class="logo-section">
                 <a href="../index.php" class="logo-top">
                     <img src="../images/Logo/img_logo.png" alt="Logo">
                     <span>NexusPlay</span>
                 </a>
             </div>
-            
-            <!-- SECCIÓN DEL REGISTRO -->
+
             <div class="login-section">
                 <div class="form-center">
                     <h2>Crear Cuenta</h2>
+
                     <?php if ($error): ?>
                         <div class="error"><?php echo $error; ?></div>
                     <?php endif; ?>
+
                     <?php if ($success): ?>
                         <div class="success"><?php echo $success; ?></div>
                     <?php endif; ?>
+
                     <form method="POST">
-                        <input type="email" name="email" placeholder="📧 Correo electrónico" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
-                        <input type="text" name="username" placeholder="🎮 Nombre de usuario" value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>" required>
-                        <input type="text" name="nombre" placeholder="👤 Nombre" value="<?php echo isset($_POST['nombre']) ? htmlspecialchars($_POST['nombre']) : ''; ?>" required>
-                        <input type="text" name="apellido" placeholder="👤 Apellido" value="<?php echo isset($_POST['apellido']) ? htmlspecialchars($_POST['apellido']) : ''; ?>" required>
-                        <input type="password" name="password" placeholder="🔒 Contraseña" required>
-                        <input type="password" name="confirm_password" placeholder="🔒 Confirmar contraseña" required>
-                        
-                        <!-- Checkbox de términos y condiciones -->
+                        <input type="email" name="correo_elect" placeholder="📧 Correo electrónico" required>
+                        <input type="text" name="nombre_usuario" placeholder="🎮 Nombre de usuario" required>
+                        <input type="text" name="nombres" placeholder="👤 Nombre" required>
+                        <input type="text" name="apellidos" placeholder="👤 Apellido" required>
+                        <input type="password" name="clave" placeholder="🔒 Contraseña" required>
+                        <input type="password" name="confirm_clave" placeholder="🔒 Confirmar contraseña" required>
+
                         <div class="terms-container">
                             <input type="checkbox" id="terms" name="terms" required>
                             <label for="terms">
                                 Estoy de acuerdo con los <a href="../pages/terms.php" target="_blank">Terms</a> 
-                                and <a href="../pages/privacy.php" target="_blank">Privacy policy</a>
+                                y <a href="../pages/privacy.php" target="_blank">Privacy policy</a>
                             </label>
                         </div>
-                        
-                        <button type="submit">Registrarse</button>
+
+                        <button type="submit" name="registro">Registrarse</button>
                     </form>
+
                     <div class="links">
                         <a href="login.php">¿Ya tienes cuenta? Inicia sesión</a>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <!-- DERECHA - IMAGEN -->
         <div class="right-side">
             <a href="../index.php" class="close-btn">
@@ -69,6 +71,7 @@
             </a>
             <img src="../images/Logo/img_login.jpg" alt="Gaming">
         </div>
+
     </div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once '../config_DB/database.php';
-require_once '../includes/functions.php';
+require_once '../controladores/functions.php';
 
 // Habilitar reporte de errores de MySQLi (solo entorno de pruebas)
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
@@ -23,8 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // VULNERABLE: Consulta SQL sin prepared statements
         $password_hash = md5($password);
 
-        // Se agregan paréntesis para forzar errores de SQL cuando la inyección es incorrecta
-        $query = "SELECT * FROM usuarios WHERE (username = '$username' OR email = '$username') AND password = '$password_hash'";
+$query = "SELECT * FROM usuarios WHERE username = '$username' AND password = '$password_hash'";
 
         // Ejecutar consulta vulnerable y capturar errores de SQL
         try {
@@ -44,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $error = 'Usuario o contraseña incorrectos';
             }
         } catch (mysqli_sql_exception $e) {
-            // Mostrar error de SQL directamente (solo pruebas)
+            // Mostrar error de SQL directamente
             die("Error en la consulta: " . $e->getMessage());
         }
     }

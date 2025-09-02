@@ -11,6 +11,7 @@
     width: auto;
     margin: 0;
     margin-top: 2px;
+    margin-left: 2px;
     accent-color: #2563eb;
 }
 
@@ -38,16 +39,15 @@
     text-align: center;
 }
 
-/* Hacer que solo la sección de registro sea scrolleable de forma invisible */
+/* Hacer que solo la sección de registro sea scrolleable */
 .left-side {
     overflow-y: auto;
-    /* Ocultar la barra de scroll pero mantener funcionalidad */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer y Edge */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .left-side::-webkit-scrollbar {
-    display: none; /* Chrome, Safari y Opera */
+    display: none; 
 }
 
 .login-section {
