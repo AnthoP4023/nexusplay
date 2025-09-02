@@ -1,0 +1,65 @@
+/* LOGIN CSS - NexusPlay */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.login-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+/* LADO IZQUIERDO */
+.left-side {
+    width: 50%;
+    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* SECCIÓN DEL LOGO */
+.logo-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.logo-top {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+
+.logo-top img {
+    height: 90px;
+    filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.5));
+}
+
+.logo-top span {
+    color: #e5e5e5;
+    font-size: 1.8rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #e5e5e5, #2563eb, #dc2626, #4a4a4a);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: colorShift 3s ease-in-out infinite;
+}
+
+@keyframes colorShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}

@@ -1,0 +1,55 @@
+/* Estilos adicionales para el checkbox */
+.terms-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 1rem;
+    font-size: 14px;
+}
+
+.terms-container input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    margin-top: 2px;
+    accent-color: #2563eb;
+}
+
+.terms-container label {
+    color: #e5e5e5;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.terms-container a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.terms-container a:hover {
+    text-decoration: underline;
+}
+
+.success {
+    background: #16a34a;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Hacer que solo la sección de registro sea scrolleable de forma invisible */
+.left-side {
+    overflow-y: auto;
+    /* Ocultar la barra de scroll pero mantener funcionalidad */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer y Edge */
+}
+
+.left-side::-webkit-scrollbar {
+    display: none; /* Chrome, Safari y Opera */
+}
+
+.login-section {
+    flex: 1;
+}
