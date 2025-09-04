@@ -1,0 +1,160 @@
+
+/* RESPONSIVE SEARCH */
+.search-responsive { 
+    display: none; 
+}
+
+/* RESPONSIVE */
+@media (max-width: 1000px) {
+    /* Layout principal */
+    .nav-container { 
+        gap: 1rem; 
+        padding: 0 1rem; 
+    }
+    
+    /* Logo */
+    .logo-img { height: 35px; }
+    .logo-text { font-size: 1.1rem; }
+
+    /* Ocultar buscador principal y mostrar responsive */
+    .search-with-platforms { 
+        display: none !important; 
+    }
+    
+    /* Mostrar buscador responsive */
+    .search-responsive {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        margin: 0 10px;
+    }
+
+    /* Barra de plataformas móvil */
+    .mobile-platforms-bar { 
+        display: block; 
+    }
+
+    /* Íconos de navegación compactos */
+    .nav-icons { 
+        gap: 0.4rem; 
+        margin-left: auto; 
+    }
+    .nav-icon { 
+        padding: 4px 6px; 
+        min-width: auto; 
+    }
+    .nav-icon span { font-size: 10px; }
+    .nav-icon i { 
+        font-size: 14px; 
+        margin-bottom: 2px; 
+    }
+
+    /* SEARCH RESPONSIVE STYLES */
+    
+    /* Botón lupa responsive */
+    .search-responsive .search-trigger-btn {
+        background: linear-gradient(45deg, #3589ff, #a0b9f4);
+        border: none;
+        color: white;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    /* Input responsive oculto por defecto */
+    .search-responsive .search-input-form {
+        display: none;
+        align-items: center;
+        width: 100%;  /* Ocupar todo el contenedor */
+        max-width: 100%; /* Evitar que se quede pequeño */
+        border-radius: 25px;
+        padding: 8px 15px;
+        background: linear-gradient(90deg, #3589ff, #a0b9f4);
+        box-sizing: border-box;
+        margin: 0 auto;
+        position: relative; /* Cambiado de absolute */
+        transform: none; /* Quitamos translate */
+        height: 40px;
+    }
+
+
+    /* Estados del buscador responsive */
+    #toggleSearchMobile:checked ~ .search-trigger-btn {
+        display: none;
+    }
+
+    #toggleSearchMobile:checked ~ .search-input-form {
+        display: flex !important;
+        width: calc(100% - 20px); /* Dejamos margen pequeño */
+        position: relative; /* que no se superponga con el header */
+        left: 0;
+        top: 0;
+        transform: none;
+        z-index: 101;
+    }
+
+    /* Estilos del input responsive */
+    .search-responsive .search-input-field {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        padding: 8px 12px;
+        border-radius: 20px;
+        color: white;
+        background: transparent;
+    }
+
+    .search-responsive .search-input-field::placeholder {
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 500;
+    }
+
+    /* Botón X responsive */
+    .search-responsive .search-cancel-btn {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        margin-left: 8px;
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 50%;
+    }
+
+    .search-responsive .search-cancel-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+@media (max-width: 768px) {
+    /* Ajustes para móviles pequeños */
+    .nav-container { 
+        padding: 0 0.5rem; 
+    }
+    .logo-img { height: 30px; }
+    .logo-text { font-size: 1rem; }
+
+    .mobile-platforms-content { gap: 1.5rem; }
+    .mobile-platform-icon i { font-size: 1.3rem; }
+    .mobile-platform-icon span { font-size: 0.75rem; }
+
+    /* Íconos más compactos */
+    .nav-icons { gap: 0.3rem; }
+    .nav-icon { 
+        padding: 3px 5px; 
+        min-width: auto; 
+    }
+    .nav-icon span { font-size: 9px; }
+    .nav-icon i { 
+        font-size: 12px; 
+        margin-bottom: 1px; 
+    }
+}

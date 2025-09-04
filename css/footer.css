@@ -106,7 +106,10 @@
     padding-top: 2rem;
     border-top: 1px solid rgba(74, 74, 74, 0.3);
     color: #888;
-    font-size: 0.9rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 /* RESPONSIVE FOOTER */
@@ -121,12 +124,9 @@
     }
     
     .footer-content {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: 1fr;
         gap: 1.5rem;
-    }
-    
-    .footer-section h4 {
-        font-size: 1.1rem;
+        padding: 0 1rem;
     }
     
     .footer-section p {

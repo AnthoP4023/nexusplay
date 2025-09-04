@@ -1,0 +1,27 @@
+
+.footer {
+    margin-top: 80px;
+}
+
+.footer-container {
+    background-color: #1a1a1a;
+    color: white;
+    text-align: center;
+    padding: 15px 20px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.content {
+    --gap: 30px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    max-width: 1200px;
+    width: 100%;
+}

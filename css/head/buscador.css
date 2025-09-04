@@ -1,0 +1,195 @@
+/* BUSCADOR CON PLATAFORMAS DENTRO */
+.search-with-platforms {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(45, 45, 45, 0.8);
+    border-radius: 25px;
+    border: 2px solid rgba(74, 74, 74, 0.5);
+    padding: 2px 15px;
+    min-width: 500px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.search-with-platforms:focus-within {
+    border-color: #2563eb;
+    box-shadow: 0 0 25px rgba(37, 99, 235, 0.3);
+}
+
+/* PLATAFORMAS */
+.platforms-inside {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex: 1;
+}
+
+.platform-icon {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: #888;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    padding: 6px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+.platform-icon:hover {
+    color: #e5e5e5;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.platform-icon:nth-child(1):hover { color: #ff6b35; }
+.platform-icon:nth-child(2):hover { color: #0070d1; }
+.platform-icon:nth-child(3):hover { color: #5bb85c; }
+
+.platform-icon i { font-size: 1.1rem; }
+.platform-icon span { font-weight: 500; font-size: 0.9rem; }
+
+
+
+/* BOTÓN LUPA TRIGGER */
+.search-trigger-btn {
+    background: linear-gradient(45deg, #3589ff, #a0b9f4);
+    border: none;
+    color: white;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.search-trigger-btn:hover {
+    background: linear-gradient(45deg, #2563eb, #3b82f6);
+    transform: scale(1.05);
+}
+
+/* Ocultar checkbox */
+.search-toggle { display: none; }
+
+/* Buscador normal - desktop */
+.search-input-form { display: none; }
+.search-toggle:checked ~ .search-input-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.search-toggle:checked ~ .search-trigger-btn { display: none; }
+.search-toggle:checked ~ .platforms-inside { display: none; }
+
+.search-input-field {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #e5e5e5;
+    font-size: 16px;
+    outline: none;
+    padding: 10px 0;
+    min-width: 0;
+}
+
+.search-input-field::placeholder { color: #888; }
+
+/* Botones dentro del buscador */
+.search-submit-icon, .search-cancel-btn {
+    border: none;
+    color: white;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.search-submit-icon {
+    background: linear-gradient(45deg, #3589ff, #a0b9f4);
+}
+.search-submit-icon:hover {
+    background: linear-gradient(45deg, #2563eb, #3b82f6);
+    transform: scale(1.05);
+}
+
+.search-cancel-btn {
+    background: linear-gradient(45deg, #dc2626, #ef4444);
+}
+.search-cancel-btn:hover {
+    background: linear-gradient(45deg, #b91c1c, #dc2626);
+    transform: scale(1.05);
+}
+
+/* BARRA DE PLATAFORMAS MÓVIL */
+.mobile-platforms-bar {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: rgba(26, 26, 26, 0.4);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(26, 26, 26, 0.4);
+    padding: 0.5rem;
+    z-index: 99;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+.mobile-platforms-bar.hidden {
+    transform: translateY(-100%);
+}
+
+.mobile-platforms-content {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.mobile-platform-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #bbb;
+    transition: all 0.3s ease;
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+.mobile-platform-icon:hover {
+    color: #e5e5e5;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-platform-icon:nth-child(1):hover { color: #ff6b35; }
+.mobile-platform-icon:nth-child(2):hover { color: #0070d1; }
+.mobile-platform-icon:nth-child(3):hover { color: #5bb85c; }
+
+.mobile-platform-icon i {
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+}
+
+.mobile-platform-icon span {
+    font-size: 0.7rem;
+    font-weight: 500;
+}

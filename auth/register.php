@@ -1,6 +1,6 @@
 <?php 
 require_once '../config_DB/database.php';
-require_once '../includes/functions.php';
+require_once '../controladores/functions.php';
 include("../controladores/cont_register.php"); 
 ?>
 <!DOCTYPE html>
