@@ -1,3 +1,7 @@
+<?php 
+    include("../controladores/cont_login.php"); 
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,10 +15,7 @@
 
 </head>
 <body>
-    <div class="login-container">
-    <?php include("../controladores/cont_login.php"); 
-    ?>
-    
+    <div class="login-container">  
         <!-- IZQUIERDA - LOGO Y LOGIN -->
         <div class="left-side">
             <!-- SECCIÓN DEL LOGO -->

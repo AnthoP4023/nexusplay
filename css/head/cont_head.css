@@ -4,7 +4,7 @@
 .header {
     background: rgba(26, 26, 26, 0.95);
     backdrop-filter: blur(15px);
-    padding: 1rem 0;
+    padding: 0 30px;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -17,6 +17,6 @@
     justify-content: space-between;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 2rem;
+    height: 80px;
     position: relative;
 }

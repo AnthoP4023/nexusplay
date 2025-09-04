@@ -52,8 +52,6 @@
 .platform-icon i { font-size: 1.1rem; }
 .platform-icon span { font-weight: 500; font-size: 0.9rem; }
 
-
-
 /* BOTÓN LUPA TRIGGER */
 .search-trigger-btn {
     background: linear-gradient(45deg, #3589ff, #a0b9f4);
@@ -136,25 +134,55 @@
     transform: scale(1.05);
 }
 
+/* ICONOS NAVEGACIÓN */
+.nav-icons {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.nav-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #e5e5e5;
+    padding: 1px 1px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    min-width: 60px;
+}
+
+.nav-icon:hover {
+    color: #2563eb; 
+    transform: scale(1.1);
+}
+
+.nav-icon.logout:hover {
+    color: red; 
+    transform: scale(1.1);
+}
+
+
+.nav-icon i { font-size: 1.1rem; margin-bottom: 4px; }
+.nav-icon span { font-size: 0.75rem; font-weight: 500; }
+
+
 /* BARRA DE PLATAFORMAS MÓVIL */
 .mobile-platforms-bar {
     display: none;
     position: fixed;
-    top: 64px;
     left: 0;
     right: 0;
     background: rgba(26, 26, 26, 0.4);
     backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(26, 26, 26, 0.4);
+    border-bottom: 1px solid transparent;
     padding: 0.5rem;
     z-index: 99;
     transform: translateY(0);
     transition: all 0.3s ease;
 }
 
-.mobile-platforms-bar.hidden {
-    transform: translateY(-100%);
-}
+.mobile-platforms-bar.hidden { transform: translateY(-100%); }
 
 .mobile-platforms-content {
     display: flex;
@@ -184,12 +212,10 @@
 .mobile-platform-icon:nth-child(2):hover { color: #0070d1; }
 .mobile-platform-icon:nth-child(3):hover { color: #5bb85c; }
 
-.mobile-platform-icon i {
-    font-size: 1.2rem;
-    margin-bottom: 2px;
-}
+.mobile-platform-icon i { font-size: 1.2rem; margin-bottom: 2px; }
+.mobile-platform-icon span { font-size: 0.7rem; font-weight: 500; }
 
-.mobile-platform-icon span {
-    font-size: 0.7rem;
-    font-weight: 500;
+/* RESPONSIVE SEARCH */
+.search-responsive { 
+    display: none; 
 }

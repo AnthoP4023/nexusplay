@@ -1,15 +1,8 @@
-
-/* RESPONSIVE SEARCH */
-.search-responsive { 
-    display: none; 
-}
-
 /* RESPONSIVE */
 @media (max-width: 1000px) {
-    /* Layout principal */
     .nav-container { 
-        gap: 1rem; 
-        padding: 0 1rem; 
+        align-items: center;
+        height: 80px; 
     }
     
     /* Logo */
@@ -72,18 +65,13 @@
     .search-responsive .search-input-form {
         display: none;
         align-items: center;
-        width: 100%;  /* Ocupar todo el contenedor */
-        max-width: 100%; /* Evitar que se quede pequeño */
+        width: calc(100% - 20px); /* Compensar el margin del contenedor */
         border-radius: 25px;
         padding: 8px 15px;
         background: linear-gradient(90deg, #3589ff, #a0b9f4);
         box-sizing: border-box;
         margin: 0 auto;
-        position: relative; /* Cambiado de absolute */
-        transform: none; /* Quitamos translate */
-        height: 40px;
     }
-
 
     /* Estados del buscador responsive */
     #toggleSearchMobile:checked ~ .search-trigger-btn {
@@ -92,12 +80,12 @@
 
     #toggleSearchMobile:checked ~ .search-input-form {
         display: flex !important;
-        width: calc(100% - 20px); /* Dejamos margen pequeño */
-        position: relative; /* que no se superponga con el header */
-        left: 0;
-        top: 0;
-        transform: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         z-index: 101;
+        height: 40px; /* Altura fija para controlar el tamaño */
     }
 
     /* Estilos del input responsive */

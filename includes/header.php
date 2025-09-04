@@ -80,52 +80,49 @@ if (file_exists('includes/functions.php')) {
             </button>
         </form>
     </div>
+    
+        <!-- ICONOS NAVEGACIÓN -->
+        <div class="nav-icons">
+            <!-- Noticias -->
+            <a href="news.php" class="nav-icon" title="Noticias">
+                <i class="fas fa-newspaper"></i>
+                <span>Noticias</span>
+            </a>
 
+            <!-- Carrito -->
+            <a href="cart.php" class="nav-icon" title="Carrito">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Carrito</span>
+            </a>
 
-
-            <!-- ICONOS NAVEGACIÓN -->
-            <div class="nav-icons">
-                <!-- Noticias -->
-                <a href="news.php" class="nav-icon" title="Noticias">
-                    <i class="fas fa-newspaper"></i>
-                    <span>Noticias</span>
-                </a>
-
-                <!-- Carrito -->
-                <a href="cart.php" class="nav-icon" title="Carrito">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span>Carrito</span>
-                </a>
-
-                <!-- Login/Perfil -->
-                <?php if (isset($_SESSION['user_id'])): ?>
-                    <!-- Mostrar panel de administración si es admin -->
-                    <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] === 'admin'): ?>
-                        <a href="admin/index.php" class="nav-icon" title="Panel Admin">
-                            <i class="fas fa-cogs"></i>
-                            <span>Admin</span>
-                        </a>
-                    <?php endif; ?>
-                    
-                    <a href="profile.php" class="nav-icon" title="Perfil">
-                        <i class="fas fa-user"></i>
-                        <span><?php echo htmlspecialchars($_SESSION['username']); ?></span>
-                    </a>
-                    
-                    <!-- Cerrar Sesión -->
-                    <a href="auth/logout.php" class="nav-icon logout" title="Cerrar Sesión">
-                        <i class="fas fa-door-open"></i>
-                        <span>Salir</span>
-                    </a>
-                <?php else: ?>
-                    <a href="auth/login.php" class="nav-icon" title="Iniciar Sesión">
-                        <i class="fas fa-user"></i>
-                        <span>Login</span>
+            <!-- Login/Perfil -->
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <!-- Mostrar panel de administración si es admin -->
+                <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] === 'admin'): ?>
+                    <a href="admin/index.php" class="nav-icon" title="Panel Admin">
+                        <i class="fas fa-cogs"></i>
+                        <span>Admin</span>
                     </a>
                 <?php endif; ?>
-            </div>
+                
+                <a href="profile.php" class="nav-icon" title="Perfil">
+                    <i class="fas fa-user"></i>
+                    <span><?php echo htmlspecialchars($_SESSION['username']); ?></span>
+                </a>
+                
+                <!-- Cerrar Sesión -->
+                <a href="auth/logout.php" class="nav-icon logout" title="Cerrar Sesión">
+                    <i class="fas fa-door-open"></i>
+                    <span>Salir</span>
+                </a>
+            <?php else: ?>
+                <a href="auth/login.php" class="nav-icon" title="Iniciar Sesión">
+                    <i class="fas fa-user"></i>
+                    <span>Login</span>
+                </a>
+            <?php endif; ?>
         </div>
-
+    </div>
 </header>
 
 <!-- BARRA DE PLATAFORMAS MÓVIL (estática, sin JS) -->
@@ -145,78 +142,3 @@ if (file_exists('includes/functions.php')) {
         </a>
     </div>
 </div>
-
-<script>
-function expandSearchInput() {
-    const platformsInside = document.getElementById('platformsInside');
-    const searchTriggerBtn = document.getElementById('searchTriggerBtn');
-    const searchInputForm = document.getElementById('searchInputForm');
-    const searchInputField = document.getElementById('searchInputField');
-    
-    // Ocultar plataformas y botón lupa
-    platformsInside.style.display = 'none';
-    searchTriggerBtn.style.display = 'none';
-    
-    // Mostrar input de búsqueda
-    searchInputForm.style.display = 'flex';
-    
-    // Enfocar el input
-    setTimeout(() => {
-        searchInputField.focus();
-    }, 100);
-}
-
-function collapseSearchInput() {
-    const platformsInside = document.getElementById('platformsInside');
-    const searchTriggerBtn = document.getElementById('searchTriggerBtn');
-    const searchInputForm = document.getElementById('searchInputForm');
-    const searchInputField = document.getElementById('searchInputField');
-    
-    // Limpiar input
-    searchInputField.value = '';
-    
-    // Ocultar input de búsqueda
-    searchInputForm.style.display = 'none';
-    
-    // Mostrar plataformas y botón lupa
-    platformsInside.style.display = 'flex';
-    searchTriggerBtn.style.display = 'flex';
-}
-
-// Cerrar con ESC
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        collapseSearchInput();
-    }
-});
-
-// Cerrar si se hace clic fuera
-document.addEventListener('click', function(e) {
-    const searchWithPlatforms = document.getElementById('searchWithPlatforms');
-    const searchInputForm = document.getElementById('searchInputForm');
-    
-    if (!searchWithPlatforms.contains(e.target) && searchInputForm.style.display === 'flex') {
-        collapseSearchInput();
-    }
-});
-
-// Script para ocultar/mostrar barra móvil al hacer scroll
-let lastScrollTop = 0;
-const mobilePlatformsBar = document.getElementById('mobilePlatformsBar');
-
-window.addEventListener('scroll', function() {
-    if (window.innerWidth <= 768) {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > lastScrollTop) {
-            // Scrolling down - hide bar
-            mobilePlatformsBar.classList.add('hidden');
-        } else {
-            // Scrolling up - show bar
-            mobilePlatformsBar.classList.remove('hidden');
-        }
-        
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-    }
-});
-</script>
