@@ -14,3 +14,30 @@ body {
     max-width: 1200px;
     width: 100%;
 }
+
+.admin-profile-layout {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-container .main-panel {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+    position: relative;
+}
+
+.profile-container .main-panel .avatar-card .admin-avatar {
+    position: relative;
+    width: 120px;
+}
+
+.profile-container .main-panel .avatar-card .admin-links {
+    --gap-small: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
+    margin-bottom: 0 !important;
+}

@@ -17,8 +17,20 @@ include '../controladores/cont_profile.php';
 <body>
     <?php include '../includes/header.php'; ?>
     <main class="main-content">
-    <div class="profile-container"></div> 
-    
+        <div class="admin-profile-layout" id="ig-profile-main-panel">
+            <div class="profile-container">
+                <div class="main-panel">
+                    <div class="avatar-card">
+                        <div class="admin-avatar">
+
+                        </div>
+                        <div class="admin-link">
+
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
     </main>
     <?php include '../includes/footer.php'; ?>
 </body>
