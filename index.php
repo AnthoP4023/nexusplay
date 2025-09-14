@@ -56,7 +56,7 @@ include 'controladores/cont_index.php';
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Tendencias</h2>
-                    <a href="games.php" class="view-all">Ver todos <i class="fas fa-chevron-right"></i></a>
+                    <a href="/prueba5/search.php?plataforma=&categoria=&precio=" class="view-all">Ver todos <i class="fas fa-chevron-right"></i></a>
                 </div>
                 <div class="games-grid">
                     <?php if ($tendencias_result && $tendencias_result->num_rows > 0): ?>
@@ -126,7 +126,7 @@ include 'controladores/cont_index.php';
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Te recomendamos</h2>
-                    <a href="games.php" class="view-all">Ver todos <i class="fas fa-chevron-right"></i></a>
+                    <a href="/prueba5/search.php?plataforma=&categoria=&precio=" class="view-all">Ver todos <i class="fas fa-chevron-right"></i></a>
                 </div>
                 <div class="games-grid">
                     <?php if ($recomendados_result && $recomendados_result->num_rows > 0): ?>
