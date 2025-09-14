@@ -18,7 +18,7 @@ include 'functions/fun_search.php';
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/search.css">
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="/prueba5/assets/fontawesome/css/all.min.css">
 </head>
 <body>
     <?php include 'includes/header.php'; ?>

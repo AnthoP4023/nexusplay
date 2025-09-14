@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0; 
+}
+
+.profile-container {
+    --separator: 80px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--separator);
+    margin-top: 190px;
+    max-width: 1200px;
+    width: 100%;
+}
