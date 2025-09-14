@@ -49,6 +49,13 @@ include '../controladores/cont_profile.php';
                     <div class="password-container">
                         <div class="password-change">
                             <h3>Cambiar Contraseña</h3>
+                            
+                            <?php if (!empty($password_message)): ?>
+                                <div class="password-message <?php echo $password_message_type; ?>">
+                                    <?php echo htmlspecialchars($password_message); ?>
+                                </div>
+                            <?php endif; ?>
+                            
                             <form method="POST" action="change_password.php" class="password-form">
                                 <div class="password-inputs">
                                     <input type="password" name="current_password" placeholder="Contraseña actual" required>
