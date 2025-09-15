@@ -12,7 +12,7 @@ include '../controladores/cont_profile.php';
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/profile.css">
-    <link rel="stylesheet" href="/prueba5/assets/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/nexusplay/assets/fontawesome/css/all.min.css">
 </head>
 <body>
     <?php include '../includes/header.php'; ?>
@@ -34,12 +34,12 @@ include '../controladores/cont_profile.php';
                                 <p class="user-type">Administrador</p>
                                 <p class="user-email"><?php echo htmlspecialchars($admin_data['email']); ?></p>
                                 <p class="join-date">
-                                    Registro: <?php echo date('F Y', strtotime($admin_data['fecha_registro'])); ?>
+                                    Miembro desde: <?php echo date('d F Y', strtotime($admin_data['fecha_registro'])); ?>
                                 </p>
                             </div>
                             
                             <div class="admin-actions">
-                                <a href="/prueba5/admin/dashboard.php" class="btn-admin-panel">
+                                <a href="/panel-control/login.php" class="btn-admin-panel" target="_blank">
                                     <i class="fas fa-cogs"></i> Panel de Administrador
                                 </a>
                             </div>
@@ -71,16 +71,63 @@ include '../controladores/cont_profile.php';
                 </div>
                 
                 <div class="personal-actions">
-                    <h2>Acciones Personales</h2>
-                    <div class="actions-grid">
-                        <div class="action-item"><i class="fas fa-user-edit"></i><span>Editar Perfil</span></div>
-                        <div class="action-item"><i class="fas fa-bell"></i><span>Mis Notificaciones</span></div>
-                        <div class="action-item"><i class="fas fa-history"></i><span>Actividad Reciente</span></div>
-                        <div class="action-item"><i class="fas fa-shield-alt"></i><span>Seguridad</span></div>
-                        <div class="action-item"><i class="fas fa-download"></i><span>Mis Descargas</span></div>
-                        <div class="action-item"><i class="fas fa-cog"></i><span>Configuración</span></div>
-                    </div>
-                </div>
+    <h2>Privilegios de Administrador</h2>
+    <div class="actions-grid">
+        <!-- Moderar reseñas directamente desde la aplicación -->
+        <a href="/nexusplay/admin/moderate-reviews.php" class="action-item">
+            <i class="fas fa-gavel"></i>
+            <span>Moderar Reseñas</span>
+        </a>
+        
+        <!-- Ver perfiles de todos los usuarios -->
+        <a href="/nexusplay/admin/view-users.php" class="action-item">
+            <i class="fas fa-users"></i>
+            <span>Ver Usuarios</span>
+        </a>
+        
+        <!-- Ver todos los pedidos del sistema -->
+        <a href="/nexusplay/admin/all-orders.php" class="action-item">
+            <i class="fas fa-clipboard-list"></i>
+            <span>Todos los Pedidos</span>
+        </a>
+        
+        <!-- Cambiar estado de pedidos (completar, cancelar) -->
+        <a href="/nexusplay/admin/manage-orders.php" class="action-item">
+            <i class="fas fa-edit"></i>
+            <span>Gestionar Pedidos</span>
+        </a>
+        
+        <!-- Ver reportes y estadísticas del sitio -->
+        <a href="/nexusplay/admin/reports.php" class="action-item">
+            <i class="fas fa-chart-pie"></i>
+            <span>Reportes</span>
+        </a>
+        
+        <!-- Gestionar códigos de juegos -->
+        <a href="/nexusplay/admin/game-codes.php" class="action-item">
+            <i class="fas fa-key"></i>
+            <span>Códigos de Juegos</span>
+        </a>
+        
+        <!-- Suspender/activar usuarios -->
+        <a href="/nexusplay/admin/user-status.php" class="action-item">
+            <i class="fas fa-user-slash"></i>
+            <span>Estado de Usuarios</span>
+        </a>
+        
+        <!-- Ver logs de actividad del sistema -->
+        <a href="/nexusplay/admin/activity-logs.php" class="action-item">
+            <i class="fas fa-file-alt"></i>
+            <span>Logs del Sistema</span>
+        </a>
+        
+        <!-- Gestionar contenido destacado -->
+        <a href="/nexusplay/admin/featured-content.php" class="action-item">
+            <i class="fas fa-star"></i>
+            <span>Contenido Destacado</span>
+        </a>
+    </div>
+</div>
             </div>
         </div>
     </main>

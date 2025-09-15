@@ -12,7 +12,7 @@ include 'controladores/cont_index.php';
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="/prueba5/assets/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/nexusplay/assets/fontawesome/css/all.min.css">
 </head>
 <body>
     <?php include 'includes/header.php'; ?>
@@ -56,7 +56,7 @@ include 'controladores/cont_index.php';
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Tendencias</h2>
-                    <a href="/prueba5/search.php?plataforma=&categoria=&precio=" class="view-all">Ver todos <i class="fas fa-chevron-right"></i></a>
+                    <a href="/nexusplay/search.php?plataforma=&categoria=&precio=" class="view-all">Ver todos <i class="fas fa-chevron-right"></i></a>
                 </div>
                 <div class="games-grid">
                     <?php if ($tendencias_result && $tendencias_result->num_rows > 0): ?>
@@ -126,7 +126,7 @@ include 'controladores/cont_index.php';
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Te recomendamos</h2>
-                    <a href="/prueba5/search.php?plataforma=&categoria=&precio=" class="view-all">Ver todos <i class="fas fa-chevron-right"></i></a>
+                    <a href="/nexusplay/search.php?plataforma=&categoria=&precio=" class="view-all">Ver todos <i class="fas fa-chevron-right"></i></a>
                 </div>
                 <div class="games-grid">
                     <?php if ($recomendados_result && $recomendados_result->num_rows > 0): ?>

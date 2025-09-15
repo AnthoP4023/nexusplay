@@ -8,6 +8,11 @@ if (file_exists('functions/fun_auth.php')) {
 } elseif (file_exists('../functions/fun_auth.php')) {
     require_once '../functions/fun_auth.php';
 }
+
+// Usar la imagen de perfil de la sesión o imagen por defecto
+$perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perfil']) 
+              ? $_SESSION['imagen_perfil'] 
+              : '/prueba5/images/users/default-avatar.png';
 ?>
 
 <header class="header">
@@ -77,11 +82,6 @@ if (file_exists('functions/fun_auth.php')) {
     <div class="nav-profile">
         <input type="checkbox" id="profileMenuToggle" class="profile-toggle">
         <label for="profileMenuToggle" class="profile-btn nav-icon">
-            <?php
-                $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perfil']) 
-                              ? $_SESSION['imagen_perfil'] 
-                              : '/prueba5/images/users/default-avatar.png';
-            ?>
             <img src="<?php echo htmlspecialchars($perfil_img); ?>" alt="Perfil" class="profile-img">
         </label>
 
@@ -92,7 +92,7 @@ if (file_exists('functions/fun_auth.php')) {
 
             <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin'): ?>
                 <a href="/prueba5/profile/admin.php"><i class="fas fa-id-card"></i> Perfil Admin</a>
-                <a href="/prueba5/index.php" class="admin" target="_blank"><i class="fas fa-cogs"></i> Panel Admin</a>
+                <a href="/panel-control/index.php" class="admin" target="_blank"><i class="fas fa-cogs"></i> Panel Admin</a>
             <?php else: ?>
                 <a href="/prueba5/profile/user.php"><i class="fas fa-id-card"></i> Mi Perfil</a>
                 <a href="/prueba5/orders.php" class="pedidos"><i class="fas fa-box"></i> Mis Pedidos</a>
@@ -169,4 +169,3 @@ if (file_exists('functions/fun_auth.php')) {
     }
 });
 </script>
-

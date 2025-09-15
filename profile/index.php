@@ -1,3 +1,3 @@
 <?php
-header("Location: /prueba5/index.php");
+header("Location: /nexusplay/index.php");
 exit;

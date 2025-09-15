@@ -2,6 +2,13 @@
 session_start();
 require_once __DIR__ . '/../config_db/database.php';
 require_once __DIR__ . '/../functions/fun_auth.php';
+require_once __DIR__ . '/../functions/fun_profile.php';
+
+// Cargar imagen de perfil si el usuario está logueado
+if (isset($_SESSION['user_id'])) {
+    $perfil_img = loadUserProfileImage($conn, $_SESSION['user_id']);
+    $_SESSION['imagen_perfil'] = $perfil_img;
+}
 
 $mejores_juegos_query = "SELECT j.*, c.nombre as categoria_nombre, 
                         COALESCE(AVG(r.puntuacion), 0) as promedio_rating
@@ -54,4 +61,4 @@ $categorias_query = "SELECT c.*, COUNT(j.id) as total_juegos
                     GROUP BY c.id 
                     ORDER BY total_juegos DESC";
 $categorias_result = $conn->query($categorias_query);
-?> 
+?>

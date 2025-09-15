@@ -43,18 +43,18 @@ try {
         
         if (!empty($imagen_bd) && $imagen_bd !== 'default-avatar.png') {
             // Si tiene una imagen específica, verificar si existe
-            $ruta_imagen = '/prueba5/images/users/' . $imagen_bd;
+            $ruta_imagen = '/nexusplay/images/users/' . $imagen_bd;
             $ruta_fisica = $_SERVER['DOCUMENT_ROOT'] . $ruta_imagen;
             
             if (file_exists($ruta_fisica)) {
                 $perfil_img = $ruta_imagen;
             } else {
                 // Si el archivo no existe, usar imagen por defecto
-                $perfil_img = '/prueba5/images/users/default-avatar.png';
+                $perfil_img = '/nexusplay/images/users/default-avatar.png';
             }
         } else {
             // Si no tiene imagen o es la por defecto
-            $perfil_img = '/prueba5/images/users/default-avatar.png';
+            $perfil_img = '/nexusplay/images/users/default-avatar.png';
         }
 
         // Actualizar la sesión con la imagen correcta
