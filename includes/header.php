@@ -90,7 +90,7 @@ $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perf
                 <?php echo htmlspecialchars($_SESSION['username']); ?>
             </div>
 
-            <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin'): ?>
+            <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'administrador'): ?>
                 <a href="/nexusplay/profile/admin.php"><i class="fas fa-id-card"></i> Perfil Admin</a>
                 <a href="/panel-control/index.php" class="admin" target="_blank"><i class="fas fa-cogs"></i> Panel Admin</a>
             <?php else: ?>

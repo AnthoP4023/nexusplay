@@ -9,8 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - NexusPlay</title>
     <link rel="stylesheet" href="../css/auth.css">
-    <link rel="stylesheet" href="/nexusplay/assets/fontawesome/css/all.min.css">
-
+    
 </head>
 <body>
     <div class="login-container">

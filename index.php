@@ -12,7 +12,7 @@ include 'controladores/cont_index.php';
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="/nexusplay/assets/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/nexusplay/assests/fontawesome/css/all.min.css">
 </head>
 <body>
     <?php include 'includes/header.php'; ?>
@@ -41,7 +41,7 @@ include 'controladores/cont_index.php';
                     <?php endif; ?>
                 </div>
                 <button class="carousel-btn carousel-btn-prev" onclick="moveCarousel(-1)">
-                    <i class="fas fa-chevron-left"></i>
+                    <i class="fa-solid fa-chevron-left"></i>
                 </button>
                 <button class="carousel-btn carousel-btn-next" onclick="moveCarousel(1)">
                     <i class="fas fa-chevron-right"></i>
@@ -114,7 +114,7 @@ include 'controladores/cont_index.php';
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
                             <span>4.0</span>
                         </div>
                     </div>
@@ -146,7 +146,7 @@ include 'controladores/cont_index.php';
                                         <?php 
                                         $rating = round($juego['promedio_rating']);
                                         for ($i = 1; $i <= 5; $i++) {
-                                            echo $i <= $rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>';
+                                            echo $i <= $rating ? '<i class="fas fa-star"></i>' : '<i class="fa-regular fa-star"></i>';
                                         }
                                         ?>
                                         <span>(<?php echo number_format($juego['promedio_rating'], 1); ?>)</span>

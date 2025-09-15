@@ -11,11 +11,6 @@ if (!isLoggedIn()) {
     exit();
 }
 
-if (!isAdmin()) {
-    header('Location: ../index.php');
-    exit();
-}
-
 $user_id = $_SESSION['user_id'];
 
 $password_message = '';
@@ -36,10 +31,10 @@ try {
     $result = $stmt->get_result();
 
     if ($result && $result->num_rows > 0) {
-        $admin_data = $result->fetch_assoc();
-        $_SESSION['username'] = $admin_data['username'];
+        $user_data = $result->fetch_assoc();
+        $_SESSION['username'] = $user_data['username'];
 
-        $imagen_bd = $admin_data['imagen_perfil'];
+        $imagen_bd = $user_data['imagen_perfil'];
         
         if (!empty($imagen_bd) && $imagen_bd !== 'default-avatar.png') {
             $ruta_imagen = '/nexusplay/images/users/' . $imagen_bd;

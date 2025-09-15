@@ -4,7 +4,6 @@ require_once __DIR__ . '/../config_db/database.php';
 require_once __DIR__ . '/../functions/fun_auth.php';
 require_once __DIR__ . '/../functions/fun_profile.php';
 
-// Cargar imagen de perfil si el usuario está logueado
 if (isset($_SESSION['user_id'])) {
     $perfil_img = loadUserProfileImage($conn, $_SESSION['user_id']);
     $_SESSION['imagen_perfil'] = $perfil_img;

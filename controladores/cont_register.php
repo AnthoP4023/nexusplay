@@ -42,8 +42,8 @@
                     $error = 'El usuario o email ya están registrados';
                 } else {
                     $password_hash = md5($password);
-                    $insert_query = "INSERT INTO usuarios (email, username, password, nombre, apellido, imagen_perfil, tipo_usuario, fecha_registro) 
-                                VALUES ('$email', '$username', '$password_hash', '$nombre', '$apellido', 'default-avatar.png', 'normal', NOW())";
+                    $insert_query = "INSERT INTO usuarios (email, username, password, nombre, apellido, imagen_perfil, tipo_user_id, fecha_registro) 
+                                VALUES ('$email', '$username', '$password_hash', '$nombre', '$apellido', 'default-avatar.png', '1', NOW())";
                     
                     if ($conn->query($insert_query)) {
                         $success = 'Usuario registrado exitosamente. Puedes iniciar sesión ahora.';

@@ -1,5 +1,5 @@
 <?php 
-include '../controladores/cont_profile.php'; 
+include '../controladores/cont_user_profile.php'; 
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@ include '../controladores/cont_profile.php';
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/profile.css">
-    <link rel="stylesheet" href="/nexusplay/assets/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/nexusplay/assests/fontawesome/css/all.min.css">
 </head>
 <body>
     <?php include '../includes/header.php'; ?>

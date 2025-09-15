@@ -1,12 +1,15 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
+    
 }
 require_once '../config_db/database.php';
 require_once '../functions/fun_auth.php';
 
+
 if (isLoggedIn()) {
     header('Location: ../index.php');
+    
     exit();
 }
 
@@ -20,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Complete todos los campos';
     } else {
         $password_hash = md5($password);
-        $query = "SELECT * FROM usuarios WHERE username = '$username' AND password = '$password_hash'";
+        $query = "SELECT u.*, t.nombre as tipo_usuario FROM usuarios u INNER JOIN tipo_user t ON u.tipo_user_id = t.id WHERE u.username = '$username' AND u.password = '$password_hash'";
 
         try {
             $result = $conn->query($query);
