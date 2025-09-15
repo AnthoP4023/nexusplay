@@ -42,13 +42,13 @@ $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perf
         </div>
 
         <label for="toggleSearch" class="search-trigger-btn">
-            <i class="fas fa-search"></i>
+            <i class="fa-solid fa-magnifying-glass"></i>
         </label>
 
         <form class="search-input-form" action="/nexusplay/search.php" method="GET">
             <input type="text" name="q" placeholder="Buscar juegos..." class="search-input-field" value="<?php echo isset($_GET['q']) ? $_GET['q'] : ''; ?>">
             <button type="submit" class="search-submit-icon">
-              <i class="fas fa-search"></i>
+              <i class="fa-solid fa-magnifying-glass"></i>
              </button>
              <button type="button" class="search-cancel-btn" onclick="document.getElementById('toggleSearch').checked=false;">
               <i class="fas fa-times"></i>
@@ -72,7 +72,7 @@ $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perf
         <div class="nav-icons">
             <div class="header-cart">
                 <a href="/nexusplay/cart.php" class="cart-link nav-icon" title="Carrito" >
-                    <i class="fas fa-shopping-cart"></i>
+                    <i class="fa-solid fa-cart-shopping"></i>
                     <span id="cart-count" class="cart-count">
                         <?php echo isset($_SESSION['carrito']) ? array_sum($_SESSION['carrito']) : 0; ?>
                     </span>
