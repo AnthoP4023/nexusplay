@@ -72,7 +72,7 @@ include '../controladores/cont_profile.php';
 
                <ul class="admin-profile-tabs">
                     <li>
-                        <a href="/nexusplay/profile/control_panel.php" class="user-link">
+                        <a href="/nexusplay/profile/admin.php" class="user-link">
                             <div class="fa-solid fa-gauge">
                                 <span>Panel de control</span>
                             </div>
