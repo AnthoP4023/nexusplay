@@ -1,6 +1,6 @@
 <?php
 function loadUserProfileImage($conn, $user_id) {
-    if (!$user_id) return '/prueba5/images/users/default-avatar.png';
+    if (!$user_id) return '/nexusplay/images/users/default-avatar.png';
     
     try {
         $stmt = $conn->prepare("SELECT imagen_perfil FROM usuarios WHERE id = ?");
@@ -14,14 +14,14 @@ function loadUserProfileImage($conn, $user_id) {
             
             if (!empty($imagen_bd) && $imagen_bd !== 'default-avatar.png') {
                 // Si tiene una imagen específica, verificar si existe
-                $ruta_imagen = '/prueba5/images/users/' . $imagen_bd;
+                $ruta_imagen = '/nexusplay/images/users/' . $imagen_bd;
                 $ruta_fisica = $_SERVER['DOCUMENT_ROOT'] . $ruta_imagen;
                 
                 if (file_exists($ruta_fisica)) {
                     return $ruta_imagen;
                 } else {
                     // Si el archivo no existe, usar imagen por defecto
-                    return '/prueba5/images/users/default-avatar.png';
+                    return '/nexusplay/images/users/default-avatar.png';
                 }
             } else {
                 return '/nexusplay/images/users/default-avatar.png';

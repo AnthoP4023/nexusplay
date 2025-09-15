@@ -12,7 +12,7 @@ include 'controladores/cont_index.php';
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="/nexusplay/assets/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/nexusplay/assets/fontawesome-free-7.0.1-web/css/all.min.css">
 </head>
 <body>
     <?php include 'includes/header.php'; ?>

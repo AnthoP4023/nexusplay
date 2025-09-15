@@ -12,14 +12,14 @@ if (file_exists('functions/fun_auth.php')) {
 // Usar la imagen de perfil de la sesión o imagen por defecto
 $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perfil']) 
               ? $_SESSION['imagen_perfil'] 
-              : '/prueba5/images/users/default-avatar.png';
+              : '/nexusplay/images/users/default-avatar.png';
 ?>
 
 <header class="header">
     <div class="nav-container">
       <div class="logo">
-        <a href="/prueba5/index.php" class="logo-link">
-            <img src="/prueba5/images/Logo/img_logo.png" alt="NexusPlay Logo" class="logo-img">
+        <a href="/nexusplay/index.php" class="logo-link">
+            <img src="/nexusplay/images/Logo/img_logo.png" alt="NexusPlay Logo" class="logo-img">
           <span class="logo-text">NexusPlay</span>
         </a>
       </div>
@@ -27,15 +27,15 @@ $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perf
       <div class="search-with-platforms">
         <input type="checkbox" id="toggleSearch" class="search-toggle">
         <div class="platforms-inside">
-          <a href="/prueba5/search.php?plataforma=1&categoria=&precio=" class="platform-icon">
+          <a href="/nexusplay/search.php?plataforma=1&categoria=&precio=" class="platform-icon">
             <i class="fas fa-desktop"></i>
             <span>PC</span>
           </a>
-          <a href="/prueba5/search.php?plataforma=2&categoria=&precio=" class="platform-icon">
+          <a href="/nexusplay/search.php?plataforma=2&categoria=&precio=" class="platform-icon">
             <i class="fab fa-playstation"></i>
             <span>PlayStation</span>
           </a>
-          <a href="/prueba5/search.php?plataforma=3&categoria=&precio=" class="platform-icon">
+          <a href="/nexusplay/search.php?plataforma=3&categoria=&precio=" class="platform-icon">
             <i class="fab fa-xbox"></i>
             <span>Xbox</span>
           </a>
@@ -45,7 +45,7 @@ $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perf
             <i class="fas fa-search"></i>
         </label>
 
-        <form class="search-input-form" action="/prueba5/search.php" method="GET">
+        <form class="search-input-form" action="/nexusplay/search.php" method="GET">
             <input type="text" name="q" placeholder="Buscar juegos..." class="search-input-field" value="<?php echo isset($_GET['q']) ? $_GET['q'] : ''; ?>">
             <button type="submit" class="search-submit-icon">
               <i class="fas fa-search"></i>
@@ -61,7 +61,7 @@ $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perf
           <label for="toggleSearchMobile" class="search-trigger-btn">
               <i class="fas fa-search"></i>
           </label>
-          <form class="search-input-form" action="/prueba5/search.php" method="GET">
+          <form class="search-input-form" action="/nexusplay/search.php" method="GET">
               <input type="text" name="q" placeholder="Minecraft, RPG, multijugador..." class="search-input-field">
               <button type="button" class="search-cancel-btn" onclick="document.getElementById('toggleSearchMobile').checked=false;">
                   <i class="fas fa-times"></i>
@@ -71,7 +71,7 @@ $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perf
       
         <div class="nav-icons">
             <div class="header-cart">
-                <a href="/prueba5/cart.php" class="cart-link nav-icon" title="Carrito" >
+                <a href="/nexusplay/cart.php" class="cart-link nav-icon" title="Carrito" >
                     <i class="fas fa-shopping-cart"></i>
                     <span id="cart-count" class="cart-count">
                         <?php echo isset($_SESSION['carrito']) ? array_sum($_SESSION['carrito']) : 0; ?>
@@ -91,19 +91,19 @@ $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perf
             </div>
 
             <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin'): ?>
-                <a href="/prueba5/profile/admin.php"><i class="fas fa-id-card"></i> Perfil Admin</a>
+                <a href="/nexusplay/profile/admin.php"><i class="fas fa-id-card"></i> Perfil Admin</a>
                 <a href="/panel-control/index.php" class="admin" target="_blank"><i class="fas fa-cogs"></i> Panel Admin</a>
             <?php else: ?>
-                <a href="/prueba5/profile/user.php"><i class="fas fa-id-card"></i> Mi Perfil</a>
-                <a href="/prueba5/orders.php" class="pedidos"><i class="fas fa-box"></i> Mis Pedidos</a>
-                <a href="/prueba5/reviews.php" class="reseña"><i class="fas fa-star"></i> Mis Reseñas</a>
+                <a href="/nexusplay/profile/user.php"><i class="fas fa-id-card"></i> Mi Perfil</a>
+                <a href="/nexusplay/orders.php" class="pedidos"><i class="fas fa-box"></i> Mis Pedidos</a>
+                <a href="/nexusplay/reviews.php" class="reseña"><i class="fas fa-star"></i> Mis Reseñas</a>
             <?php endif; ?>
 
-            <a href="/prueba5/auth/logout.php" class="logout"><i class="fas fa-door-open"></i> Salir</a>
+            <a href="/nexusplay/auth/logout.php" class="logout"><i class="fas fa-door-open"></i> Salir</a>
         </div>
     </div>
 <?php else: ?>
-    <a href="/prueba5/auth/login.php" class="nav-icon" title="Iniciar Sesión">
+    <a href="/nexusplay/auth/login.php" class="nav-icon" title="Iniciar Sesión">
         <i class="fas fa-user"></i>
     </a>
 <?php endif; ?>
@@ -114,15 +114,15 @@ $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perf
 
 <div class="mobile-platforms-bar">
     <div class="mobile-platforms-content">
-        <a href="/prueba5/search.php?plataforma=1&categoria=&precio=" class="mobile-platform-icon">
+        <a href="/nexusplay/search.php?plataforma=1&categoria=&precio=" class="mobile-platform-icon">
             <i class="fas fa-desktop"></i>
             <span>PC</span>
         </a>
-        <a href="/prueba5/search.php?plataforma=2&categoria=&precio=" class="mobile-platform-icon">
+        <a href="/nexusplay/search.php?plataforma=2&categoria=&precio=" class="mobile-platform-icon">
             <i class="fab fa-playstation"></i>
             <span>PlayStation</span>
         </a>
-        <a href="/prueba5/search.php?plataforma=3&categoria=&precio=" class="mobile-platform-icon">
+        <a href="/nexusplay/search.php?plataforma=3&categoria=&precio=" class="mobile-platform-icon">
             <i class="fab fa-xbox"></i>
             <span>Xbox</span>
         </a>
