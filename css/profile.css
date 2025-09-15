@@ -242,74 +242,34 @@
     box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
 }
 
-/* ACCIONES PERSONALES */
-.personal-actions h2 {
-    color: #e5e5e5;
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin: 0 0 20px 0;
-}
-
-.actions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-}
-
-.action-item {
+.profile-container .admin-profile-tabs {
+    --gap-small: 15px;
+    box-shadow: 0 1px 0 0 hsla(0, 0%, 100%, .3);
     display: flex;
+    gap: var(--gap-small);
+    justify-content: flex-start;
+}
+
+.profile-container .admin-profile-tabs li {
     align-items: center;
-    gap: 12px;
-    padding: 15px 20px;
-    background: rgba(45, 45, 45, 0.3);
-    border: 1px solid rgba(74, 74, 74, 0.3);
-    border-radius: 12px;
-    color: #e5e5e5;
     cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
+    display: flex;
+    position: relative;
 }
 
-.action-item:hover {
-    background: rgba(45, 45, 45, 0.6);
-    border-color: #2563eb;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.1);
-    color: #e5e5e5;
+.profile-container .admin-profile-tabs li a {
+    align-items: center;
+    display: flex;
+    padding-bottom: 15px;
+    white-space: nowrap;
 }
 
-.action-item i {
-    font-size: 1.2rem;
-    color: #2563eb;
-    width: 20px;
-    text-align: center;
-    transition: all 0.3s ease;
+.profile-container .admin-profile-tabs li .dashboard {
+    margin-right: 10px;
+    transition: 0s;
 }
-
-.action-item:hover i {
-    color: #3b82f6;
-    transform: scale(1.1);
-}
-
-.action-item span {
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-/* COLORES ESPECÍFICOS PARA ICONOS */
-.action-item:nth-child(1) i { color: #dc2626; } /* Moderar - Rojo */
-.action-item:nth-child(2) i { color: #10b981; } /* Usuarios - Verde */
-.action-item:nth-child(3) i { color: #f59e0b; } /* Pedidos - Amarillo */
-.action-item:nth-child(4) i { color: #3b82f6; } /* Gestionar - Azul */
-.action-item:nth-child(5) i { color: #8b5cf6; } /* Reportes - Púrpura */
-.action-item:nth-child(6) i { color: #84cc16; } /* Códigos - Lima */
-.action-item:nth-child(7) i { color: #ef4444; } /* Estado - Rojo */
-.action-item:nth-child(8) i { color: #6b7280; } /* Logs - Gris */
-.action-item:nth-child(9) i { color: #fbbf24; } /* Destacado - Dorado */
 
 /* RESPONSIVE */
-
-/* Tablets grandes y monitores pequeños */
 @media (max-width: 1200px) {
     .profile-container {
         max-width: 100%;
@@ -416,32 +376,8 @@
     .password-change h3 {
         font-size: 1.1rem;
     }
-
-    .actions-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-
-    .action-item {
-        padding: 12px 15px;
-        font-size: 0.9rem;
-    }
-
-    .action-item i {
-        font-size: 1.1rem;
-    }
-
-    .action-item span {
-        font-size: 0.9rem;
-    }
-
-    .personal-actions h2 {
-        font-size: 1.3rem;
-        margin-bottom: 15px;
-    }
 }
 
-/* Móviles */
 @media (max-width: 420px) {
     .profile-container {
         --separator: 10px;
@@ -512,35 +448,8 @@
         padding: 10px 15px;
         font-size: 0.8rem;
     }
-
-    .actions-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .action-item {
-        padding: 12px;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .action-item i {
-        font-size: 1rem;
-        margin-right: 8px;
-    }
-
-    .action-item span {
-        font-size: 0.85rem;
-    }
-
-    .personal-actions h2 {
-        font-size: 1.2rem;
-        text-align: center;
-        margin-bottom: 12px;
-    }
 }
 
-/* Móviles muy pequeños */
 @media (max-width: 360px) {
     .admin-avatar {
         width: 70px;
@@ -554,13 +463,5 @@
     .btn-admin-panel {
         font-size: 0.75rem;
         padding: 6px 12px;
-    }
-
-    .action-item {
-        padding: 10px;
-    }
-
-    .action-item span {
-        font-size: 0.8rem;
     }
 }

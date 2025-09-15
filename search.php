@@ -127,9 +127,6 @@ include 'functions/fun_search.php';
             }
         });
     </script>
-
-
-
 </body>
 </html>
 

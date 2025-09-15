@@ -543,7 +543,6 @@ body {
         gap: var(--separator);
         height: 100%;
         justify-content: space-between;
-        margin: 0 0px auto 0px;
     }
 
     .categories-grid {

@@ -6,7 +6,6 @@ if (session_status() == PHP_SESSION_NONE) {
 require_once '../config_db/database.php';
 require_once '../functions/fun_auth.php';
 
-// Solo admin puede acceder
 if (!isLoggedIn() || !isAdmin()) {
     header('Location: ../index.php');
     exit();
@@ -21,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $confirm_password = trim($_POST['confirm_password']);
     $user_id = $_SESSION['user_id'];
     
-    // Validaciones
     if (empty($current_password) || empty($new_password) || empty($confirm_password)) {
         $message = 'Todos los campos son obligatorios';
         $message_type = 'error';
@@ -33,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message_type = 'error';
     } else {
         try {
-            // Verificar contraseña actual
             $stmt = $conn->prepare("SELECT password FROM usuarios WHERE id = ?");
             $stmt->bind_param("i", $user_id);
             $stmt->execute();
@@ -44,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $current_password_hash = md5($current_password);
                 
                 if ($current_password_hash === $user['password']) {
-                    // Actualizar contraseña
                     $new_password_hash = md5($new_password);
                     $update_stmt = $conn->prepare("UPDATE usuarios SET password = ? WHERE id = ?");
                     $update_stmt->bind_param("si", $new_password_hash, $user_id);
@@ -70,12 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     
-    // Guardar mensaje en sesión para mostrar después del redirect
     $_SESSION['password_message'] = $message;
     $_SESSION['password_message_type'] = $message_type;
 }
 
-// Redirect de vuelta al perfil
 header('Location: admin.php');
 exit();
 ?>
