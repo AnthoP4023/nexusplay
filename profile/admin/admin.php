@@ -103,7 +103,7 @@ include '../../controladores/cont_profile.php';
                 </div>
 
                 <div id="estadisticas" class="tab-content active">
-                    <h2 class="section-title">Estadísticas de Actividad</h2>
+                    <h2 class="section-title">Resumen de Actividad</h2>
                     
                     <div class="stats-grid">
                         <div class="stat-card">
