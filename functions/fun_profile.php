@@ -13,14 +13,12 @@ function loadUserProfileImage($conn, $user_id) {
             $imagen_bd = $user_data['imagen_perfil'];
             
             if (!empty($imagen_bd) && $imagen_bd !== 'default-avatar.png') {
-                // Si tiene una imagen específica, verificar si existe
                 $ruta_imagen = '/nexusplay/images/users/' . $imagen_bd;
                 $ruta_fisica = $_SERVER['DOCUMENT_ROOT'] . $ruta_imagen;
                 
                 if (file_exists($ruta_fisica)) {
                     return $ruta_imagen;
                 } else {
-                    // Si el archivo no existe, usar imagen por defecto
                     return '/nexusplay/images/users/default-avatar.png';
                 }
             } else {

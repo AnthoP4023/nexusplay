@@ -9,7 +9,6 @@ if (file_exists('functions/fun_auth.php')) {
     require_once '../functions/fun_auth.php';
 }
 
-// Usar la imagen de perfil de la sesión o imagen por defecto
 $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perfil']) 
               ? $_SESSION['imagen_perfil'] 
               : '/nexusplay/images/users/default-avatar.png';
@@ -17,57 +16,57 @@ $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perf
 
 <header class="header">
     <div class="nav-container">
-      <div class="logo">
-        <a href="/nexusplay/index.php" class="logo-link">
-            <img src="/nexusplay/images/Logo/img_logo.png" alt="NexusPlay Logo" class="logo-img">
-          <span class="logo-text">NexusPlay</span>
-        </a>
-      </div>
-
-      <div class="search-with-platforms">
-        <input type="checkbox" id="toggleSearch" class="search-toggle">
-        <div class="platforms-inside">
-          <a href="/nexusplay/search.php?plataforma=1&categoria=&precio=" class="platform-icon">
-            <i class="fas fa-desktop"></i>
-            <span>PC</span>
-          </a>
-          <a href="/nexusplay/search.php?plataforma=2&categoria=&precio=" class="platform-icon">
-            <i class="fab fa-playstation"></i>
-            <span>PlayStation</span>
-          </a>
-          <a href="/nexusplay/search.php?plataforma=3&categoria=&precio=" class="platform-icon">
-            <i class="fab fa-xbox"></i>
-            <span>Xbox</span>
-          </a>
+        <div class="logo">
+            <a href="/nexusplay/index.php" class="logo-link">
+                <img src="/nexusplay/images/Logo/img_logo.png" alt="NexusPlay Logo" class="logo-img">
+                <span class="logo-text">NexusPlay</span>
+            </a>
         </div>
 
-        <label for="toggleSearch" class="search-trigger-btn">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </label>
+        <div class="search-with-platforms">
+            <input type="checkbox" id="toggleSearch" class="search-toggle">
+            <div class="platforms-inside">
+                <a href="/nexusplay/search.php?plataforma=1&categoria=&precio=" class="platform-icon">
+                    <i class="fas fa-desktop"></i>
+                    <span>PC</span>
+                </a>
+                <a href="/nexusplay/search.php?plataforma=2&categoria=&precio=" class="platform-icon">
+                    <i class="fab fa-playstation"></i>
+                    <span>PlayStation</span>
+                </a>
+                <a href="/nexusplay/search.php?plataforma=3&categoria=&precio=" class="platform-icon">
+                    <i class="fab fa-xbox"></i>
+                    <span>Xbox</span>
+                </a>
+            </div>
 
-        <form class="search-input-form" action="/nexusplay/search.php" method="GET">
-            <input type="text" name="q" placeholder="Buscar juegos..." class="search-input-field" value="<?php echo isset($_GET['q']) ? $_GET['q'] : ''; ?>">
-            <button type="submit" class="search-submit-icon">
-              <i class="fa-solid fa-magnifying-glass"></i>
-             </button>
-             <button type="button" class="search-cancel-btn" onclick="document.getElementById('toggleSearch').checked=false;">
-              <i class="fas fa-times"></i>
-             </button>
-        </form>
-      </div>
+            <label for="toggleSearch" class="search-trigger-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </label>
 
-      <div class="search-responsive">
-          <input type="checkbox" id="toggleSearchMobile" class="search-toggle" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
-          <label for="toggleSearchMobile" class="search-trigger-btn">
-              <i class="fas fa-search"></i>
-          </label>
-          <form class="search-input-form" action="/nexusplay/search.php" method="GET">
-              <input type="text" name="q" placeholder="Minecraft, RPG, multijugador..." class="search-input-field">
-              <button type="button" class="search-cancel-btn" onclick="document.getElementById('toggleSearchMobile').checked=false;">
-                  <i class="fas fa-times"></i>
-              </button>
-          </form>
-      </div>
+            <form class="search-input-form" action="/nexusplay/search.php" method="GET">
+                <input type="text" name="q" placeholder="Buscar juegos..." class="search-input-field" value="<?php echo isset($_GET['q']) ? $_GET['q'] : ''; ?>">
+                <button type="submit" class="search-submit-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button type="button" class="search-cancel-btn" onclick="document.getElementById('toggleSearch').checked=false;">
+                <i class="fas fa-times"></i>
+                </button>
+            </form>
+        </div>
+
+        <div class="search-responsive">
+            <input type="checkbox" id="toggleSearchMobile" class="search-toggle" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+            <label for="toggleSearchMobile" class="search-trigger-btn">
+                <i class="fas fa-search"></i>
+            </label>
+            <form class="search-input-form" action="/nexusplay/search.php" method="GET">
+                <input type="text" name="q" placeholder="Minecraft, RPG, multijugador..." class="search-input-field">
+                    <button type="button" class="search-cancel-btn" onclick="document.getElementById('toggleSearchMobile').checked=false;">
+                        <i class="fas fa-times"></i>
+                    </button>
+            </form>
+        </div>
       
         <div class="nav-icons">
             <div class="header-cart">
@@ -76,38 +75,37 @@ $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perf
                     <span id="cart-count" class="cart-count">
                         <?php echo isset($_SESSION['carrito']) ? array_sum($_SESSION['carrito']) : 0; ?>
                     </span>
-                  </a>
-                </div>
-            <?php if (isset($_SESSION['user_id'])): ?>
-    <div class="nav-profile">
-        <input type="checkbox" id="profileMenuToggle" class="profile-toggle">
-        <label for="profileMenuToggle" class="profile-btn nav-icon">
-            <img src="<?php echo htmlspecialchars($perfil_img); ?>" alt="Perfil" class="profile-img">
-        </label>
-
-        <div class="profile-menu">
-            <div class="profile-username">
-                <?php echo htmlspecialchars($_SESSION['username']); ?>
+                </a>
             </div>
+            
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <div class="nav-profile">
+                    <input type="checkbox" id="profileMenuToggle" class="profile-toggle">
+                        <label for="profileMenuToggle" class="profile-btn nav-icon">
+                            <img src="<?php echo htmlspecialchars($perfil_img); ?>" alt="Perfil" class="profile-img">
+                        </label>
 
-            <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'administrador'): ?>
-                <a href="/nexusplay/profile/admin/admin.php"><i class="fas fa-id-card"></i> Perfil Admin</a>
-                <a href="/panel-control/index.php" class="admin" target="_blank"><i class="fas fa-cogs"></i> Panel Admin</a>
+                    <div class="profile-menu">
+                        <div class="profile-username">
+                            <?php echo htmlspecialchars($_SESSION['username']); ?>
+                        </div>
+
+                        <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'administrador'): ?>
+                            <a href="/nexusplay/profile/admin/admin.php"><i class="fas fa-id-card"></i> Perfil Admin</a>
+                            <a href="/panel-control/index.php" class="admin" target="_blank"><i class="fas fa-cogs"></i> Panel Admin</a>
+                        <?php else: ?>
+                            <a href="/nexusplay/profile/user/user.php"><i class="fas fa-id-card"></i> Mi Perfil</a>
+                            <a href="/nexusplay/orders.php" class="pedidos"><i class="fas fa-box"></i> Mis Pedidos</a>
+                            <a href="/nexusplay/reviews.php" class="reseña"><i class="fas fa-star"></i> Mis Reseñas</a>
+                        <?php endif; ?>
+                            <a href="/nexusplay/auth/logout.php" class="logout"><i class="fas fa-door-open"></i> Salir</a>
+                    </div>
+                </div>
             <?php else: ?>
-                <a href="/nexusplay/profile/user/user.php"><i class="fas fa-id-card"></i> Mi Perfil</a>
-                <a href="/nexusplay/orders.php" class="pedidos"><i class="fas fa-box"></i> Mis Pedidos</a>
-                <a href="/nexusplay/reviews.php" class="reseña"><i class="fas fa-star"></i> Mis Reseñas</a>
+                <a href="/nexusplay/auth/login.php" class="nav-icon" title="Iniciar Sesión">
+                    <i class="fas fa-user"></i>
+                </a>
             <?php endif; ?>
-
-            <a href="/nexusplay/auth/logout.php" class="logout"><i class="fas fa-door-open"></i> Salir</a>
-        </div>
-    </div>
-<?php else: ?>
-    <a href="/nexusplay/auth/login.php" class="nav-icon" title="Iniciar Sesión">
-        <i class="fas fa-user"></i>
-    </a>
-<?php endif; ?>
-
         </div>
     </div>
 </header>
@@ -135,7 +133,6 @@ $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perf
     const profileToggle = document.getElementById('profileMenuToggle');
     const profileMenu = document.querySelector('.nav-profile');
 
-    // Solo ejecutar si ambos elementos existen
     if (profileMenu && profileToggle) {
         if (!profileMenu.contains(event.target)) {
             profileToggle.checked = false;

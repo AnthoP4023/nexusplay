@@ -5,7 +5,6 @@
     padding: 31px 0;
 }
 
-/* ESTADÍSTICAS */
 .stats-section {
     margin-bottom: 50px;
 }
@@ -32,7 +31,6 @@
     transform: translateY(-2px);
 }
 
-/* Efectos hover específicos para cada tarjeta */
 .stat-card:nth-child(1):hover {
     border-color: #2563eb;
     box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
@@ -84,37 +82,36 @@
     color: white;
 }
 
-/* Colores específicos para cada estadística */
 .stat-card:nth-child(1) .stat-icon {
-    background: linear-gradient(45deg, #2563eb, #3b82f6); /* Azul - Total Pedidos */
+    background: linear-gradient(45deg, #2563eb, #3b82f6); 
 }
 
 .stat-card:nth-child(2) .stat-icon {
-    background: linear-gradient(45deg, #10b981, #34d399); /* Verde - Total Gastado */
+    background: linear-gradient(45deg, #10b981, #34d399); 
 }
 
 .stat-card:nth-child(3) .stat-icon {
-    background: linear-gradient(45deg, #059669, #10b981); /* Verde oscuro - Completados */
+    background: linear-gradient(45deg, #059669, #10b981); 
 }
 
 .stat-card:nth-child(4) .stat-icon {
-    background: linear-gradient(45deg, #7c3aed, #a855f7); /* Púrpura - Saldo */
+    background: linear-gradient(45deg, #7c3aed, #a855f7); 
 }
 
 .stat-card:nth-child(5) .stat-icon {
-    background: linear-gradient(45deg, #f59e0b, #fbbf24); /* Amarillo - Pendientes */
+    background: linear-gradient(45deg, #f59e0b, #fbbf24); 
 }
 
 .stat-card:nth-child(6) .stat-icon {
-    background: linear-gradient(45deg, #ef4444, #f87171); /* Rojo - Cancelados */
+    background: linear-gradient(45deg, #ef4444, #f87171);
 }
 
 .stat-card:nth-child(7) .stat-icon {
-    background: linear-gradient(45deg, #06b6d4, #22d3ee); /* Cian - Promedio */
+    background: linear-gradient(45deg, #06b6d4, #22d3ee);
 }
 
 .stat-card:nth-child(8) .stat-icon {
-    background: linear-gradient(45deg, #8b5cf6, #a78bfa); /* Violeta - Tasa de Éxito */
+    background: linear-gradient(45deg, #8b5cf6, #a78bfa);
 }
 
 .stat-info h3 {
@@ -130,7 +127,6 @@
     font-size: 0.9rem;
 }
 
-/* TABS DE NAVEGACIÓN */
 .admin-tabs {
     display: flex;
     gap: 15px;
@@ -218,7 +214,6 @@
     background: rgba(37, 99, 235, 0.1);
 }
 
-/* CONTENIDO DE TABS */
 .tab-content {
     display: none;
     animation: fadeIn 0.3s ease;
@@ -233,7 +228,6 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* PEDIDOS */
 .pedidos-container {
     display: flex;
     flex-direction: column;
@@ -314,7 +308,6 @@
     color: #2563eb;
 }
 
-/* CARTERA */
 .cartera-section {
     display: flex;
     flex-direction: column;
@@ -431,7 +424,6 @@
     color: #f59e0b;
 }
 
-/* TARJETAS */
 .tarjetas-container {
     display: flex;
     flex-direction: column;
@@ -506,7 +498,6 @@
     text-align: center;
 }
 
-/* RESEÑAS */
 .resenas-container {
     display: flex;
     flex-direction: column;
@@ -579,7 +570,6 @@
     font-size: 0.8rem;
 }
 
-/* ESTADO VACÍO */
 .empty-state {
     text-align: center;
     padding: 60px 20px;
@@ -603,7 +593,6 @@
     font-size: 1rem;
 }
 
-/* RESPONSIVE */
 @media (max-width: 992px) {
     .stats-grid {
         grid-template-columns: repeat(3, 1fr);

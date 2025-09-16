@@ -6,13 +6,13 @@ include '../../controladores/cont_user_profile.php';
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
-    <link rel="stylesheet" href="../../css/header.css">
-    <link rel="stylesheet" href="../../css/footer.css">
-    <link rel="stylesheet" href="../../css/index.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perfil</title>
+ <link rel="stylesheet" href="../../css/header.css">
+<link rel="stylesheet" href="../../css/footer.css">
+<link rel="stylesheet" href="../../css/index.css">
     <link rel="stylesheet" href="../../css/profile.css">
-    <link rel="stylesheet" href="../../assests/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="../../assests/fontawesome/css/all.min.css">
 </head>
 <body>
     <?php include '../../includes/header.php'; ?>

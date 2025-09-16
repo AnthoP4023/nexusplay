@@ -3,8 +3,8 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once '../../config_db/database.php';
-require_once '../../functions/fun_auth.php';
+require_once __DIR__ . '/../config_db/database.php';
+require_once __DIR__ . '/../functions/fun_auth.php';
 
 if (!isLoggedIn() || !isAdmin()) {
     header('Location: ../index.php');
@@ -70,6 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['password_message_type'] = $message_type;
 }
 
-header('Location: admin.php');
+header('Location: ../profile/admin/admin.php');
 exit();
 ?>

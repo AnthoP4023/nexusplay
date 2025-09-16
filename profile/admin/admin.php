@@ -11,7 +11,7 @@ include '../../controladores/cont_profile.php';
     <link rel="stylesheet" href="../../css/header.css">
     <link rel="stylesheet" href="../../css/footer.css">
     <link rel="stylesheet" href="../../css/index.css">
-    <link rel="stylesheet" href="../../css/profile.css">
+    <link rel="stylesheet" href="../../css/profile_admin.css">
     <link rel="stylesheet" href="../../css/admin_panel.css">
     <link rel="stylesheet" href="../../assests/fontawesome/css/all.min.css">
 </head>
@@ -31,10 +31,10 @@ include '../../controladores/cont_profile.php';
                         </div>
                         
                         <div class="info-and-button">
-                            <div class="user-info">
-                                <h1 class="username"><?php echo htmlspecialchars($_SESSION['username']); ?></h1>
-                                <p class="user-type">Administrador</p>
-                                <p class="user-email"><?php echo htmlspecialchars($admin_data['email']); ?></p>
+                            <div class="admin-info">
+                                <h1 class="admin"><?php echo htmlspecialchars($_SESSION['username']); ?></h1>
+                                <p class="admin-type">Administrador</p>
+                                <p class="admin-email"><?php echo htmlspecialchars($admin_data['email']); ?></p>
                                 <p class="join-date">
                                     Miembro desde: <?php echo date('d F Y', strtotime($admin_data['fecha_registro'])); ?>
                                 </p>
@@ -58,7 +58,7 @@ include '../../controladores/cont_profile.php';
                                 </div>
                             <?php endif; ?>
                             
-                            <form method="POST" action="change_password.php" class="password-form">
+                            <form method="POST" action="../../controladores/cont_password.php" class="password-form">
                                 <div class="password-inputs">
                                     <input type="password" name="current_password" placeholder="Contraseña actual" required>
                                     <input type="password" name="new_password" placeholder="Nueva contraseña" required>

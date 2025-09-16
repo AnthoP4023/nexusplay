@@ -1,4 +1,3 @@
-/* CONTENEDOR PRINCIPAL*/
 .search-filters-container {
     display: flex;
     flex-direction: column;
@@ -15,7 +14,6 @@
 }
 
 
-/* CONTADOR DE RESULTADOS */
 .search-results-count {
     margin-bottom: 30px;
     align-items: center;
@@ -39,14 +37,12 @@
     margin: 0;
 }
 
-/* GRID DE JUEGOS */
 .games-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
 }
 
-/* Tarjeta de juego */
 .game-card {
     background: rgba(26, 26, 26, 0.8);
     border-radius: 10px;
@@ -104,7 +100,6 @@
     transform: scale(1.05);
 }
 
-/* INFO DEL JUEGO */
 .game-info {
     display: flex;
     flex-direction: column;
@@ -123,7 +118,7 @@
     text-transform: capitalize;
 }
 
-.game-platform { 
+.game-developer  { 
     color: #888; 
     font-size: 0.8rem; 
     margin-bottom: 0.4rem; 
@@ -185,14 +180,12 @@
     transform: scale(1.05);
 }
 
-/* DESTACADO */
 .highlight {
     color: white;
     border-radius: 3px;
     font-weight: 600;
 }
 
-/* 1 resultado */
 .games-grid.single-result {
     display: flex;
     justify-content: center;
@@ -212,7 +205,6 @@
     font-size: 1rem;
 }
 
-/* 2 resultados */
 .games-grid.few-results {
     display: flex;
     justify-content: center;
@@ -223,7 +215,6 @@
     flex: 0 0 300px;
 }
 
-/* Descripción del juego */
 .game-description {
     color: #888888;     
     font-size: 0.9rem; 
@@ -236,14 +227,14 @@
     margin: 80px 30px 80px 30px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* centra todo horizontalmente */
+    align-items: center; 
 }
 
 .filter-row {
     display: flex;
     gap: 100px;
     margin-bottom: 25px;
-    justify-content: center; /* centra los selects */
+    justify-content: center; 
 }
 
 .filter-row select {
@@ -282,8 +273,6 @@
     transform: scale(1.05);
 }
 
-/* RESPONSIVE */
-/* Tablets medianas */
 @media (max-width: 1024px) {
     .search-filters-container  {
         margin: 80px 10px 60px 10px;
@@ -307,13 +296,17 @@
         font-size: 1rem;
     }
 
+    .game-developer  { 
+        font-size: 0.8rem; 
+    }
+
     .current-price {
         font-size: 1.1rem;
     }
 
     .filter-row {
-        gap: 20px; /* reducir espacio entre selects */
-        flex-wrap: wrap; /* permite que se muevan a la siguiente línea si hace falta */
+        gap: 20px; 
+        flex-wrap: wrap;
     }
 
     .filter-row select {
@@ -321,7 +314,7 @@
     }
 
     .filter-buttons {
-        gap: 30px; /* reducir espacio entre botones */
+        gap: 30px; 
     }
 
     .btn {
@@ -332,7 +325,6 @@
     
 }
 
-/* Tablets pequeñas */
 @media (max-width: 480px) {
     .search-filters-container {
         margin: 90px 10px 40px 10px;
@@ -378,6 +370,10 @@
         transform: scale(1.05);
     }
 
+    .game-card .game-image img {
+        height: 120px;
+    }
+
     .game-info {
         flex: 1 0 40%;
         display: flex;
@@ -401,6 +397,9 @@
     .game-description {
         display: none;
     }
+    .game-developer{
+        display: none;
+    }
 
     .game-price {
         display: flex;
@@ -418,9 +417,12 @@
     }
 
     .btn-cart {
-        font-size: 0.7rem;
-        padding: 4px 8px;
+        font-size: 10px;
+        padding: 6px 5px;
         flex-shrink: 0;
+    }
+    .btn-cart o {
+        font-size: 15px;
     }
 
     .game-rating {
@@ -454,11 +456,11 @@
 
     .filter-row {
         gap: 20px;
-        align-items: center; /* centrar selects */
+        align-items: center;
     }
 
     .filter-row select {
-        width: 40%; /* ocupar casi todo el ancho */
+        width: 40%; 
         padding: 15px;
         font-size: 12px;
     }

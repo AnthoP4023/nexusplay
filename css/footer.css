@@ -1,4 +1,3 @@
-/* CONTENEDOR FOOTER */
 .footer {
     margin-top: 80px;
 }
@@ -23,7 +22,6 @@
     position: relative;
 }
 
-/* Líneas verticales */
 .footer-content::before,
 .footer-content::after,
 .footer-content div:nth-child(3)::before {
@@ -35,7 +33,6 @@
     background: rgba(74, 74, 74, 0.3);
 }
 
-/* Desktop (4 columnas → 3 líneas) */
 .footer-content::before { left: 25%; }
 .footer-content::after { left: 50%; }
 .footer-content div:nth-child(3)::before { left: 75%; }
@@ -121,7 +118,6 @@
     margin: 40px auto 0;
 }
 
-/* RESPONSIVE FOOTER - Unificado a 980pxpx */
 @media (max-width: 1060px) {
     .footer-content {
         grid-template-columns: repeat(2, 1fr);
@@ -134,7 +130,6 @@
     }
 }
 
-/* RESPONSIVE FOOTER - Unificado a 860px */
 @media (max-width: 595px) {
     .footer-content {
         grid-template-columns: 1fr;
@@ -144,14 +139,12 @@
         position: relative;
     }
 
-    /* Ocultar líneas verticales */
     .footer-content::before,
     .footer-content::after,
     .footer-content div:nth-child(3)::before {
         display: none;
     }
 
-    /* Líneas horizontales entre filas */
     .footer-section {
         border-bottom: 1px solid rgba(74, 74, 74, 0.3);
         width: 90%;
@@ -160,14 +153,12 @@
         margin-bottom: 15px;
     }
 
-    /* Última sección no tiene línea */
     .footer-section:last-child {
         border-bottom: none;
         margin-bottom: 0;
         padding-top: 0; 
     }
 
-    /* Iconos centrados y sin espacio extra */
     .social-icons {
         justify-content: center;
         margin: 10px 0 0 0;
