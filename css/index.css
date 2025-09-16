@@ -744,9 +744,14 @@ body {
     }
 
     .btn-cart {
-        font-size: 0.75rem;
-        padding: 6px 8px;
+        font-size: 10px;
+        padding: 6px 5px;
     }
+
+    .btn-cart i {
+        font-size: 15px;
+    }
+
     .game-rating{
             padding: 0 1px
     }
