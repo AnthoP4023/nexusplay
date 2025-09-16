@@ -57,7 +57,7 @@ try {
     }
 } catch (mysqli_sql_exception $e) {
     $error_message = $e->getMessage();
-    $filtered_message = str_replace('prueba2.', '', $error_message);
+    $filtered_message = str_replace('nexusplay_db.', '', $error_message);
     echo "Error SQL: " . $filtered_message;
     exit;
 }
