@@ -1,5 +1,5 @@
 <?php 
-include '../controladores/cont_user_profile.php'; 
+include '../../controladores/cont_user_profile.php'; 
 ?>
 
 <!DOCTYPE html>
@@ -8,14 +8,14 @@ include '../controladores/cont_user_profile.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/profile.css">
-    <link rel="stylesheet" href="/nexusplay/assests/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/footer.css">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/profile.css">
+    <link rel="stylesheet" href="../../assests/fontawesome/css/all.min.css">
 </head>
 <body>
-    <?php include '../includes/header.php'; ?>
+    <?php include '../../includes/header.php'; ?>
     <main class="main-content">
         <div class="admin-profile-layout" id="ig-profile-main-panel">
             <div class="profile-container">
@@ -32,7 +32,7 @@ include '../controladores/cont_user_profile.php';
             </div> 
         </div>
     </main>
-    <?php include '../includes/footer.php'; ?>
+    <?php include '../../includes/footer.php'; ?>
 </body>
 </html>
 

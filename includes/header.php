@@ -91,10 +91,10 @@ $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perf
             </div>
 
             <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'administrador'): ?>
-                <a href="/nexusplay/profile/admin.php"><i class="fas fa-id-card"></i> Perfil Admin</a>
+                <a href="/nexusplay/profile/admin/admin.php"><i class="fas fa-id-card"></i> Perfil Admin</a>
                 <a href="/panel-control/index.php" class="admin" target="_blank"><i class="fas fa-cogs"></i> Panel Admin</a>
             <?php else: ?>
-                <a href="/nexusplay/profile/user.php"><i class="fas fa-id-card"></i> Mi Perfil</a>
+                <a href="/nexusplay/profile/user/user.php"><i class="fas fa-id-card"></i> Mi Perfil</a>
                 <a href="/nexusplay/orders.php" class="pedidos"><i class="fas fa-box"></i> Mis Pedidos</a>
                 <a href="/nexusplay/reviews.php" class="reseña"><i class="fas fa-star"></i> Mis Reseñas</a>
             <?php endif; ?>

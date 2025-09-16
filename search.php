@@ -86,6 +86,7 @@ include 'functions/fun_search.php';
 
                         <div class="game-info">
                             <h3><?php echo highlightSearchTerm($juego['titulo'], $search_query); ?></h3>
+                            <p class="game-platform"><?php echo htmlspecialchars($juego['desarrollador'] ?? 'Sin desarrollador'); ?></p>
                             <p class="game-description">
                                 <?php echo htmlspecialchars(substr($juego['descripcion'], 0, 100)); ?>...
                             </p>
@@ -129,4 +130,3 @@ include 'functions/fun_search.php';
     </script>
 </body>
 </html>
-

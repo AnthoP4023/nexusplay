@@ -12,7 +12,7 @@ if (isset($_SESSION['user_id'])) {
     $_SESSION['imagen_perfil'] = $perfil_img;
 }
 
-$search_query = isset($_GET['q']) ? trim($_GET['q']) : '';
+$search_query = isset($_GET['q']) ? $_GET['q'] : '';
 $plataforma_id = isset($_GET['plataforma']) ? $_GET['plataforma'] : '';
 $categoria_id = isset($_GET['categoria']) ? $_GET['categoria'] : '';
 $precio = isset($_GET['precio']) ? $_GET['precio'] : '';
@@ -20,30 +20,30 @@ $precio = isset($_GET['precio']) ? $_GET['precio'] : '';
 $juegos_result = null;
 $total_resultados = 0;
 
-$sql = "SELECT id, titulo, descripcion, imagen, precio FROM juegos WHERE 1=1";
+$sql = "SELECT j.id, j.titulo, j.descripcion, j.imagen, j.precio, j.desarrollador FROM juegos j WHERE 1=1";
 
 if (!empty($search_query)) {
-    $sql .= " AND CONCAT(titulo, ' ', descripcion) LIKE '%$search_query%'";  //Vulnerabilidad SQLi
+    $sql .= " AND j.titulo LIKE '%$search_query%'";  //Vulnerabilidad SQLi
 }
 
 if (!empty($plataforma_id)) {
-    $sql .= " AND plataforma_id = $plataforma_id";
+    $sql .= " AND j.plataforma_id = $plataforma_id";
 }
 
 if (!empty($categoria_id)) {
-    $sql .= " AND categoria_id = $categoria_id";
+    $sql .= " AND j.categoria_id = $categoria_id";
 }
 
 if (!empty($precio)) {
     switch ($precio) {
         case '1':
-            $sql .= " AND precio < 20";
+            $sql .= " AND j.precio < 20";
             break;
         case '2':
-            $sql .= " AND precio BETWEEN 20 AND 50";
+            $sql .= " AND j.precio BETWEEN 20 AND 50";
             break;
         case '3':
-            $sql .= " AND precio > 50";
+            $sql .= " AND j.precio > 50";
             break;
     }
 }
@@ -56,7 +56,9 @@ try {
         $total_resultados = 0;
     }
 } catch (mysqli_sql_exception $e) {
-    echo "Error SQL: " . $e->getMessage();
+    $error_message = $e->getMessage();
+    $filtered_message = str_replace('prueba2.', '', $error_message);
+    echo "Error SQL: " . $filtered_message;
     exit;
 }
 
