@@ -12,7 +12,15 @@ if (file_exists('functions/fun_auth.php')) {
 $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perfil']) 
               ? $_SESSION['imagen_perfil'] 
               : '/nexusplay/images/users/default-avatar.png';
+
+$total_items_carrito = 0;
+if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
+    foreach ($_SESSION['carrito'] as $item) {
+        $total_items_carrito += $item['cantidad'];
+    }
+}
 ?>
+
 
 <header class="header">
     <div class="nav-container">
@@ -72,9 +80,9 @@ $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perf
             <div class="header-cart">
                 <a href="/nexusplay/cart.php" class="cart-link nav-icon" title="Carrito" >
                     <i class="fa-solid fa-cart-shopping"></i>
-                    <span id="cart-count" class="cart-count">
-                        <?php echo isset($_SESSION['carrito']) ? array_sum($_SESSION['carrito']) : 0; ?>
-                    </span>
+                    <?php if ($total_items_carrito > 0): ?>
+                        <span class="cart-count"><?php echo $total_items_carrito; ?></span>
+                    <?php endif; ?>
                 </a>
             </div>
             

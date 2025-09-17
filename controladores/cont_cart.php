@@ -1,0 +1,140 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once __DIR__ . '/../config_db/database.php';
+require_once __DIR__ . '/../functions/fun_auth.php';
+require_once __DIR__ . '/../functions/fun_profile.php';
+
+// Cargar imagen de perfil si está logueado
+if (isset($_SESSION['user_id'])) {
+    $perfil_img = loadUserProfileImage($conn, $_SESSION['user_id']);
+    $_SESSION['imagen_perfil'] = $perfil_img;
+}
+
+// Inicializar carrito en sesión si no existe
+if (!isset($_SESSION['carrito'])) {
+    $_SESSION['carrito'] = array();
+}
+
+$message = '';
+$message_type = '';
+$carrito_items = array();
+$total_carrito = 0;
+
+// Función para actualizar el carrito desde la base de datos
+function refreshCarritoSession($conn, $user_id) {
+    $_SESSION['carrito'] = array();
+    $stmt = $conn->prepare("
+        SELECT c.juego_id, c.cantidad, j.titulo, j.precio, j.imagen
+        FROM carrito c
+        JOIN juegos j ON c.juego_id = j.id
+        WHERE c.user_id = ?
+    ");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $_SESSION['carrito'][$row['juego_id']] = [
+            'id' => $row['juego_id'],
+            'titulo' => $row['titulo'],
+            'precio' => $row['precio'],
+            'imagen' => $row['imagen'],
+            'cantidad' => $row['cantidad']
+        ];
+    }
+}
+
+// Procesar acciones del carrito
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+
+    // 1. Agregar juego al carrito
+    if (isset($_POST['add_to_cart']) && isset($_POST['juego_id'])) {
+        $juego_id = intval($_POST['juego_id']);
+        $cantidad = intval($_POST['cantidad'] ?? 1);
+        if ($cantidad <= 0) $cantidad = 1;
+
+        // Verificar si ya existe en DB
+        $stmt_check = $conn->prepare("SELECT cantidad FROM carrito WHERE user_id=? AND juego_id=?");
+        $stmt_check->bind_param("ii", $user_id, $juego_id);
+        $stmt_check->execute();
+        $res_check = $stmt_check->get_result();
+
+        if ($res_check->num_rows > 0) {
+            // Actualizar cantidad
+            $stmt_update = $conn->prepare("UPDATE carrito SET cantidad = cantidad + ? WHERE user_id=? AND juego_id=?");
+            $stmt_update->bind_param("iii", $cantidad, $user_id, $juego_id);
+            $stmt_update->execute();
+        } else {
+            // Insertar nuevo
+            $stmt_insert = $conn->prepare("INSERT INTO carrito(user_id, juego_id, cantidad) VALUES(?,?,?)");
+            $stmt_insert->bind_param("iii", $user_id, $juego_id, $cantidad);
+            $stmt_insert->execute();
+        }
+
+        $message = "Juego agregado al carrito";
+        $message_type = "success";
+    }
+
+    // 2. Actualizar cantidad de un juego
+    if (isset($_POST['update_quantity']) && isset($_POST['juego_id'], $_POST['nueva_cantidad'])) {
+        $juego_id = intval($_POST['juego_id']);
+        $cantidad = intval($_POST['nueva_cantidad']);
+
+        if ($cantidad <= 0) {
+            $stmt = $conn->prepare("DELETE FROM carrito WHERE user_id=? AND juego_id=?");
+            $stmt->bind_param("ii", $user_id, $juego_id);
+            $stmt->execute();
+            $message = "Juego eliminado del carrito";
+            $message_type = "info";
+        } else {
+            $stmt = $conn->prepare("UPDATE carrito SET cantidad=? WHERE user_id=? AND juego_id=?");
+            $stmt->bind_param("iii", $cantidad, $user_id, $juego_id);
+            $stmt->execute();
+            $message = "Cantidad actualizada";
+            $message_type = "success";
+        }
+    }
+
+    // 3. Eliminar un juego
+    if (isset($_POST['remove_from_cart']) && isset($_POST['juego_id'])) {
+        $juego_id = intval($_POST['juego_id']);
+        $stmt = $conn->prepare("DELETE FROM carrito WHERE user_id=? AND juego_id=?");
+        $stmt->bind_param("ii", $user_id, $juego_id);
+        $stmt->execute();
+        $message = "Juego eliminado del carrito";
+        $message_type = "info";
+    }
+
+    // 4. Vaciar carrito completo
+    if (isset($_POST['clear_cart'])) {
+        $stmt = $conn->prepare("DELETE FROM carrito WHERE user_id=?");
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $message = "Carrito vaciado";
+        $message_type = "info";
+    }
+
+    // Refrescar carrito en sesión
+    refreshCarritoSession($conn, $user_id);
+}
+
+// Obtener items del carrito y calcular total
+if (!empty($_SESSION['carrito'])) {
+    $carrito_items = $_SESSION['carrito'];
+    foreach ($carrito_items as $item) {
+        $total_carrito += $item['precio'] * $item['cantidad'];
+    }
+}
+
+// Contar total de items en el carrito
+$total_items_carrito = 0;
+foreach ($carrito_items as $item) {
+    $total_items_carrito += $item['cantidad'];
+}
+
+// Actualizar contador en sesión para el header
+$_SESSION['carrito_count'] = $total_items_carrito;
+?>
