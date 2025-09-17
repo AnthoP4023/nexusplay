@@ -28,20 +28,24 @@ include 'functions/fun_search.php';
             <div class="filter-row">
                 <select name="plataforma">
                     <option value="">Todas las plataformas</option>
-                    <?php while($plat = $plataformas->fetch_assoc()): ?>
-                        <option value="<?= $plat['id'] ?>" <?= ($plataforma_id == $plat['id']) ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($plat['nombre']) ?>
-                        </option>
-                    <?php endwhile; ?>
+                    <?php if ($plataformas): ?>
+                        <?php while($plat = $plataformas->fetch_assoc()): ?>
+                            <option value="<?= $plat['id'] ?>" <?= ($plataforma_id == $plat['id']) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($plat['nombre']) ?>
+                            </option>
+                        <?php endwhile; ?>
+                    <?php endif; ?>
                 </select>
 
                 <select name="categoria">
                     <option value="">Todas las categorías</option>
-                    <?php while($cat = $categorias->fetch_assoc()): ?>
-                        <option value="<?= $cat['id'] ?>" <?= ($categoria_id == $cat['id']) ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($cat['nombre']) ?>
-                        </option>
-                    <?php endwhile; ?>
+                    <?php if ($categorias): ?>
+                        <?php while($cat = $categorias->fetch_assoc()): ?>
+                            <option value="<?= $cat['id'] ?>" <?= ($categoria_id == $cat['id']) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($cat['nombre']) ?>
+                            </option>
+                        <?php endwhile; ?>
+                    <?php endif; ?>
                 </select>
 
                 <select name="precio">
@@ -75,7 +79,7 @@ include 'functions/fun_search.php';
                 <?php while ($juego = $juegos_result->fetch_assoc()): ?>
                     <div class="game-card">
                         <div class="game-image">
-                            <img src="images/juegos/<?php echo $juego['imagen'] ?: 'default.jpg'; ?>" 
+                            <img src="images/juegos/<?php echo $juego['imagen']?>" 
                                 alt="<?php echo htmlspecialchars($juego['titulo']); ?>">
                             <div class="game-overlay">
                                 <a href="game_view.php?id=<?php echo $juego['id']; ?>" class="btn-overlay">
@@ -88,7 +92,7 @@ include 'functions/fun_search.php';
                             <h3><?php echo highlightSearchTerm($juego['titulo'], $search_query); ?></h3>
                             <p class="game-developer"><?php echo htmlspecialchars($juego['desarrollador'] ?? 'Sin desarrollador'); ?></p>
                             <p class="game-description">
-                                <?php echo htmlspecialchars(substr($juego['descripcion'], 0, 100)); ?>...
+                                <?php echo htmlspecialchars(substr($juego['descripcion'] ?? '', 0, 100)); ?>...
                             </p>
 
                             <div class="game-price">
@@ -118,13 +122,11 @@ include 'functions/fun_search.php';
     <?php include 'includes/footer.php'; ?>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-        const searchTerm = <?php echo json_encode($_GET['q'] ?? '', JSON_UNESCAPED_UNICODE); ?>;
-        document.querySelectorAll('.search-input-field').forEach(input => input.value = searchTerm);
-            if (profileMenu && profileToggle) {
-                if (!profileMenu.contains(event.target)) {
-                    profileToggle.checked = false;
-                }
+        document.addEventListener('click', (event) => {
+            const profileMenu = document.querySelector('.profile-menu');
+            const profileToggle = document.querySelector('#profile-toggle');
+            if (profileMenu && profileToggle && !profileMenu.contains(event.target)) {
+                profileToggle.checked = false;
             }
         });
     </script>

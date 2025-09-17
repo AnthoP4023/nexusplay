@@ -9,6 +9,6 @@ if ($_SESSION['user_type'] === 'administrador') {
     header("Location: /nexusplay/profile/admin/admin.php");
     exit();
 } else {
-    header("Location: /nexusplay/profile/user.php");
+    header("Location: /nexusplay/profile/user/user.php");
     exit();
 }

@@ -21,7 +21,6 @@ include '../../controladores/cont_profile.php';
     <main class="main-content">
         <div class="admin-profile-layout">
             <div class="profile-container">
-                <!-- Panel Principal del Admin -->
                 <div class="main-panel">
                     <div class="admin-info-container">
                         <div class="avatar-section">

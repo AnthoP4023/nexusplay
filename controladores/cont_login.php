@@ -23,8 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Complete todos los campos';
     } else {
         $password_hash = md5($password);
-        $query = "SELECT u.*, t.nombre as tipo_usuario FROM usuarios u INNER JOIN tipo_user t ON u.tipo_user_id = t.id WHERE u.username = '$username' AND u.password = '$password_hash'";
-
+        $query = "SELECT u.*, t.nombre as tipo_usuario 
+                FROM usuarios u INNER JOIN tipo_user t ON u.tipo_user_id = t.id 
+                WHERE u.username = '$username' AND u.password = '$password_hash'";
         try {
             $result = $conn->query($query);
 
@@ -40,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $error = 'Usuario o contraseña incorrectos';
             }
         } catch (mysqli_sql_exception $e) {
-            die("Error en la consulta: " . $e->getMessage());
+            die($e->getMessage());
         }
     }
 }

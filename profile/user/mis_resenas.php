@@ -87,7 +87,7 @@ include '../../controladores/cont_user_profile.php';
                         <option value="mi_cartera.php">💰 Mi Cartera</option>
                         <option value="mis_tarjetas.php">💳 Mis Tarjetas</option>
                         <option value="mis_resenas.php" selected>⭐ Mis Reseñas</option>
-                        <option value="mis_resenas.php">⚙️ Configuraciones</option>
+                        <option value="configuracion.php">⚙️ Configuraciones</option>
                     </select>
                 </div>
 
