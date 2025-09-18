@@ -18,7 +18,7 @@ include 'functions/fun_search.php';
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/search.css">
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="/nexusplay/assests/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assests/fontawesome/css/all.min.css">
 </head>
 <body>
     <?php include 'includes/header.php'; ?>

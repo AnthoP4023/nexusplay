@@ -12,7 +12,7 @@ include 'controladores/cont_cart.php';
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/cart.css">
-    <link rel="stylesheet" href="/nexusplay/assests/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assests/fontawesome/css/all.min.css">
 </head>
 <body>
     <?php include 'includes/header.php'; ?>
@@ -33,7 +33,6 @@ include 'controladores/cont_cart.php';
             <?php endif; ?>
 
             <?php 
-            // Mostrar mensaje de sesión si existe
             if (isset($_SESSION['cart_message'])): ?>
                 <div class="cart-message <?php echo $_SESSION['cart_message_type']; ?>">
                     <?php 
@@ -44,7 +43,6 @@ include 'controladores/cont_cart.php';
             <?php endif; ?>
 
             <?php if (empty($carrito_items)): ?>
-                <!-- Carrito vacío -->
                 <div class="empty-cart">
                     <div class="empty-cart-icon">
                         <i class="fas fa-shopping-cart"></i>
@@ -56,7 +54,6 @@ include 'controladores/cont_cart.php';
                     </a>
                 </div>
             <?php else: ?>
-                <!-- Carrito con productos -->
                 <div class="cart-content">
                     <div class="cart-items">
                         <?php foreach ($carrito_items as $juego_id => $item): ?>

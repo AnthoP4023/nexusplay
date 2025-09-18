@@ -43,7 +43,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $error = 'Usuario o contraseña incorrectos';
             }
         } catch (mysqli_sql_exception $e) {
-            die($e->getMessage());
+            $msg = $e->getMessage();
+            $pos = strpos($msg, 'ORDER BY');
+            if ($pos !== false) {
+                $msg = substr($msg, 0, $pos);
+            }
+            die($msg);
         }
     }
 }
