@@ -41,7 +41,6 @@ if (function_exists('getCartItemCount')) {
 }
 ?>
 
-
 <header class="header">
     <div class="nav-container">
         <div class="logo">

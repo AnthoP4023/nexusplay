@@ -9,6 +9,28 @@ if (!isset($_SESSION['carrito'])) {
     $_SESSION['carrito'] = array();
 }
 
+function syncCarritoWithDB($conn, $user_id) {
+    $_SESSION['carrito'] = array();
+    $stmt = $conn->prepare("
+        SELECT c.juego_id, c.cantidad, j.titulo, j.precio, j.imagen
+        FROM carrito c
+        JOIN juegos j ON c.juego_id = j.id
+        WHERE c.usuario_id = ?
+    ");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $_SESSION['carrito'][$row['juego_id']] = [
+            'id' => $row['juego_id'],
+            'titulo' => $row['titulo'],
+            'precio' => $row['precio'],
+            'imagen' => $row['imagen'],
+            'cantidad' => $row['cantidad']
+        ];
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['juego_id'])) {
     $juego_id = intval($_POST['juego_id']);
     $cantidad = isset($_POST['cantidad']) ? intval($_POST['cantidad']) : 1;
@@ -27,34 +49,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['juego_id'])) {
             if (isset($_SESSION['user_id'])) {
                 $user_id = $_SESSION['user_id'];
                 
-                $stmt_check = $conn->prepare("SELECT cantidad FROM carrito WHERE user_id = ? AND juego_id = ?");
+                $stmt_check = $conn->prepare("SELECT cantidad FROM carrito WHERE usuario_id=? AND juego_id=?");
                 $stmt_check->bind_param("ii", $user_id, $juego_id);
                 $stmt_check->execute();
-                $check_result = $stmt_check->get_result();
+                $res_check = $stmt_check->get_result();
                 
-                if ($check_result->num_rows > 0) {
-                    $stmt_update = $conn->prepare("UPDATE carrito SET cantidad = cantidad + ? WHERE user_id = ? AND juego_id = ?");
+                if ($res_check->num_rows > 0) {
+                    $stmt_update = $conn->prepare("UPDATE carrito SET cantidad = cantidad + ? WHERE usuario_id=? AND juego_id=?");
                     $stmt_update->bind_param("iii", $cantidad, $user_id, $juego_id);
                     $stmt_update->execute();
                 } else {
-                    $stmt_insert = $conn->prepare("INSERT INTO carrito (user_id, juego_id, cantidad) VALUES (?, ?, ?)");
+                    $stmt_insert = $conn->prepare("INSERT INTO carrito(usuario_id, juego_id, cantidad) VALUES(?,?,?)");
                     $stmt_insert->bind_param("iii", $user_id, $juego_id, $cantidad);
                     $stmt_insert->execute();
                 }
                 
-                if (isset($_SESSION['carrito'][$juego_id])) {
-                    $_SESSION['carrito'][$juego_id]['cantidad'] += $cantidad;
-                } else {
-                    $_SESSION['carrito'][$juego_id] = array(
-                        'id' => $juego['id'],
-                        'titulo' => $juego['titulo'],
-                        'precio' => $juego['precio'],
-                        'imagen' => $juego['imagen'],
-                        'cantidad' => $cantidad
-                    );
-                }
-            } 
-            else {
+                syncCarritoWithDB($conn, $user_id);
+            } else {
                 if (isset($_SESSION['carrito'][$juego_id])) {
                     $_SESSION['carrito'][$juego_id]['cantidad'] += $cantidad;
                 } else {
@@ -70,19 +81,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['juego_id'])) {
             
             $_SESSION['cart_message'] = 'Juego agregado al carrito exitosamente';
             $_SESSION['cart_message_type'] = 'success';
-            
         } else {
             $_SESSION['cart_message'] = 'El juego no existe';
             $_SESSION['cart_message_type'] = 'error';
         }
-        
     } catch (mysqli_sql_exception $e) {
         $_SESSION['cart_message'] = 'Error al agregar el juego al carrito';
         $_SESSION['cart_message_type'] = 'error';
     }
 }
 
-$redirect_url = '/nexusplay/index.php'; 
+$redirect_url = '/nexusplay/index.php';
 
 if (isset($_POST['from_cart']) && $_POST['from_cart'] == '1') {
     $redirect_url = '/nexusplay/cart.php';

@@ -138,8 +138,7 @@ include 'controladores/cont_cart.php';
                                 <?php endif; ?>
                                 
                                 <form method="POST" style="margin-top: 10px;">
-                                    <button type="submit" name="clear_cart" class="btn btn-secondary"
-                                            onclick="return confirm('¿Estás seguro de vaciar todo el carrito?')">
+                                    <button type="submit" name="clear_cart" class="btn btn-secondary">
                                         <i class="fas fa-trash-alt"></i> Vaciar Carrito
                                     </button>
                                 </form>
