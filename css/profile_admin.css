@@ -35,7 +35,7 @@ body {
 }
 
 .admin-info-container {
-    width: 565px;
+    width: fit-content;
     flex-shrink: 0;
     display: flex;
     justify-content: center;  
@@ -255,7 +255,6 @@ body {
     .admin-info-container {
         width: auto;
         flex: 1;
-        max-width: 500px;
         padding: 40px 30px;
     }
     

@@ -128,9 +128,9 @@ include 'controladores/cont_cart.php';
                             
                             <div class="cart-actions">
                                 <?php if (isLoggedIn()): ?>
-                                    <button class="btn btn-primary btn-checkout">
+                                    <a href="buy_game.php" class="btn btn-primary btn-checkout">
                                         <i class="fas fa-credit-card"></i> Proceder al Pago
-                                    </button>
+                                    </a>
                                 <?php else: ?>
                                     <a href="auth/login.php" class="btn btn-primary">
                                         <i class="fas fa-sign-in-alt"></i> Iniciar Sesión para Comprar

@@ -26,7 +26,7 @@ body {
 }
 
 .user-info-container {
-    width: 100%;
+    width: fit-content;
     max-width: 1200px;
     display: flex;
     flex-direction: column;
@@ -48,21 +48,6 @@ body {
     justify-content: center;
     padding-bottom: 60px;
     border-bottom: 1px solid rgba(74, 74, 74, 0.3);
-}
-
-.user-info-container {
-    width: 100%;
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background: rgba(26, 26, 26, 0.95);
-    border: 1px solid rgba(74, 74, 74, 0.3);
-    border-radius: 15px;
-    padding: 40px 30px;
-    transition: all 0.3s ease;
-    gap: 20px;
 }
 
 .user-info-container:hover {
@@ -337,7 +322,6 @@ body {
 
     .user-info-container {
         padding: 30px 20px;
-        max-width: 400px;
     }
 
     .user-avatar {
@@ -384,7 +368,6 @@ body {
 
     .user-info-container {
         padding: 25px 15px;
-        max-width: 320px;
     }
 
     .user-avatar {
