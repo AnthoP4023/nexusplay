@@ -98,8 +98,7 @@ include 'controladores/cont_cart.php';
                                     
                                     <form method="POST" class="remove-form">
                                         <input type="hidden" name="juego_id" value="<?php echo $juego_id; ?>">
-                                        <button type="submit" name="remove_from_cart" class="btn-remove" 
-                                                onclick="return confirm('¿Estás seguro de eliminar este juego del carrito?')">
+                                        <button type="submit" name="remove_from_cart" class="btn-remove">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
