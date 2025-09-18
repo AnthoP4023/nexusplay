@@ -1,5 +1,3 @@
-/* Configuraciones de Usuario - Estilos específicos */
-
 .config-container {
     display: flex;
     flex-direction: column;
@@ -216,7 +214,6 @@
     box-shadow: 0 8px 20px rgba(16, 185, 86, 0.4);
 }
 
-/* Estados de validación */
 .form-group input:valid {
     border-color: #10b956;
 }
@@ -225,7 +222,6 @@
     border-color: #ef4444;
 }
 
-/* Animaciones */
 @keyframes slideInUp {
     from {
         opacity: 0;
@@ -237,7 +233,6 @@
     }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .config-container {
         gap: 20px;

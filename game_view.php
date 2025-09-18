@@ -19,9 +19,7 @@ include 'controladores/cont_game_view.php';
 
     <main class="main-content">
         <div class="game-container">
-            <!-- Contenido principal izquierdo -->
             <div class="game-main-content">
-                <!-- Hero compacto -->
                 <div class="game-hero-compact">
                     <div class="game-hero-grid">
                         <div class="game-image-compact">
@@ -58,7 +56,6 @@ include 'controladores/cont_game_view.php';
                     </div>
                 </div>
 
-                <!-- Descripción -->
                 <div class="game-description-section">
                     <h2>Descripción del Juego</h2>
                     <div class="game-description">
@@ -66,7 +63,6 @@ include 'controladores/cont_game_view.php';
                     </div>
                 </div>
 
-                <!-- Sección de reseñas -->
                 <div class="reviews-section">
                     <div class="reviews-header">
                         <h2>Reseñas de Usuarios</h2>
@@ -78,10 +74,8 @@ include 'controladores/cont_game_view.php';
                         <?php endif; ?>
                     </div>
 
-                    <!-- Formulario de reseña -->
                     <?php if (isset($_SESSION['user_id'])): ?>
                     <div class="review-form-container" id="reviewFormContainer" style="display: none;">
-                        <!-- FIX 2: El mensaje se muestra aquí, en el formulario -->
                         <?php if (!empty($message)): ?>
                             <div class="review-message <?php echo $message_type; ?>">
                                 <i class="fas <?php echo $message_type === 'success' ? 'fa-check-circle' : 'fa-exclamation-triangle'; ?>"></i>
@@ -117,7 +111,6 @@ include 'controladores/cont_game_view.php';
                     </div>
                     <?php endif; ?>
 
-                    <!-- Lista de reseñas -->
                     <div class="reviews-list">
                         <?php if ($reviews_result && $reviews_result->num_rows > 0): ?>
                             <?php while ($review = $reviews_result->fetch_assoc()): ?>
@@ -152,9 +145,7 @@ include 'controladores/cont_game_view.php';
                 </div>
             </div>
 
-            <!-- Sidebar derecho -->
             <div class="game-sidebar">
-                <!-- Card de compra -->
                 <div class="purchase-card">
                     <div class="game-price"><?php echo formatGamePrice($game['precio']); ?></div>
                     <form method="POST" action="controladores/carrito_add.php" class="add-to-cart-form">
@@ -166,7 +157,6 @@ include 'controladores/cont_game_view.php';
                     </form>
                 </div>
 
-                <!-- Card de estadísticas de rating -->
                 <?php if ($game['total_resenas'] > 0): ?>
                 <div class="rating-stats-card">
                     <h3>Calificaciones</h3>

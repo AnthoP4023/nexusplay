@@ -185,7 +185,6 @@ include 'controladores/cont_cart.php';
             submitBtn.click();
         }
 
-        // Auto-actualizar cuando se cambie la cantidad manualmente
         document.addEventListener('DOMContentLoaded', function() {
             const quantityInputs = document.querySelectorAll('.quantity-input');
             quantityInputs.forEach(input => {

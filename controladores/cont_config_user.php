@@ -11,7 +11,6 @@ if (!isLoggedIn()) {
     exit();
 }
 
-// Verificar que NO sea admin
 if (isAdmin()) {
     header('Location: /nexusplay/profile/admin/admin.php');
     exit();
@@ -19,13 +18,11 @@ if (isAdmin()) {
 
 $user_id = $_SESSION['user_id'];
 
-// Variables para mensajes
 $password_message = '';
 $password_message_type = '';
 $profile_message = '';
 $profile_message_type = '';
 
-// Verificar mensajes de sesión
 if (isset($_SESSION['password_message'])) {
     $password_message = $_SESSION['password_message'];
     $password_message_type = $_SESSION['password_message_type'];
@@ -43,7 +40,6 @@ if (isset($_SESSION['profile_message'])) {
 }
 
 try {
-    // Obtener datos del usuario
     $stmt = $conn->prepare("SELECT username, email, nombre, apellido, imagen_perfil, fecha_registro FROM usuarios WHERE id = ?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
@@ -74,7 +70,6 @@ try {
         die("Usuario no encontrado.");
     }
 
-    // Obtener estadísticas básicas del usuario para mostrar en el panel
     $stmt_stats = $conn->prepare("
         SELECT 
             COUNT(p.id) as total_pedidos,
@@ -87,7 +82,6 @@ try {
     $stats_result = $stmt_stats->get_result();
     $stats = $stats_result->fetch_assoc();
 
-    // Obtener saldo de la cartera
     $stmt_cartera = $conn->prepare("SELECT saldo FROM carteras WHERE usuario_id = ?");
     $stmt_cartera->bind_param("i", $user_id);
     $stmt_cartera->execute();
@@ -99,10 +93,8 @@ try {
     die("Error en la consulta: " . $e->getMessage());
 }
 
-// Procesar formularios
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
-    // Cambio de contraseña
     if (isset($_POST['change_password'])) {
         $current_password = trim($_POST['current_password']);
         $new_password = trim($_POST['new_password']);
@@ -119,7 +111,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $password_message_type = 'error';
         } else {
             try {
-                // Verificar contraseña actual
                 $stmt = $conn->prepare("SELECT password FROM usuarios WHERE id = ?");
                 $stmt->bind_param("i", $user_id);
                 $stmt->execute();
@@ -156,7 +147,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     
-    // Actualización de perfil
     if (isset($_POST['update_profile'])) {
         $new_username = trim($_POST['username']);
         $new_email = trim($_POST['email']);
@@ -171,7 +161,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $profile_message_type = 'error';
         } else {
             try {
-                // Verificar si el username o email ya existen (excluyendo al usuario actual)
                 $check_stmt = $conn->prepare("SELECT id FROM usuarios WHERE (username = ? OR email = ?) AND id != ?");
                 $check_stmt->bind_param("ssi", $new_username, $new_email, $user_id);
                 $check_stmt->execute();
@@ -181,7 +170,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $profile_message = 'El nombre de usuario o email ya están en uso';
                     $profile_message_type = 'error';
                 } else {
-                    // Actualizar datos del usuario
                     $update_stmt = $conn->prepare("UPDATE usuarios SET username = ?, email = ?, nombre = ?, apellido = ? WHERE id = ?");
                     $update_stmt->bind_param("ssssi", $new_username, $new_email, $new_nombre, $new_apellido, $user_id);
                     
@@ -189,7 +177,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $profile_message = 'Perfil actualizado exitosamente';
                         $profile_message_type = 'success';
                         
-                        // Actualizar datos en la sesión y variables locales
                         $_SESSION['username'] = $new_username;
                         $user_data['username'] = $new_username;
                         $user_data['email'] = $new_email;

@@ -1,6 +1,3 @@
-/* Panel de Usuario - Estilos específicos para las secciones de contenido */
-
-/* Stats Grid */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -119,7 +116,6 @@
     font-size: 0.9rem;
 }
 
-/* Pedidos Container */
 .pedidos-container {
     display: flex;
     flex-direction: column;
@@ -201,7 +197,6 @@
     font-weight: bold;
 }
 
-/* Cartera Section */
 .cartera-section {
     display: flex;
     flex-direction: column;
@@ -243,7 +238,6 @@
     transform: translateY(-2px);
 }
 
-/* Movimientos Container */
 .movimientos-container {
     background: rgba(26, 26, 26, 0.95);
     border: 1px solid rgba(74, 74, 74, 0.3);
@@ -323,7 +317,6 @@
     color: #f59e0b;
 }
 
-/* Tarjetas Container */
 .tarjetas-container {
     display: flex;
     flex-direction: column;
@@ -335,16 +328,18 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
+    padding-left: 50px;
 }
 
 .tarjeta-card {
     background: linear-gradient(135deg, #1f2937, #374151);
     border-radius: 15px;
-    padding: 20px;
+    padding: 30px;
     color: white;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    max-width: 320px;
 }
 
 .tarjeta-card::before {
@@ -399,7 +394,6 @@
     text-align: center;
 }
 
-/* Reseñas Container */
 .resenas-container {
     display: flex;
     flex-direction: column;
@@ -473,7 +467,6 @@
     font-size: 0.75rem;
 }
 
-/* Responsive ajustes */
 @media (max-width: 768px) {
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);

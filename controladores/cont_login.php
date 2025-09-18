@@ -1,15 +1,12 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-    
 }
 require_once '../config_db/database.php';
 require_once '../functions/fun_auth.php';
 
-
 if (isLoggedIn()) {
     header('Location: ../index.php');
-    
     exit();
 }
 
@@ -36,6 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_id']   = $user['id'];
                 $_SESSION['username']  = $user['username'];
                 $_SESSION['user_type'] = $user['tipo_usuario'];
+                
+                unset($_SESSION['cart_loaded']);
+                unset($_SESSION['carrito_count']);
 
                 header('Location: ../index.php');
                 exit();
@@ -52,5 +52,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-
 ?>

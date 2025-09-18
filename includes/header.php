@@ -5,8 +5,24 @@ if (session_status() == PHP_SESSION_NONE) {
 
 if (file_exists('functions/fun_auth.php')) {
     require_once 'functions/fun_auth.php';
+    if (file_exists('functions/fun_cart.php')) {
+        require_once 'functions/fun_cart.php';
+    }
+    if (file_exists('config_db/database.php')) {
+        require_once 'config_db/database.php';
+    }
 } elseif (file_exists('../functions/fun_auth.php')) {
     require_once '../functions/fun_auth.php';
+    if (file_exists('../functions/fun_cart.php')) {
+        require_once '../functions/fun_cart.php';
+    }
+    if (file_exists('../config_db/database.php')) {
+        require_once '../config_db/database.php';
+    }
+}
+
+if (isset($conn) && function_exists('initializeCart')) {
+    initializeCart($conn);
 }
 
 $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perfil']) 
@@ -14,9 +30,13 @@ $perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perf
               : '/nexusplay/images/users/default-avatar.png';
 
 $total_items_carrito = 0;
-if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
-    foreach ($_SESSION['carrito'] as $item) {
-        $total_items_carrito += $item['cantidad'];
+if (function_exists('getCartItemCount')) {
+    $total_items_carrito = getCartItemCount();
+} else {
+    if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
+        foreach ($_SESSION['carrito'] as $item) {
+            $total_items_carrito += $item['cantidad'];
+        }
     }
 }
 ?>
