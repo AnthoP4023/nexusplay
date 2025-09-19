@@ -32,7 +32,6 @@ include 'controladores/cont_buy_game.php';
             <?php endif; ?>
 
             <div class="checkout-grid">
-                <!-- Resumen del pedido -->
                 <div class="order-summary">
                     <h2><i class="fas fa-shopping-bag"></i> Resumen del Pedido</h2>
                     
@@ -71,12 +70,10 @@ include 'controladores/cont_buy_game.php';
                     </div>
                 </div>
 
-                <!-- Métodos de pago -->
                 <div class="payment-section">
                     <h2><i class="fas fa-credit-card"></i> Método de Pago</h2>
                     
                     <form method="POST" class="payment-form">
-                        <!-- Opción: Cartera -->
                         <div class="payment-option">
                             <input type="radio" id="cartera" name="metodo_pago" value="cartera" 
                                    <?php echo $saldo_cartera >= $total_carrito ? '' : 'disabled'; ?>>
@@ -95,7 +92,6 @@ include 'controladores/cont_buy_game.php';
                             </label>
                         </div>
 
-                        <!-- Opción: Tarjeta existente -->
                         <?php if (!empty($tarjetas)): ?>
                             <div class="payment-option">
                                 <input type="radio" id="tarjeta" name="metodo_pago" value="tarjeta">
@@ -125,7 +121,6 @@ include 'controladores/cont_buy_game.php';
                             </div>
                         <?php endif; ?>
 
-                        <!-- Opción: Nueva tarjeta -->
                         <div class="payment-option">
                             <input type="radio" id="nueva_tarjeta" name="metodo_pago" value="nueva_tarjeta">
                             <label for="nueva_tarjeta" class="payment-label">

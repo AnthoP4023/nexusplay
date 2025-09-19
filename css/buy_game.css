@@ -1,10 +1,17 @@
-/* === ESTILOS PARA BUY_GAME.PHP === */
+body {
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.700), rgba(0, 0, 0, 0.700)), 
+        url('/nexusplay/images/Logo/fondo1.jpg') no-repeat center center fixed;
+    background-size: cover; 
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
 .main-content {
-    margin-top: 100px;
-    padding: 2rem 0;
+    margin-top: 70px;
+    padding: 20px 0;
     min-height: calc(100vh - 200px);
-    background: #0a0a0a;
 }
 
 .checkout-container {
@@ -33,7 +40,6 @@
     font-size: 1.1rem;
 }
 
-/* === MENSAJES === */
 .message {
     padding: 1rem;
     border-radius: 8px;
@@ -56,7 +62,6 @@
     color: #ef4444;
 }
 
-/* === GRID PRINCIPAL === */
 .checkout-grid {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
@@ -64,7 +69,6 @@
     margin-bottom: 2rem;
 }
 
-/* === RESUMEN DEL PEDIDO === */
 .order-summary {
     background: #1a1a1a;
     border-radius: 12px;
@@ -137,7 +141,6 @@
     font-size: 1.1rem;
 }
 
-/* === TOTALES === */
 .order-totals {
     border-top: 2px solid #333;
     padding-top: 1rem;
@@ -162,7 +165,6 @@
     color: #ffffff;
 }
 
-/* === SECCIÓN DE PAGO === */
 .payment-section {
     background: #1a1a1a;
     border-radius: 12px;
@@ -181,7 +183,6 @@
     padding-bottom: 1rem;
 }
 
-/* === OPCIONES DE PAGO === */
 .payment-option {
     margin-bottom: 1.5rem;
     border: 1px solid #333;
@@ -249,7 +250,6 @@
     gap: 0.5rem;
 }
 
-/* === DETALLES DE PAGO === */
 .payment-details {
     padding: 1.5rem;
     background: #2a2a2a;
@@ -296,7 +296,6 @@
     color: #2563eb;
 }
 
-/* === FORMULARIO === */
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -339,7 +338,6 @@
     color: #666;
 }
 
-/* === CHECKBOX PERSONALIZADO === */
 .checkbox-label {
     display: flex !important;
     align-items: center;
@@ -380,7 +378,6 @@
     font-weight: bold;
 }
 
-/* === BOTONES === */
 .form-actions {
     display: flex;
     gap: 1rem;
@@ -420,6 +417,7 @@
     background: #444;
     color: #ffffff;
     border: 1px solid #555;
+    font-size: 15px;
 }
 
 .btn-secondary:hover {
@@ -430,13 +428,12 @@
 
 .btn-purchase {
     flex: 1;
-    font-size: 1.1rem;
-    padding: 1rem 2rem;
+    font-size: 15px;
+    padding: 5px 20px;
     font-weight: 700;
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 1024px) {
+@media (max-width: 1115px) {
     .checkout-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -445,11 +442,19 @@
     .checkout-container {
         padding: 0 1rem;
     }
+
+    .btn-secondary {
+        padding: 15px 50px;
+        font-size: 15px;
+    }
+    .btn-purchase{
+        padding: 15px 13px;
+    }
 }
 
 @media (max-width: 768px) {
     .main-content {
-        margin-top: 80px;
+        margin-top: 60px;
         padding: 1rem 0;
     }
     
@@ -488,8 +493,11 @@
         gap: 0.75rem;
     }
     
-    .btn {
-        width: 100%;
+    .btn-secondary {
+        padding: 15px 50px;
+    }
+    .btn-purchase{
+        padding: 15px 13px;
     }
 }
 
@@ -520,12 +528,10 @@
     }
     
     .btn-purchase {
-        font-size: 1rem;
-        padding: 0.875rem 1.5rem;
+        max-width: fit-content;
     }
 }
 
-/* === ANIMACIONES === */
 .payment-details {
     animation: slideDown 0.3s ease-out;
 }
@@ -545,7 +551,6 @@
     }
 }
 
-/* === ESTADOS DE CARGA === */
 .btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;

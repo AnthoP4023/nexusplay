@@ -1,3 +1,13 @@
+body {
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.700), rgba(0, 0, 0, 0.700)), 
+        url('/nexusplay/images/Logo/fondo1.jpg') no-repeat center center fixed;
+    background-size: cover; 
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
 .cart-container {
     max-width: 1200px;
     padding: 80px 20px 40px;
@@ -336,7 +346,8 @@
 .btn-checkout {
     background: linear-gradient(45deg, #10b981, #34d399) !important;
     box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4) !important;
-    max-height: 70px;
+    max-height: 20px;
+    max-width: 166px;
 }
 
 .btn-checkout:hover {
@@ -430,6 +441,11 @@
     .cart-item {
         padding: 15px;
     }
+
+    .btn-checkout {
+        max-height: 20px;
+        max-width: 167px;
+    }
     
     .item-image img {
         width: 60px;
@@ -509,7 +525,12 @@
         padding: 10px 15px;
         font-size: 0.9rem;
     }
-    
+
+    .btn-checkout {
+        max-height: 20px;
+        max-width: 170px;
+    }
+        
     .empty-cart {
         padding: 60px 15px;
     }
