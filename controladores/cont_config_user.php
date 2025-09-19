@@ -62,16 +62,16 @@ try {
         $imagen_bd = $user_data['imagen_perfil'];
         
         if (!empty($imagen_bd) && $imagen_bd !== 'default-avatar.png') {
-            $ruta_imagen = '/nexusplay/images/users/' . $imagen_bd;
+            $ruta_imagen = '/panel-control/img/' . $imagen_bd;
             $ruta_fisica = $_SERVER['DOCUMENT_ROOT'] . $ruta_imagen;
             
             if (file_exists($ruta_fisica)) {
                 $perfil_img = $ruta_imagen;
             } else {
-                $perfil_img = '/nexusplay/images/users/default-avatar.png';
+                $perfil_img = '/panel-control/img/default-avatar.png';
             }
         } else {
-            $perfil_img = '/nexusplay/images/users/default-avatar.png';
+            $perfil_img = '/panel-control/img/default-avatar.png';
         }
 
         $_SESSION['imagen_perfil'] = $perfil_img;
@@ -214,7 +214,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Procesamiento de cambio de imagen de perfil
     if (isset($_POST['update_profile_image'])) {
         if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
-            $upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/nexusplay/images/users/';
+            $upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/panel-control/img/';
             
             // Crear directorio si no existe
             if (!is_dir($upload_dir)) {
@@ -275,7 +275,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $_SESSION['image_message_type'] = 'success';
                             
                             // Actualizar la imagen en la sesión
-                            $new_image_path = '/nexusplay/images/users/' . $new_filename;
+                            $new_image_path = '/panel-control/img/' . $new_filename;
                             $_SESSION['imagen_perfil'] = $new_image_path;
                             $perfil_img = $new_image_path;
                             $user_data['imagen_perfil'] = $new_filename;

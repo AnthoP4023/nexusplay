@@ -323,7 +323,6 @@ include '../../controladores/cont_config_user.php';
             }
         });
 
-        // Funcionalidad para el cambio de imagen de perfil
         document.addEventListener('DOMContentLoaded', function() {
             const fileInput = document.getElementById('profileImageInput');
             const fileName = document.getElementById('fileName');
@@ -337,7 +336,6 @@ include '../../controladores/cont_config_user.php';
                     const file = e.target.files[0];
                     
                     if (file) {
-                        // Validar tipo de archivo
                         const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
                         if (!allowedTypes.includes(file.type)) {
                             alert('Solo se permiten archivos de imagen (JPG, JPEG, PNG, GIF)');
@@ -345,18 +343,15 @@ include '../../controladores/cont_config_user.php';
                             return;
                         }
                         
-                        // Validar tamaño (5MB)
                         if (file.size > 5 * 1024 * 1024) {
                             alert('El archivo es demasiado grande. Máximo 5MB');
                             resetFileInput();
                             return;
                         }
                         
-                        // Mostrar nombre del archivo
                         fileName.textContent = file.name;
                         fileName.style.display = 'block';
                         
-                        // Mostrar vista previa
                         const reader = new FileReader();
                         reader.onload = function(e) {
                             imagePreview.src = e.target.result;

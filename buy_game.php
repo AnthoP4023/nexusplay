@@ -189,96 +189,39 @@ include 'controladores/cont_buy_game.php';
     </main>
 
     <?php include 'includes/footer.php'; ?>
-
-    <script>
-        // Mostrar/ocultar detalles de pago
-        document.querySelectorAll('input[name="metodo_pago"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                // Ocultar todos los detalles
-                document.querySelectorAll('.payment-details').forEach(detail => {
-                    detail.style.display = 'none';
-                });
-                
-                // Mostrar el detalle correspondiente
-                const detailsId = this.value + '-details';
-                const details = document.getElementById(detailsId);
-                if (details) {
-                    details.style.display = 'block';
-                }
+<script>
+    document.querySelectorAll('input[name="metodo_pago"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.querySelectorAll('.payment-details').forEach(detail => {
+                detail.style.display = 'none';
             });
-        });
-
-        // Formatear número de tarjeta
-        document.getElementById('numero_tarjeta')?.addEventListener('input', function() {
-            let value = this.value.replace(/\s/g, '');
-            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
-            this.value = formattedValue;
-        });
-
-        // Formatear fecha de expiración
-        document.getElementById('fecha_expiracion')?.addEventListener('input', function() {
-            let value = this.value.replace(/\D/g, '');
-            if (value.length >= 2) {
-                value = value.substring(0, 2) + '/' + value.substring(2, 4);
-            }
-            this.value = value;
-        });
-
-        // Solo números en CVV
-        document.getElementById('cvv')?.addEventListener('input', function() {
-            this.value = this.value.replace(/\D/g, '');
-        });
-
-        // Validación del formulario
-        document.querySelector('.payment-form')?.addEventListener('submit', function(e) {
-            const metodo = document.querySelector('input[name="metodo_pago"]:checked');
             
-            if (!metodo) {
-                e.preventDefault();
-                alert('Por favor selecciona un método de pago');
-                return;
-            }
-            
-            if (metodo.value === 'tarjeta') {
-                const tarjetaSeleccionada = document.querySelector('input[name="tarjeta_seleccionada"]:checked');
-                if (!tarjetaSeleccionada) {
-                    e.preventDefault();
-                    alert('Por favor selecciona una tarjeta');
-                    return;
-                }
-            }
-            
-            if (metodo.value === 'nueva_tarjeta') {
-                const numero = document.getElementById('numero_tarjeta').value.replace(/\s/g, '');
-                const fecha = document.getElementById('fecha_expiracion').value;
-                const cvv = document.getElementById('cvv').value;
-                const titular = document.getElementById('nombre_titular').value.trim();
-                
-                if (numero.length < 13 || numero.length > 19) {
-                    e.preventDefault();
-                    alert('Número de tarjeta inválido');
-                    return;
-                }
-                
-                if (!/^\d{2}\/\d{2}$/.test(fecha)) {
-                    e.preventDefault();
-                    alert('Fecha de expiración inválida (MM/YY)');
-                    return;
-                }
-                
-                if (cvv.length < 3 || cvv.length > 4) {
-                    e.preventDefault();
-                    alert('CVV inválido');
-                    return;
-                }
-                
-                if (!titular) {
-                    e.preventDefault();
-                    alert('Nombre del titular requerido');
-                    return;
-                }
+            const detailsId = this.value + '-details';
+            const details = document.getElementById(detailsId);
+            if (details) {
+                details.style.display = 'block';
             }
         });
-    </script>
+    });
+
+    document.getElementById('numero_tarjeta')?.addEventListener('input', function() {
+        let value = this.value.replace(/\s/g, '');
+        let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+        this.value = formattedValue;
+    });
+
+    document.getElementById('fecha_expiracion')?.addEventListener('input', function() {
+        let value = this.value.replace(/\D/g, '');
+        if (value.length >= 2) {
+            value = value.substring(0, 2) + '/' + value.substring(2, 4);
+        }
+        this.value = value;
+    });
+
+    document.getElementById('cvv')?.addEventListener('input', function() {
+        this.value = this.value.replace(/\D/g, '');
+    });
+
+</script>
 </body>
 </html>

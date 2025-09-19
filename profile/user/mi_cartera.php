@@ -101,9 +101,9 @@ include '../../controladores/cont_user_profile.php';
                                 <div class="saldo-amount">$<?php echo number_format($saldo_cartera, 2); ?></div>
                             </div>
                             <div class="saldo-actions">
-                                <button class="btn btn-primary">
+                                <a href="../../recharge.php" class="btn btn-primary">
                                     <i class="fas fa-plus"></i> Recargar
-                                </button>
+                                </a>
                             </div>
                         </div>
                         
