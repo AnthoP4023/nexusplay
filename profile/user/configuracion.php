@@ -155,6 +155,60 @@ include '../../controladores/cont_config_user.php';
                             </form>
                         </div>
 
+                        <!-- Sección Cambiar Imagen de Perfil -->
+                        <div class="config-section">
+                            <div class="config-header">
+                                <h3><i class="fas fa-camera"></i> Imagen de Perfil</h3>
+                                <p>Cambia tu foto de perfil</p>
+                            </div>
+                            
+                            <?php if (!empty($image_message)): ?>
+                                <div class="message <?php echo $image_message_type; ?>">
+                                    <i class="fas <?php echo $image_message_type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'; ?>"></i>
+                                    <?php echo htmlspecialchars($image_message); ?>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <div class="profile-image-section">
+                                <div class="current-image">
+                                    <img src="<?php echo htmlspecialchars($perfil_img); ?>" alt="Imagen actual" id="currentProfileImage" class="profile-preview">
+                                    <div class="image-info">
+                                        <h4>Imagen Actual</h4>
+                                        <p class="image-guidelines">
+                                            <i class="fas fa-info-circle"></i>
+                                            Formatos permitidos: JPG, JPEG, PNG, GIF<br>
+                                            Tamaño máximo: 5MB<br>
+                                            Recomendado: 400x400 píxeles
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <form method="POST" enctype="multipart/form-data" class="image-upload-form">
+                                    <div class="file-input-container">
+                                        <input type="file" id="profileImageInput" name="profile_image" accept="image/*" required>
+                                        <label for="profileImageInput" class="file-input-label">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <span>Seleccionar Nueva Imagen</span>
+                                        </label>
+                                        <div id="fileName" class="file-name"></div>
+                                    </div>
+                                    
+                                    <div class="image-preview-container" id="imagePreviewContainer" style="display: none;">
+                                        <img id="imagePreview" class="image-preview" alt="Vista previa">
+                                        <div class="preview-actions">
+                                            <button type="button" id="cancelPreview" class="btn btn-secondary">
+                                                <i class="fas fa-times"></i> Cancelar
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <button type="submit" name="update_profile_image" class="btn btn-primary" id="uploadBtn" disabled>
+                                        <i class="fas fa-save"></i> Actualizar Imagen
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
                         <!-- Sección Cambiar Contraseña -->
                         <div class="config-section">
                             <div class="config-header">
@@ -216,8 +270,6 @@ include '../../controladores/cont_config_user.php';
                                 </button>
                             </form>
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -268,6 +320,70 @@ include '../../controladores/cont_config_user.php';
             } else {
                 this.setCustomValidity('');
                 this.classList.remove('error');
+            }
+        });
+
+        // Funcionalidad para el cambio de imagen de perfil
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('profileImageInput');
+            const fileName = document.getElementById('fileName');
+            const imagePreview = document.getElementById('imagePreview');
+            const previewContainer = document.getElementById('imagePreviewContainer');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const cancelBtn = document.getElementById('cancelPreview');
+            
+            if (fileInput) {
+                fileInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    
+                    if (file) {
+                        // Validar tipo de archivo
+                        const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+                        if (!allowedTypes.includes(file.type)) {
+                            alert('Solo se permiten archivos de imagen (JPG, JPEG, PNG, GIF)');
+                            resetFileInput();
+                            return;
+                        }
+                        
+                        // Validar tamaño (5MB)
+                        if (file.size > 5 * 1024 * 1024) {
+                            alert('El archivo es demasiado grande. Máximo 5MB');
+                            resetFileInput();
+                            return;
+                        }
+                        
+                        // Mostrar nombre del archivo
+                        fileName.textContent = file.name;
+                        fileName.style.display = 'block';
+                        
+                        // Mostrar vista previa
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            imagePreview.src = e.target.result;
+                            previewContainer.style.display = 'block';
+                            uploadBtn.disabled = false;
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        resetFileInput();
+                    }
+                });
+            }
+            
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', function() {
+                    resetFileInput();
+                });
+            }
+            
+            function resetFileInput() {
+                if (fileInput) fileInput.value = '';
+                if (fileName) {
+                    fileName.textContent = '';
+                    fileName.style.display = 'none';
+                }
+                if (previewContainer) previewContainer.style.display = 'none';
+                if (uploadBtn) uploadBtn.disabled = true;
             }
         });
     </script>

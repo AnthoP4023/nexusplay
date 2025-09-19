@@ -22,6 +22,8 @@ $password_message = '';
 $password_message_type = '';
 $profile_message = '';
 $profile_message_type = '';
+$image_message = '';
+$image_message_type = '';
 
 if (isset($_SESSION['password_message'])) {
     $password_message = $_SESSION['password_message'];
@@ -37,6 +39,14 @@ if (isset($_SESSION['profile_message'])) {
     
     unset($_SESSION['profile_message']);
     unset($_SESSION['profile_message_type']);
+}
+
+if (isset($_SESSION['image_message'])) {
+    $image_message = $_SESSION['image_message'];
+    $image_message_type = $_SESSION['image_message_type'];
+    
+    unset($_SESSION['image_message']);
+    unset($_SESSION['image_message_type']);
 }
 
 try {
@@ -93,12 +103,12 @@ try {
     die("Error en la consulta: " . $e->getMessage());
 }
 
+// Procesamiento de cambio de contraseña
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
     if (isset($_POST['change_password'])) {
-        $current_password = trim($_POST['current_password']);
-        $new_password = trim($_POST['new_password']);
-        $confirm_password = trim($_POST['confirm_password']);
+        $current_password = $_POST['current_password'];
+        $new_password = $_POST['new_password'];
+        $confirm_password = $_POST['confirm_password'];
         
         if (empty($current_password) || empty($new_password) || empty($confirm_password)) {
             $password_message = 'Todos los campos de contraseña son obligatorios';
@@ -126,27 +136,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $update_stmt->bind_param("si", $new_password_hash, $user_id);
                         
                         if ($update_stmt->execute()) {
-                            $password_message = 'Contraseña cambiada exitosamente';
-                            $password_message_type = 'success';
+                            $_SESSION['password_message'] = 'Contraseña cambiada exitosamente';
+                            $_SESSION['password_message_type'] = 'success';
                         } else {
-                            $password_message = 'Error al actualizar la contraseña';
-                            $password_message_type = 'error';
+                            $_SESSION['password_message'] = 'Error al actualizar la contraseña';
+                            $_SESSION['password_message_type'] = 'error';
                         }
                     } else {
-                        $password_message = 'La contraseña actual es incorrecta';
-                        $password_message_type = 'error';
+                        $_SESSION['password_message'] = 'La contraseña actual es incorrecta';
+                        $_SESSION['password_message_type'] = 'error';
                     }
                 } else {
-                    $password_message = 'Usuario no encontrado';
-                    $password_message_type = 'error';
+                    $_SESSION['password_message'] = 'Usuario no encontrado';
+                    $_SESSION['password_message_type'] = 'error';
                 }
             } catch (mysqli_sql_exception $e) {
-                $password_message = 'Error en la base de datos';
-                $password_message_type = 'error';
+                $_SESSION['password_message'] = 'Error en la base de datos';
+                $_SESSION['password_message_type'] = 'error';
             }
         }
+        
+        header('Location: configuracion.php');
+        exit();
     }
     
+    // Procesamiento de actualización de perfil
     if (isset($_POST['update_profile'])) {
         $new_username = trim($_POST['username']);
         $new_email = trim($_POST['email']);
@@ -154,11 +168,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $new_apellido = trim($_POST['apellido']);
         
         if (empty($new_username) || empty($new_email) || empty($new_nombre) || empty($new_apellido)) {
-            $profile_message = 'Todos los campos del perfil son obligatorios';
-            $profile_message_type = 'error';
+            $_SESSION['profile_message'] = 'Todos los campos del perfil son obligatorios';
+            $_SESSION['profile_message_type'] = 'error';
         } elseif (!filter_var($new_email, FILTER_VALIDATE_EMAIL)) {
-            $profile_message = 'El email no es válido';
-            $profile_message_type = 'error';
+            $_SESSION['profile_message'] = 'El email no es válido';
+            $_SESSION['profile_message_type'] = 'error';
         } else {
             try {
                 $check_stmt = $conn->prepare("SELECT id FROM usuarios WHERE (username = ? OR email = ?) AND id != ?");
@@ -167,15 +181,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $check_result = $check_stmt->get_result();
                 
                 if ($check_result && $check_result->num_rows > 0) {
-                    $profile_message = 'El nombre de usuario o email ya están en uso';
-                    $profile_message_type = 'error';
+                    $_SESSION['profile_message'] = 'El nombre de usuario o email ya están en uso';
+                    $_SESSION['profile_message_type'] = 'error';
                 } else {
                     $update_stmt = $conn->prepare("UPDATE usuarios SET username = ?, email = ?, nombre = ?, apellido = ? WHERE id = ?");
                     $update_stmt->bind_param("ssssi", $new_username, $new_email, $new_nombre, $new_apellido, $user_id);
                     
                     if ($update_stmt->execute()) {
-                        $profile_message = 'Perfil actualizado exitosamente';
-                        $profile_message_type = 'success';
+                        $_SESSION['profile_message'] = 'Perfil actualizado exitosamente';
+                        $_SESSION['profile_message_type'] = 'success';
                         
                         $_SESSION['username'] = $new_username;
                         $user_data['username'] = $new_username;
@@ -183,15 +197,119 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $user_data['nombre'] = $new_nombre;
                         $user_data['apellido'] = $new_apellido;
                     } else {
-                        $profile_message = 'Error al actualizar el perfil';
-                        $profile_message_type = 'error';
+                        $_SESSION['profile_message'] = 'Error al actualizar el perfil';
+                        $_SESSION['profile_message_type'] = 'error';
                     }
                 }
             } catch (mysqli_sql_exception $e) {
-                $profile_message = 'Error en la base de datos';
-                $profile_message_type = 'error';
+                $_SESSION['profile_message'] = 'Error en la base de datos';
+                $_SESSION['profile_message_type'] = 'error';
             }
         }
+        
+        header('Location: configuracion.php');
+        exit();
+    }
+    
+    // Procesamiento de cambio de imagen de perfil
+    if (isset($_POST['update_profile_image'])) {
+        if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
+            $upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/nexusplay/images/users/';
+            
+            // Crear directorio si no existe
+            if (!is_dir($upload_dir)) {
+                mkdir($upload_dir, 0755, true);
+            }
+            
+            $file = $_FILES['profile_image'];
+            $file_size = $file['size'];
+            $file_tmp = $file['tmp_name'];
+            $file_type = $file['type'];
+            $file_ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+            
+            // Validaciones
+            $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif'];
+            $max_size = 5 * 1024 * 1024; // 5MB
+            
+            if (!in_array($file_ext, $allowed_extensions)) {
+                $_SESSION['image_message'] = 'Solo se permiten archivos JPG, JPEG, PNG y GIF';
+                $_SESSION['image_message_type'] = 'error';
+            } elseif ($file_size > $max_size) {
+                $_SESSION['image_message'] = 'El archivo es demasiado grande. Máximo 5MB';
+                $_SESSION['image_message_type'] = 'error';
+            } else {
+                // Eliminar imagen anterior si existe y no es la default
+                try {
+                    $stmt_old = $conn->prepare("SELECT imagen_perfil FROM usuarios WHERE id = ?");
+                    $stmt_old->bind_param("i", $user_id);
+                    $stmt_old->execute();
+                    $result_old = $stmt_old->get_result();
+                    
+                    if ($result_old && $result_old->num_rows > 0) {
+                        $old_data = $result_old->fetch_assoc();
+                        $old_image = $old_data['imagen_perfil'];
+                        
+                        if (!empty($old_image) && $old_image !== 'default-avatar.png') {
+                            $old_path = $upload_dir . $old_image;
+                            if (file_exists($old_path)) {
+                                unlink($old_path);
+                            }
+                        }
+                    }
+                } catch (Exception $e) {
+                    // Continuar aunque no se pueda eliminar la imagen anterior
+                }
+                
+                // Generar nombre único para la nueva imagen
+                $new_filename = 'user_' . $user_id . '_' . time() . '.' . $file_ext;
+                $upload_path = $upload_dir . $new_filename;
+                
+                if (move_uploaded_file($file_tmp, $upload_path)) {
+                    // Actualizar base de datos
+                    try {
+                        $stmt_update = $conn->prepare("UPDATE usuarios SET imagen_perfil = ? WHERE id = ?");
+                        $stmt_update->bind_param("si", $new_filename, $user_id);
+                        
+                        if ($stmt_update->execute()) {
+                            $_SESSION['image_message'] = 'Imagen de perfil actualizada exitosamente';
+                            $_SESSION['image_message_type'] = 'success';
+                            
+                            // Actualizar la imagen en la sesión
+                            $new_image_path = '/nexusplay/images/users/' . $new_filename;
+                            $_SESSION['imagen_perfil'] = $new_image_path;
+                            $perfil_img = $new_image_path;
+                            $user_data['imagen_perfil'] = $new_filename;
+                        } else {
+                            $_SESSION['image_message'] = 'Error al actualizar la imagen en la base de datos';
+                            $_SESSION['image_message_type'] = 'error';
+                            
+                            // Eliminar archivo subido si no se pudo actualizar la BD
+                            if (file_exists($upload_path)) {
+                                unlink($upload_path);
+                            }
+                        }
+                    } catch (mysqli_sql_exception $e) {
+                        $_SESSION['image_message'] = 'Error en la base de datos';
+                        $_SESSION['image_message_type'] = 'error';
+                        
+                        // Eliminar archivo subido si hubo error
+                        if (file_exists($upload_path)) {
+                            unlink($upload_path);
+                        }
+                    }
+                } else {
+                    $_SESSION['image_message'] = 'Error al subir la imagen';
+                    $_SESSION['image_message_type'] = 'error';
+                }
+            }
+        } else {
+            $_SESSION['image_message'] = 'Por favor selecciona una imagen válida';
+            $_SESSION['image_message_type'] = 'error';
+        }
+        
+        // Redirigir para evitar reenvío del formulario
+        header('Location: configuracion.php');
+        exit();
     }
 }
 ?>

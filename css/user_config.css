@@ -1,3 +1,4 @@
+/* Estilos base para la configuración de usuario */
 .config-container {
     display: flex;
     flex-direction: column;
@@ -100,11 +101,6 @@
     font-size: 0.85rem;
 }
 
-.form-group input.error {
-    border-color: #ef4444;
-    box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
-}
-
 .password-input {
     position: relative;
     display: flex;
@@ -142,33 +138,132 @@
     margin-top: 4px;
 }
 
-.message {
-    padding: 12px 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
+/* Estilos para la sección de imagen de perfil */
+.profile-image-section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.current-image {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 0.9rem;
-    font-weight: 500;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(45, 45, 45, 0.5);
+    border-radius: 12px;
+    border: 1px solid rgba(74, 74, 74, 0.3);
 }
 
-.message.success {
-    background: rgba(16, 185, 86, 0.2);
-    color: #10b956;
-    border: 1px solid rgba(16, 185, 86, 0.3);
+.profile-preview {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #10b956;
+    box-shadow: 0 4px 12px rgba(16, 185, 86, 0.3);
 }
 
-.message.error {
-    background: rgba(239, 68, 68, 0.2);
-    color: #ef4444;
-    border: 1px solid rgba(239, 68, 68, 0.3);
-}
-
-.message i {
+.image-info h4 {
+    color: #e5e5e5;
+    margin: 0 0 8px 0;
     font-size: 1rem;
 }
 
+.image-guidelines {
+    color: #888;
+    font-size: 0.85rem;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.image-guidelines i {
+    color: #10b956;
+    margin-right: 5px;
+}
+
+/* Formulario de subida de imagen */
+.image-upload-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.file-input-container {
+    position: relative;
+}
+
+.file-input-container input[type="file"] {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+}
+
+.file-input-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 20px;
+    background: linear-gradient(45deg, rgba(16, 185, 86, 0.1), rgba(52, 211, 153, 0.1));
+    border: 2px dashed #10b956;
+    border-radius: 12px;
+    color: #e5e5e5;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    min-height: 60px;
+}
+
+.file-input-label:hover {
+    background: linear-gradient(45deg, rgba(16, 185, 86, 0.2), rgba(52, 211, 153, 0.2));
+    border-color: #34d399;
+    transform: translateY(-2px);
+}
+
+.file-input-label i {
+    font-size: 1.2rem;
+    color: #10b956;
+}
+
+.file-name {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: rgba(16, 185, 86, 0.1);
+    border-radius: 6px;
+    color: #10b956;
+    font-size: 0.9rem;
+    display: none;
+    word-break: break-all;
+}
+
+/* Vista previa de imagen */
+.image-preview-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(45, 45, 45, 0.5);
+    border-radius: 12px;
+    border: 1px solid rgba(16, 185, 86, 0.3);
+}
+
+.image-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #10b956;
+    box-shadow: 0 4px 15px rgba(16, 185, 86, 0.4);
+}
+
+.preview-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Botones */
 .btn {
     padding: 12px 24px;
     border: none;
@@ -177,41 +272,72 @@
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    justify-content: center;
     gap: 8px;
-    text-decoration: none;
-    min-width: 200px;
+    min-width: 140px;
+    justify-content: center;
 }
 
-.btn:focus-visible {
-    outline: 2px solid #10b956;
-    outline-offset: 2px;
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn:disabled:hover {
+    transform: none !important;
+    box-shadow: none !important;
 }
 
 .btn-primary {
-    background: linear-gradient(45deg, #10b956, #34d399);
+    background: linear-gradient(45deg, #10b956, #7ede6a);
     color: white;
-    box-shadow: 0 4px 15px rgba(16, 185, 86, 0.3);
+    box-shadow: 0 4px 15px  rgb(46 235 37 / 55%);
 }
 
-.btn-primary:hover {
-    background: linear-gradient(45deg, #059669, #10b956);
+
+.btn-primary:hover:not(:disabled) {
+    background: linear-gradient(45deg, #56cb20, #227a1a);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(16, 185, 86, 0.4);
+    box-shadow: 0 8px 20px rgba(98, 164, 70, 0.675);
 }
 
 .btn-secondary {
-    background: linear-gradient(45deg, #10b956, #34d399);
+    background: linear-gradient(45deg, #10b956, #7ede6a);
     color: white;
-    box-shadow: 0 4px 15px rgba(16, 185, 86, 0.3);
+    box-shadow: 0 4px 15px rgb(46 235 37 / 55%);
 }
 
 .btn-secondary:hover {
-    background: linear-gradient(45deg, #059669, #10b956);
+    background: linear-gradient(45deg, #56cb20, #227a1a);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(16, 185, 86, 0.4);
+    box-shadow: 0 8px 20px rgb(46 235 37 / 55%);
+}
+
+/* Mensajes */
+.message {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    animation: slideInDown 0.3s ease;
+}
+
+.message.success {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.message.error {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 .form-group input:valid {
@@ -233,6 +359,18 @@
     }
 }
 
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
 @media (max-width: 768px) {
     .config-container {
         gap: 20px;
@@ -255,6 +393,27 @@
     .btn {
         width: 100%;
         min-width: unset;
+    }
+
+    .current-image {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .profile-preview {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .file-input-label {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .preview-actions {
+        width: 100%;
+        justify-content: center;
     }
 }
 
@@ -298,8 +457,18 @@
     }
 
     .btn {
-        padding: 5px 20px;
-        font-size: 12px;
-        max-width: 160px;
+        padding: 10px 20px;
+        font-size: 0.85rem;
+        max-width: fit-content;
+        align-self: center;
+    }
+
+    .btn-primary{
+        max-width: none;
+    }
+
+    .btn:disabled {
+        max-width: fit-content;
+        align-self: center;
     }
 }
