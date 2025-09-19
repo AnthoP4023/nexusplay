@@ -406,6 +406,10 @@
         font-size: 12px;
     }
 
+    .form-group input {
+    width: 485px;
+    }
+
 }
 
 @media (max-width: 768px) {
