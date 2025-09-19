@@ -92,7 +92,7 @@ include 'functions/fun_search.php';
                             <h3><?php echo highlightSearchTerm($juego['titulo'], $search_query); ?></h3>
                             <p class="game-developer"><?php echo htmlspecialchars($juego['desarrollador'] ?? 'Sin desarrollador'); ?></p>
                             <p class="game-description">
-                                <?php echo htmlspecialchars(substr($juego['descripcion'] ?? '', 0, 100)); ?>...
+                                <?php echo htmlspecialchars($juego['descripcion'] ?? ''); ?>
                             </p>
 
                             <div class="game-price">
