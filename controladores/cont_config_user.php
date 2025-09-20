@@ -161,8 +161,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if (isset($_POST['update_profile'])) {
         $new_username = trim($_POST['username']);
-        $new_email = trim($_POST['email']);
-        $new_nombre = trim($_POST['nombre']);
+        $new_email    = trim($_POST['email']);
+        $new_nombre   = trim($_POST['nombre']);
         $new_apellido = trim($_POST['apellido']);
         
         if (empty($new_username) || empty($new_email) || empty($new_nombre) || empty($new_apellido)) {
@@ -172,42 +172,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['profile_message'] = 'El email no es válido';
             $_SESSION['profile_message_type'] = 'error';
         } else {
+            $sql = "UPDATE usuarios SET 
+                        username = '$new_username', 
+                        email = '$new_email', 
+                        nombre = '$new_nombre', 
+                        apellido = '$new_apellido'
+                    WHERE id = $user_id";
+
             try {
-                $check_stmt = $conn->prepare("SELECT id FROM usuarios WHERE (username = ? OR email = ?) AND id != ?");
-                $check_stmt->bind_param("ssi", $new_username, $new_email, $user_id);
-                $check_stmt->execute();
-                $check_result = $check_stmt->get_result();
-                
-                if ($check_result && $check_result->num_rows > 0) {
-                    $_SESSION['profile_message'] = 'El nombre de usuario o email ya están en uso';
-                    $_SESSION['profile_message_type'] = 'error';
-                } else {
-                    $update_stmt = $conn->prepare("UPDATE usuarios SET username = ?, email = ?, nombre = ?, apellido = ? WHERE id = ?");
-                    $update_stmt->bind_param("ssssi", $new_username, $new_email, $new_nombre, $new_apellido, $user_id);
-                    
-                    if ($update_stmt->execute()) {
-                        $_SESSION['profile_message'] = 'Perfil actualizado exitosamente';
-                        $_SESSION['profile_message_type'] = 'success';
-                        
-                        $_SESSION['username'] = $new_username;
-                        $user_data['username'] = $new_username;
-                        $user_data['email'] = $new_email;
-                        $user_data['nombre'] = $new_nombre;
-                        $user_data['apellido'] = $new_apellido;
-                    } else {
-                        $_SESSION['profile_message'] = 'Error al actualizar el perfil';
-                        $_SESSION['profile_message_type'] = 'error';
-                    }
-                }
+                $conn->query($sql);
+
+                $_SESSION['profile_message'] = 'Perfil actualizado exitosamente';
+                $_SESSION['profile_message_type'] = 'success';
+
+                $_SESSION['username'] = $new_username;
+                $user_data['username'] = $new_username;
+                $user_data['email'] = $new_email;
+                $user_data['nombre'] = $new_nombre;
+                $user_data['apellido'] = $new_apellido;
+
             } catch (mysqli_sql_exception $e) {
-                $_SESSION['profile_message'] = 'Error en la base de datos';
+                $_SESSION['profile_message'] = $e->getMessage();
                 $_SESSION['profile_message_type'] = 'error';
             }
         }
-        
+
         header('Location: configuracion.php');
         exit();
     }
+
+
     
     if (isset($_POST['update_profile_image'])) {
         if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {

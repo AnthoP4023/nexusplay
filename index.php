@@ -169,21 +169,18 @@ include 'controladores/cont_index.php';
         </section>
 
         <section class="evento-banner-section">
-            <div class="container">
-                <div class="evento-banner">
-                    <div class="evento-content">
-                        <div class="evento-icon">
-                            <i class="fas fa-gift"></i>
-                        </div>
-                        <div class="evento-text">
-                            <h3>¡Participa para Ganar 5 Códigos de Juegos Premium!</h3>
-                            <p>Únete a nuestro sorteo exclusivo y gana increíbles premios</p>
-                        </div>
-                        <a href="evento.php" target="_blank" class="evento-btn">
-                            <i class="fas fa-ticket-alt"></i>
-                            ¡Participar Ahora!
-                        </a>
+            <div class="evento-banner">
+                <div class="evento-content">
+                    <div class="evento-icon">
+                        <i class="fas fa-star"></i>
                     </div>
+                    <div class="evento-text">
+                        <h3>Gran Evento Gamer</h3>
+                        <p>No te pierdas nuestras ofertas especiales este fin de semana.</p>
+                    </div>
+                    <a href="evento.php" target="_blank" class="evento-btn">
+                        <i class="fas fa-ticket-alt"></i> Ver Evento
+                    </a>
                 </div>
             </div>
         </section>
