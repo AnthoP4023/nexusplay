@@ -120,7 +120,6 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    
 }
 
 .pedido-card {
@@ -473,66 +472,6 @@
     gap: 10px;
     margin-top: 15px;
     justify-content: flex-end;
-}
-
-.tarjeta-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-    justify-content: flex-end;
-}
-
-.btn-delete {
-    background: rgba(239, 68, 68, 0.2);
-    color: #ef4444;
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: inherit;
-}
-
-.btn-delete:hover {
-    background: rgba(239, 68, 68, 0.3);
-    transform: translateY(-1px);
-    color: #ef4444;
-    text-decoration: none;
-}
-
-.btn-delete:active {
-    transform: translateY(0);
-}
-
-.alert {
-    padding: 15px;
-    margin: 20px 0;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.alert.success {
-    background: rgba(16, 185, 86, 0.1);
-    color: #10b956;
-    border: 1px solid rgba(16, 185, 86, 0.3);
-}
-
-.alert.error {
-    background: rgba(239, 68, 68, 0.1);
-    color: #ef4444;
-    border: 1px solid rgba(239, 68, 68, 0.3);
-}
-
-.alert i {
-    font-size: 1.1rem;
 }
 
 @media (max-width: 768px) {

@@ -285,14 +285,14 @@
     box-shadow: none !important;
 }
 
-.btn-primary {
+.btn-green {
     background: linear-gradient(45deg, #10b956, #7ede6a);
     color: white;
     box-shadow: 0 4px 15px  rgb(46 235 37 / 55%);
 }
 
 
-.btn-primary:hover:not(:disabled) {
+.btn-green:hover:not(:disabled) {
     background: linear-gradient(45deg, #56cb20, #227a1a);
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(98, 164, 70, 0.675);

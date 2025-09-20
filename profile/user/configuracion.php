@@ -143,7 +143,7 @@ include '../../controladores/cont_config_user.php';
                                     </div>
                                 </div>
                                 
-                                <button type="submit" name="update_profile" class="btn btn-primary">
+                                <button type="submit" name="update_profile" class="btn btn-green">
                                     <i class="fas fa-save"></i> Actualizar Información
                                 </button>
                             </form>
@@ -195,7 +195,7 @@ include '../../controladores/cont_config_user.php';
                                         </div>
                                     </div>
                                     
-                                    <button type="submit" name="update_profile_image" class="btn btn-primary" id="uploadBtn" disabled>
+                                    <button type="submit" name="update_profile_image" class="btn btn-green" id="uploadBtn" disabled>
                                         <i class="fas fa-save"></i> Actualizar Imagen
                                     </button>
                                 </form>

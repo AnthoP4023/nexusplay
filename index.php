@@ -168,7 +168,6 @@ include 'controladores/cont_index.php';
             </div>
         </section>
 
-        <!-- BANNER DEL EVENTO -->
         <section class="evento-banner-section">
             <div class="container">
                 <div class="evento-banner">
@@ -189,7 +188,6 @@ include 'controladores/cont_index.php';
             </div>
         </section>
 
-        <!-- SECCIÓN DE RESEÑAS -->
         <section class="reviews-section">
             <div class="container">
                 <div class="section-header">
