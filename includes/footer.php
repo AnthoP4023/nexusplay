@@ -32,14 +32,8 @@ $current_year = date('Y');
                 <ul>
                     <li><a href="#">Términos y condiciones</a></li>
                     <li><a href="#">Política de privacidad</a></li>
-                    <li><a href="auth/login.php">Programa de afiliación</a></li>
+                    <li><a href="#">Programa de afiliación</a></li>
                     <li><a href="#">Contacto</a></li>
-                     <!--  
-                    <?php if (isset($_SESSION['user_id'])): ?>
-                        <li><a href="profile.php">Mi Perfil</a></li>
-                        <li><a href="orders.php">Mis Pedidos</a></li>
-                    <?php endif; ?> 
-                    -->
                 </ul>
             </div>
 

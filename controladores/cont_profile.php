@@ -43,16 +43,16 @@ try {
         $imagen_bd = $admin_data['imagen_perfil'];
         
         if (!empty($imagen_bd) && $imagen_bd !== 'default-avatar.png') {
-            $ruta_imagen = '/panel-control/img/' . $imagen_bd;
+            $ruta_imagen = '/nexusplay/images/users/' . $imagen_bd;
             $ruta_fisica = $_SERVER['DOCUMENT_ROOT'] . $ruta_imagen;
             
             if (file_exists($ruta_fisica)) {
                 $perfil_img = $ruta_imagen;
             } else {
-                $perfil_img = '/panel-control/img/default-avatar.png';
+                $perfil_img = '/nexusplay/images/users/default-avatar.png';
             }
         } else {
-            $perfil_img = '/panel-control/img/default-avatar.png';
+            $perfil_img = '/nexusplay/images/users/default-avatar.png';
         }
 
         $_SESSION['imagen_perfil'] = $perfil_img;

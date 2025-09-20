@@ -25,9 +25,9 @@ if (isset($conn) && function_exists('initializeCart')) {
     initializeCart($conn);
 }
 
-$perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perfil']) 
-              ? $_SESSION['imagen_perfil'] 
-              : '/panel-control/img/default-avatar.png';
+$perfil_img = isset($_SESSION['imagen_perfil']) && !empty($_SESSION['imagen_perfil'])
+              ? $_SESSION['imagen_perfil']
+              : '/nexusplay/images/users/default-avatar.png';
 
 $total_items_carrito = 0;
 if (function_exists('getCartItemCount')) {
