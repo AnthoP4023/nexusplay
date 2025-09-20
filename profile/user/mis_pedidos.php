@@ -21,7 +21,6 @@ include '../../controladores/cont_user_profile.php';
     <main class="main-content">
         <div class="user-profile-layout">
             <div class="profile-container">
-                <!-- Panel Principal del Usuario -->
                 <div class="main-panel">
                     <div class="user-info-container">
                         <div class="avatar-section">
@@ -39,7 +38,6 @@ include '../../controladores/cont_user_profile.php';
                             </p>
                         </div>
                         
-                        <!-- Stats del usuario -->
                         <div class="user-stats">
                             <div class="stat-item">
                                 <div class="stat-number"><?php echo $stats['total_pedidos'] ?? 0; ?></div>
@@ -57,7 +55,6 @@ include '../../controladores/cont_user_profile.php';
                     </div>
                 </div>
 
-                <!-- Tabs de Navegación Desktop -->
                 <div class="user-tabs desktop-tabs">
                     <a href="user.php" class="tab-btn">
                         <i class="fas fa-chart-line"></i> Resumen
@@ -79,7 +76,6 @@ include '../../controladores/cont_user_profile.php';
                     </a>
                 </div>
 
-                <!-- Selector Móvil -->
                 <div class="mobile-selector">
                     <select id="section-select" class="mobile-select" onchange="navigateToSection(this.value)">
                         <option value="user.php">📊 Resumen</option>
@@ -91,13 +87,12 @@ include '../../controladores/cont_user_profile.php';
                     </select>
                 </div>
 
-                <!-- Contenido de Mis Pedidos -->
                 <div id="pedidos" class="tab-content active">
                     <h2 class="section-title">Historial de Pedidos</h2>
                     <div class="pedidos-container">
                         <?php if ($pedidos_result && $pedidos_result->num_rows > 0): ?>
                             <?php 
-                            $pedidos_result->data_seek(0); // Reiniciar el puntero
+                            $pedidos_result->data_seek(0);
                             while ($pedido = $pedidos_result->fetch_assoc()): 
                             ?>
                                 <div class="pedido-card">

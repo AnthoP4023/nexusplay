@@ -3,7 +3,6 @@ $trustpilot_score = 4.0;
 $trustpilot_reviews = 200000;
 $current_year = date('Y');
 ?>
-
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-content">

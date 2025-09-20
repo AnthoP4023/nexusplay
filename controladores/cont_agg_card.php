@@ -6,7 +6,6 @@ if (session_status() == PHP_SESSION_NONE) {
 require_once __DIR__ . '/../config_db/database.php';
 require_once __DIR__ . '/../functions/fun_auth.php';
 
-// Verificar autenticación
 if (!isLoggedIn()) {
     header('Location: auth/login.php');
     exit();
@@ -16,17 +15,14 @@ $user_id = $_SESSION['user_id'];
 $mensaje = '';
 $mensaje_tipo = '';
 
-// Procesar formulario de agregar tarjeta
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['agregar_tarjeta'])) {
     
-    // Obtener y validar datos del formulario
     $numero_tarjeta = trim($_POST['numero_tarjeta'] ?? '');
     $fecha_expiracion = trim($_POST['fecha_expiracion'] ?? '');
     $cvv = trim($_POST['cvv'] ?? '');
     $nombre_titular = trim($_POST['nombre_titular'] ?? '');
     $alias_tarjeta = trim($_POST['alias_tarjeta'] ?? '');
     
-    // Validaciones básicas
     if (empty($numero_tarjeta)) {
         $mensaje = 'El número de tarjeta es requerido';
         $mensaje_tipo = 'error';
@@ -40,10 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['agregar_tarjeta'])) {
         $mensaje = 'El nombre del titular es requerido';
         $mensaje_tipo = 'error';
     } else {
-        // Limpiar número de tarjeta (quitar espacios)
         $numero_tarjeta_limpio = preg_replace('/\s/', '', $numero_tarjeta);
         
-        // Validaciones más específicas
         if (strlen($numero_tarjeta_limpio) < 13 || strlen($numero_tarjeta_limpio) > 19) {
             $mensaje = 'Número de tarjeta inválido';
             $mensaje_tipo = 'error';
@@ -63,10 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['agregar_tarjeta'])) {
             $mensaje = 'El nombre del titular debe tener al menos 3 caracteres';
             $mensaje_tipo = 'error';
         } else {
-            // Validar que la fecha no esté vencida
             $fecha_parts = explode('/', $fecha_expiracion);
             $mes = intval($fecha_parts[0]);
-            $año = intval($fecha_parts[1]) + 2000; // Convertir YY a YYYY
+            $año = intval($fecha_parts[1]) + 2000; 
             
             if ($mes < 1 || $mes > 12) {
                 $mensaje = 'Mes inválido en la fecha de expiración';
@@ -84,10 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['agregar_tarjeta'])) {
         }
     }
     
-    // Si no hay errores, procesar la tarjeta
     if (empty($mensaje)) {
         try {
-            // Verificar si la tarjeta ya existe para este usuario
             $ultimos_4 = substr($numero_tarjeta_limpio, -4);
             $stmt_check = $conn->prepare("
                 SELECT COUNT(*) as count 
@@ -103,12 +94,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['agregar_tarjeta'])) {
                 $mensaje = 'Ya tienes una tarjeta registrada con esos últimos 4 dígitos';
                 $mensaje_tipo = 'error';
             } else {
-                // Generar alias si no se proporcionó
                 if (empty($alias_tarjeta)) {
                     $alias_tarjeta = 'Tarjeta ****' . $ultimos_4;
                 }
                 
-                // Insertar la nueva tarjeta
                 $stmt_insert = $conn->prepare("
                     INSERT INTO tarjetas (usuario_id, numero_tarjeta, fecha_expiracion, nombre_titular, alias, fecha_registro) 
                     VALUES (?, AES_ENCRYPT(?, 'clave_cifrado_segura'), ?, ?, ?, NOW())
@@ -120,10 +109,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['agregar_tarjeta'])) {
                     $mensaje = '¡Tarjeta agregada exitosamente! Ya puedes usarla para tus compras.';
                     $mensaje_tipo = 'success';
                     
-                    // Opcional: Redirigir después de un breve delay
+                    $redirect_url = isAdmin() ? 'profile/admin/mis_tarjetas.php' : 'profile/user/mis_tarjetas.php';
+                    
                     echo "<script>
                         setTimeout(function() {
-                            window.location.href = 'profile/user/mis_tarjetas.php';
+                            window.location.href = '$redirect_url';
                         }, 3000);
                     </script>";
                 } else {
@@ -139,7 +129,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['agregar_tarjeta'])) {
     }
 }
 
-// Función para validar el algoritmo de Luhn (opcional, para validación más robusta)
 function validarLuhn($numero) {
     $numero = preg_replace('/\D/', '', $numero);
     $longitud = strlen($numero);
@@ -161,7 +150,6 @@ function validarLuhn($numero) {
     return ($suma % 10) == 0;
 }
 
-// Función para detectar el tipo de tarjeta (opcional)
 function detectarTipoTarjeta($numero) {
     $numero = preg_replace('/\D/', '', $numero);
     

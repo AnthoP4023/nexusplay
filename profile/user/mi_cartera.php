@@ -91,7 +91,6 @@ include '../../controladores/cont_user_profile.php';
                     </select>
                 </div>
 
-                <!-- Contenido de Mi Cartera -->
                 <div id="cartera" class="tab-content active">
                     <h2 class="section-title">Mi Cartera Digital</h2>
                     <div class="cartera-section">

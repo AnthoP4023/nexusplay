@@ -103,7 +103,6 @@ try {
     die("Error en la consulta: " . $e->getMessage());
 }
 
-// Procesamiento de cambio de contraseña
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['change_password'])) {
         $current_password = $_POST['current_password'];
@@ -160,7 +159,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
     
-    // Procesamiento de actualización de perfil
     if (isset($_POST['update_profile'])) {
         $new_username = trim($_POST['username']);
         $new_email = trim($_POST['email']);
@@ -211,12 +209,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
     
-    // Procesamiento de cambio de imagen de perfil
     if (isset($_POST['update_profile_image'])) {
         if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
             $upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/panel-control/img/';
             
-            // Crear directorio si no existe
             if (!is_dir($upload_dir)) {
                 mkdir($upload_dir, 0755, true);
             }
@@ -227,9 +223,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $file_type = $file['type'];
             $file_ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
             
-            // Validaciones
             $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif'];
-            $max_size = 5 * 1024 * 1024; // 5MB
+            $max_size = 5 * 1024 * 1024;
             
             if (!in_array($file_ext, $allowed_extensions)) {
                 $_SESSION['image_message'] = 'Solo se permiten archivos JPG, JPEG, PNG y GIF';
@@ -238,7 +233,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['image_message'] = 'El archivo es demasiado grande. Máximo 5MB';
                 $_SESSION['image_message_type'] = 'error';
             } else {
-                // Eliminar imagen anterior si existe y no es la default
                 try {
                     $stmt_old = $conn->prepare("SELECT imagen_perfil FROM usuarios WHERE id = ?");
                     $stmt_old->bind_param("i", $user_id);
@@ -257,15 +251,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
                     }
                 } catch (Exception $e) {
-                    // Continuar aunque no se pueda eliminar la imagen anterior
                 }
                 
-                // Generar nombre único para la nueva imagen
                 $new_filename = 'user_' . $user_id . '_' . time() . '.' . $file_ext;
                 $upload_path = $upload_dir . $new_filename;
                 
                 if (move_uploaded_file($file_tmp, $upload_path)) {
-                    // Actualizar base de datos
                     try {
                         $stmt_update = $conn->prepare("UPDATE usuarios SET imagen_perfil = ? WHERE id = ?");
                         $stmt_update->bind_param("si", $new_filename, $user_id);
@@ -274,7 +265,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $_SESSION['image_message'] = 'Imagen de perfil actualizada exitosamente';
                             $_SESSION['image_message_type'] = 'success';
                             
-                            // Actualizar la imagen en la sesión
                             $new_image_path = '/panel-control/img/' . $new_filename;
                             $_SESSION['imagen_perfil'] = $new_image_path;
                             $perfil_img = $new_image_path;
@@ -283,7 +273,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $_SESSION['image_message'] = 'Error al actualizar la imagen en la base de datos';
                             $_SESSION['image_message_type'] = 'error';
                             
-                            // Eliminar archivo subido si no se pudo actualizar la BD
                             if (file_exists($upload_path)) {
                                 unlink($upload_path);
                             }
@@ -292,7 +281,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $_SESSION['image_message'] = 'Error en la base de datos';
                         $_SESSION['image_message_type'] = 'error';
                         
-                        // Eliminar archivo subido si hubo error
                         if (file_exists($upload_path)) {
                             unlink($upload_path);
                         }
@@ -307,7 +295,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['image_message_type'] = 'error';
         }
         
-        // Redirigir para evitar reenvío del formulario
         header('Location: configuracion.php');
         exit();
     }

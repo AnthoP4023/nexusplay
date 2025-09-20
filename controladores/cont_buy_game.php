@@ -75,12 +75,10 @@ try {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['realizar_compra'])) {
     $metodo_pago = $_POST['metodo_pago'] ?? '';
     
-    // VALIDAR MÉTODO DE PAGO SELECCIONADO
     if (empty($metodo_pago)) {
         $mensaje = 'Por favor selecciona un método de pago';
         $mensaje_tipo = 'error';
     }
-    // VALIDAR TARJETA GUARDADA SI SE SELECCIONÓ ESA OPCIÓN
     elseif ($metodo_pago === 'tarjeta') {
         $tarjeta_seleccionada = $_POST['tarjeta_seleccionada'] ?? '';
         if (empty($tarjeta_seleccionada)) {
@@ -88,7 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['realizar_compra'])) {
             $mensaje_tipo = 'error';
         }
     }
-    // VALIDAR DATOS DE NUEVA TARJETA SI SE SELECCIONÓ ESA OPCIÓN
     elseif ($metodo_pago === 'nueva_tarjeta') {
         $numero_tarjeta = trim($_POST['numero_tarjeta'] ?? '');
         $fecha_expiracion = trim($_POST['fecha_expiracion'] ?? '');
@@ -108,7 +105,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['realizar_compra'])) {
             $mensaje = 'El nombre del titular es requerido';
             $mensaje_tipo = 'error';
         } else {
-            // Validaciones adicionales más específicas
             $numero_tarjeta_limpio = preg_replace('/\s/', '', $numero_tarjeta);
             
             if (strlen($numero_tarjeta_limpio) < 13 || strlen($numero_tarjeta_limpio) > 19) {
@@ -124,7 +120,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['realizar_compra'])) {
         }
     }
     
-    // SOLO PROCESAR SI NO HAY ERRORES DE VALIDACIÓN
     if (empty($mensaje)) {
         try {
             $conn->autocommit(FALSE); 

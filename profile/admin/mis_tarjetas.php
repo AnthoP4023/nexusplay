@@ -71,7 +71,6 @@ include '../../controladores/cont_profile.php';
                     </div>
                 </div>
 
-                <!-- Tabs Desktop -->
                 <div class="admin-tabs desktop-tabs">
                     <a href="admin.php" class="tab-btn">
                         <i class="fas fa-chart-bar"></i> Estadísticas
@@ -90,7 +89,6 @@ include '../../controladores/cont_profile.php';
                     </a>
                 </div>
 
-                <!-- Selector Móvil -->
                 <div class="mobile-selector">
                     <select id="section-select" class="mobile-select" onchange="navigateToSection(this.value)">
                         <option value="admin.php">📊 Estadísticas</option>
@@ -121,13 +119,22 @@ include '../../controladores/cont_profile.php';
                                             <span>Exp: <?php echo htmlspecialchars($tarjeta['fecha_expiracion']); ?></span>
                                             <span class="tarjeta-fecha">Agregada: <?php echo date('d/m/Y', strtotime($tarjeta['fecha_registro'])); ?></span>
                                         </div>
+                                         <div class="tarjeta-actions">
+                                            <form method="POST" action="../../controladores/cont_delete_card.php" style="display: inline;">
+                                                <input type="hidden" name="tarjeta_id" value="<?php echo $tarjeta['id']; ?>">
+                                                <button type="submit" name="eliminar_tarjeta" class="btn-delete" >
+                                                    <i class="fas fa-trash"></i>
+                                                    Eliminar
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
                                 <?php endwhile; ?>
                             </div>
                             <div class="add-card-btn">
-                                <button class="btn btn-primary">
+                                <a href="../../agg_card.php" class="btn btn-primary">
                                     <i class="fas fa-plus"></i> Agregar Nueva Tarjeta
-                                </button>
+                                </a>
                             </div>
                         <?php else: ?>
                             <div class="empty-state">

@@ -1,5 +1,16 @@
 <?php 
 include '../../controladores/cont_user_profile.php';
+
+$card_message = '';
+$card_message_type = '';
+
+if (isset($_SESSION['card_message'])) {
+    $card_message = $_SESSION['card_message'];
+    $card_message_type = $_SESSION['card_message_type'];
+    
+    unset($_SESSION['card_message']);
+    unset($_SESSION['card_message_type']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +32,6 @@ include '../../controladores/cont_user_profile.php';
     <main class="main-content">
         <div class="user-profile-layout">
             <div class="profile-container">
-                <!-- Panel Principal del Usuario -->
                 <div class="main-panel">
                     <div class="user-info-container">
                         <div class="avatar-section">
@@ -29,7 +39,6 @@ include '../../controladores/cont_user_profile.php';
                                 <img src="<?php echo htmlspecialchars($perfil_img); ?>" alt="Mi Perfil" class="avatar-img">
                             </div>
                         </div>
-                        
                         <div class="user-info">
                             <h1 class="username"><?php echo htmlspecialchars($_SESSION['username']); ?></h1>
                             <span class="user-type">Usuario</span>
@@ -37,9 +46,7 @@ include '../../controladores/cont_user_profile.php';
                             <p class="join-date">
                                 Miembro desde: <?php echo date('d F Y', strtotime($user_data['fecha_registro'])); ?>
                             </p>
-                        </div>
-                        
-                        <!-- Stats del usuario -->
+                        </div>                        
                         <div class="user-stats">
                             <div class="stat-item">
                                 <div class="stat-number"><?php echo $stats['total_pedidos'] ?? 0; ?></div>
@@ -56,8 +63,6 @@ include '../../controladores/cont_user_profile.php';
                         </div>
                     </div>
                 </div>
-
-                <!-- Tabs de Navegación Desktop -->
                 <div class="user-tabs desktop-tabs">
                     <a href="user.php" class="tab-btn">
                         <i class="fas fa-chart-line"></i> Resumen
@@ -78,8 +83,6 @@ include '../../controladores/cont_user_profile.php';
                         <i class="fa-solid fa-gear"></i> Configuraciones
                     </a>
                 </div>
-
-                <!-- Selector Móvil -->
                 <div class="mobile-selector">
                     <select id="section-select" class="mobile-select" onchange="navigateToSection(this.value)">
                         <option value="user.php">📊 Resumen</option>
@@ -88,13 +91,19 @@ include '../../controladores/cont_user_profile.php';
                         <option value="mis_tarjetas.php" selected>💳 Mis Tarjetas</option>
                         <option value="mis_resenas.php">⭐ Mis Reseñas</option>
                         <option value="configuracion.php">⚙️ Configuraciones</option>
-
                     </select>
                 </div>
 
-                <!-- Contenido de Mis Tarjetas -->
                 <div id="tarjetas" class="tab-content active">
                     <h2 class="section-title">Mis Tarjetas</h2>
+                    
+                    <?php if (!empty($card_message)): ?>
+                        <div class="alert <?php echo $card_message_type; ?>">
+                            <i class="fas <?php echo $card_message_type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'; ?>"></i>
+                            <?php echo htmlspecialchars($card_message); ?>
+                        </div>
+                    <?php endif; ?>
+                    
                     <div class="tarjetas-container">
                         <?php if ($tarjetas_result && $tarjetas_result->num_rows > 0): ?>
                             <div class="tarjetas-grid">
@@ -112,6 +121,16 @@ include '../../controladores/cont_user_profile.php';
                                         <div class="tarjeta-footer">
                                             <span>Exp: <?php echo htmlspecialchars($tarjeta['fecha_expiracion']); ?></span>
                                             <span class="tarjeta-fecha">Agregada: <?php echo date('d/m/Y', strtotime($tarjeta['fecha_registro'])); ?></span>
+                                        </div>
+                                        
+                                        <div class="tarjeta-actions">
+                                            <form method="POST" action="../../controladores/cont_delete_card.php" style="display: inline;">
+                                                <input type="hidden" name="tarjeta_id" value="<?php echo $tarjeta['id']; ?>">
+                                                <button type="submit" name="eliminar_tarjeta" class="btn-delete" >
+                                                    <i class="fas fa-trash"></i>
+                                                    Eliminar
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 <?php endwhile; ?>

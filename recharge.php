@@ -77,7 +77,6 @@ include 'controladores/cont_recharge.php';
                     <h3>Método de Pago</h3>
 
                     <div class="payment-methods">
-                        <!-- Tarjetas Guardadas -->
                         <?php if (!empty($tarjetas)): ?>
                             <div class="saved-cards">
                                 <h4><i class="fas fa-credit-card"></i> Mis Tarjetas</h4>
@@ -97,7 +96,6 @@ include 'controladores/cont_recharge.php';
                             </div>
                         <?php endif; ?>
 
-                        <!-- Nueva Tarjeta -->
                         <div class="new-card-section">
                             <div class="payment-option">
                                 <input type="radio" id="new_card" name="metodo_pago" value="nueva_tarjeta" required>
@@ -186,7 +184,6 @@ include 'controladores/cont_recharge.php';
     <?php include 'includes/footer.php'; ?>
 
     <script>
-        // Manejar selección de monto personalizado
         document.addEventListener('DOMContentLoaded', function() {
             const customAmountRadio = document.getElementById('amount_custom');
             const customAmountDiv = document.getElementById('customAmountDiv');
@@ -194,7 +191,6 @@ include 'controladores/cont_recharge.php';
             const newCardRadio = document.getElementById('new_card');
             const newCardForm = document.getElementById('newCardForm');
             
-            // Manejo de monto personalizado
             customAmountRadio.addEventListener('change', function() {
                 if (this.checked) {
                     customAmountDiv.style.display = 'block';
@@ -202,7 +198,6 @@ include 'controladores/cont_recharge.php';
                 }
             });
 
-            // Ocultar monto personalizado si se selecciona otro
             document.querySelectorAll('input[name="monto_recarga"]:not(#amount_custom)').forEach(radio => {
                 radio.addEventListener('change', function() {
                     customAmountDiv.style.display = 'none';
@@ -211,12 +206,10 @@ include 'controladores/cont_recharge.php';
                 });
             });
 
-            // Mostrar/ocultar formulario de nueva tarjeta
             if (newCardRadio) {
                 newCardRadio.addEventListener('change', function() {
                     if (this.checked) {
                         newCardForm.style.display = 'block';
-                        // Hacer requeridos los campos de nueva tarjeta
                         document.getElementById('numero_tarjeta').required = true;
                         document.getElementById('fecha_expiracion').required = true;
                         document.getElementById('cvv').required = true;
@@ -225,12 +218,10 @@ include 'controladores/cont_recharge.php';
                 });
             }
 
-            // Ocultar formulario de nueva tarjeta si se selecciona otro método
             document.querySelectorAll('input[name="metodo_pago"]:not(#new_card)').forEach(radio => {
                 radio.addEventListener('change', function() {
                     if (newCardForm) {
                         newCardForm.style.display = 'none';
-                        // Quitar requerimientos de los campos
                         document.getElementById('numero_tarjeta').required = false;
                         document.getElementById('fecha_expiracion').required = false;
                         document.getElementById('cvv').required = false;
@@ -239,7 +230,6 @@ include 'controladores/cont_recharge.php';
                 });
             });
 
-            // Actualizar resumen en tiempo real
             function updateSummary() {
                 const selectedAmount = getSelectedAmount();
                 const currentBalance = <?php echo $saldo_cartera; ?>;
@@ -260,14 +250,12 @@ include 'controladores/cont_recharge.php';
                 return parseFloat(selectedRadio.value) || 0;
             }
 
-            // Event listeners para actualizar el resumen
             document.querySelectorAll('input[name="monto_recarga"]').forEach(radio => {
                 radio.addEventListener('change', updateSummary);
             });
 
             customAmountInput.addEventListener('input', updateSummary);
 
-            // Formatear número de tarjeta
             const numeroTarjetaInput = document.getElementById('numero_tarjeta');
             if (numeroTarjetaInput) {
                 numeroTarjetaInput.addEventListener('input', function(e) {
@@ -277,7 +265,6 @@ include 'controladores/cont_recharge.php';
                 });
             }
 
-            // Formatear fecha de expiración
             const fechaExpiracionInput = document.getElementById('fecha_expiracion');
             if (fechaExpiracionInput) {
                 fechaExpiracionInput.addEventListener('input', function(e) {
@@ -289,7 +276,6 @@ include 'controladores/cont_recharge.php';
                 });
             }
 
-            // Solo números en CVV
             const cvvInput = document.getElementById('cvv');
             if (cvvInput) {
                 cvvInput.addEventListener('input', function(e) {

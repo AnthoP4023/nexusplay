@@ -171,8 +171,6 @@ include '../../controladores/cont_user_profile.php';
                             </div>
                         </div>
                     </div>
-
-                    <!-- Mensaje de bienvenida para nuevos usuarios -->
                     <?php if (($stats['total_pedidos'] ?? 0) == 0): ?>
                         <div class="empty-state">
                             <i class="fas fa-gamepad"></i>

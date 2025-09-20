@@ -6,7 +6,6 @@ if (session_status() == PHP_SESSION_NONE) {
 require_once __DIR__ . '/../config_db/database.php';
 require_once __DIR__ . '/../functions/fun_auth.php';
 
-// Verificar autenticación
 if (!isLoggedIn()) {
     header('Location: auth/login.php');
     exit();
@@ -16,7 +15,6 @@ $user_id = $_SESSION['user_id'];
 $mensaje = '';
 $mensaje_tipo = '';
 
-// Obtener saldo actual de la cartera
 $saldo_cartera = 0;
 try {
     $stmt_user = $conn->prepare("
@@ -32,7 +30,6 @@ try {
     
     $saldo_cartera = $user['saldo_cartera'] ?? 0;
     
-    // Crear cartera si no existe
     if ($user['saldo_cartera'] === null) {
         $stmt_create_wallet = $conn->prepare("INSERT INTO carteras (usuario_id, saldo) VALUES (?, 0.00)");
         $stmt_create_wallet->bind_param("i", $user_id);
@@ -43,7 +40,6 @@ try {
     die("Error al obtener datos del usuario: " . $e->getMessage());
 }
 
-// Obtener tarjetas guardadas del usuario
 $tarjetas = [];
 try {
     $stmt_cards = $conn->prepare("
@@ -64,10 +60,8 @@ try {
     die("Error al obtener tarjetas: " . $e->getMessage());
 }
 
-// Procesar formulario de recarga
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['realizar_recarga'])) {
     
-    // Validar monto de recarga
     $monto_recarga = $_POST['monto_recarga'] ?? '';
     $custom_amount = $_POST['custom_amount'] ?? '';
     
@@ -75,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['realizar_recarga'])) 
         $mensaje = 'Por favor selecciona un monto a recargar';
         $mensaje_tipo = 'error';
     } else {
-        // Determinar el monto final
         if ($monto_recarga === 'custom') {
             if (empty($custom_amount) || !is_numeric($custom_amount)) {
                 $mensaje = 'Por favor ingresa un monto personalizado válido';
@@ -96,14 +89,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['realizar_recarga'])) 
         }
     }
     
-    // Validar método de pago
     $metodo_pago = $_POST['metodo_pago'] ?? '';
     if (empty($mensaje) && empty($metodo_pago)) {
         $mensaje = 'Por favor selecciona un método de pago';
         $mensaje_tipo = 'error';
     }
     
-    // Si se seleccionó nueva tarjeta, validar datos
     if (empty($mensaje) && $metodo_pago === 'nueva_tarjeta') {
         $numero_tarjeta = trim($_POST['numero_tarjeta'] ?? '');
         $fecha_expiracion = trim($_POST['fecha_expiracion'] ?? '');
@@ -123,7 +114,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['realizar_recarga'])) 
             $mensaje = 'El nombre del titular es requerido';
             $mensaje_tipo = 'error';
         } else {
-            // Validaciones adicionales más específicas
             $numero_tarjeta_limpio = preg_replace('/\s/', '', $numero_tarjeta);
             
             if (strlen($numero_tarjeta_limpio) < 13 || strlen($numero_tarjeta_limpio) > 19) {
@@ -139,19 +129,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['realizar_recarga'])) 
         }
     }
     
-    // Procesar la recarga si no hay errores
     if (empty($mensaje)) {
         try {
             $conn->autocommit(FALSE);
             
-            // Si es nueva tarjeta y se va a guardar
             if ($metodo_pago === 'nueva_tarjeta' && isset($_POST['guardar_tarjeta'])) {
                 $alias_tarjeta = trim($_POST['alias_tarjeta'] ?? '');
                 if (empty($alias_tarjeta)) {
                     $alias_tarjeta = 'Tarjeta ****' . substr($numero_tarjeta_limpio, -4);
                 }
                 
-                // Insertar nueva tarjeta
                 $stmt_insert_card = $conn->prepare("
                     INSERT INTO tarjetas (usuario_id, numero_tarjeta, fecha_expiracion, nombre_titular, alias) 
                     VALUES (?, AES_ENCRYPT(?, 'clave_cifrado_segura'), ?, ?, ?)
@@ -161,7 +148,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['realizar_recarga'])) 
                 $stmt_insert_card->execute();
             }
             
-            // Actualizar saldo de la cartera
             $nuevo_saldo = $saldo_cartera + $monto_final;
             $stmt_update_wallet = $conn->prepare("
                 UPDATE carteras 
@@ -171,7 +157,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['realizar_recarga'])) 
             $stmt_update_wallet->bind_param("di", $nuevo_saldo, $user_id);
             $stmt_update_wallet->execute();
             
-            // Registrar movimiento en el historial
             $descripcion = "Recarga de cartera - $" . number_format($monto_final, 2);
             $stmt_movement = $conn->prepare("
                 INSERT INTO movimientos_cartera (cartera_id, tipo, monto, descripcion)
@@ -186,7 +171,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['realizar_recarga'])) 
             $mensaje = "¡Recarga exitosa! Se han agregado $" . number_format($monto_final, 2) . " a tu cartera.";
             $mensaje_tipo = 'success';
             
-            // Actualizar el saldo mostrado
             $saldo_cartera = $nuevo_saldo;
             
         } catch (Exception $e) {

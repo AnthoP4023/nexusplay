@@ -71,7 +71,6 @@ include '../../controladores/cont_profile.php';
                     </div>
                 </div>
 
-                <!-- Tabs Desktop -->
                 <div class="admin-tabs desktop-tabs">
                     <a href="admin.php" class="tab-btn">
                         <i class="fas fa-chart-bar"></i> Estadísticas
@@ -90,7 +89,6 @@ include '../../controladores/cont_profile.php';
                     </a>
                 </div>
 
-                <!-- Selector Móvil -->
                 <div class="mobile-selector">
                     <select id="section-select" class="mobile-select" onchange="navigateToSection(this.value)">
                         <option value="admin.php">📊 Estadísticas</option>

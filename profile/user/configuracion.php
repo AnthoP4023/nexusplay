@@ -21,7 +21,6 @@ include '../../controladores/cont_config_user.php';
     <main class="main-content">
         <div class="user-profile-layout">
             <div class="profile-container">
-                <!-- Panel Principal del Usuario -->
                 <div class="main-panel">
                     <div class="user-info-container">
                         <div class="avatar-section">
@@ -39,7 +38,6 @@ include '../../controladores/cont_config_user.php';
                             </p>
                         </div>
                         
-                        <!-- Stats del usuario -->
                         <div class="user-stats">
                             <div class="stat-item">
                                 <div class="stat-number"><?php echo $stats['total_pedidos'] ?? 0; ?></div>
@@ -57,7 +55,6 @@ include '../../controladores/cont_config_user.php';
                     </div>
                 </div>
 
-                <!-- Tabs de Navegación Desktop -->
                 <div class="user-tabs desktop-tabs">
                     <a href="user.php" class="tab-btn">
                         <i class="fas fa-chart-line"></i> Resumen
@@ -79,7 +76,6 @@ include '../../controladores/cont_config_user.php';
                     </a>
                 </div>
 
-                <!-- Selector Móvil -->
                 <div class="mobile-selector">
                     <select id="section-select" class="mobile-select" onchange="navigateToSection(this.value)">
                         <option value="user.php">📊 Resumen</option>
@@ -91,12 +87,10 @@ include '../../controladores/cont_config_user.php';
                     </select>
                 </div>
 
-                <!-- Contenido de Configuraciones -->
                 <div id="configuraciones" class="tab-content active">
                     <h2 class="section-title">Configuraciones de Cuenta</h2>
                     
                     <div class="config-container">
-                        <!-- Sección Actualizar Perfil -->
                         <div class="config-section">
                             <div class="config-header">
                                 <h3><i class="fas fa-user-edit"></i> Información Personal</h3>
@@ -155,7 +149,6 @@ include '../../controladores/cont_config_user.php';
                             </form>
                         </div>
 
-                        <!-- Sección Cambiar Imagen de Perfil -->
                         <div class="config-section">
                             <div class="config-header">
                                 <h3><i class="fas fa-camera"></i> Imagen de Perfil</h3>
@@ -209,7 +202,6 @@ include '../../controladores/cont_config_user.php';
                             </div>
                         </div>
 
-                        <!-- Sección Cambiar Contraseña -->
                         <div class="config-section">
                             <div class="config-header">
                                 <h3><i class="fas fa-lock"></i> Seguridad de la Cuenta</h3>
