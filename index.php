@@ -168,6 +168,67 @@ include 'controladores/cont_index.php';
             </div>
         </section>
 
+        <!-- BANNER DEL EVENTO -->
+        <section class="evento-banner-section">
+            <div class="container">
+                <div class="evento-banner">
+                    <div class="evento-content">
+                        <div class="evento-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div class="evento-text">
+                            <h3>¡Participa para Ganar 5 Códigos de Juegos Premium!</h3>
+                            <p>Únete a nuestro sorteo exclusivo y gana increíbles premios</p>
+                        </div>
+                        <a href="evento.php" target="_blank" class="evento-btn">
+                            <i class="fas fa-ticket-alt"></i>
+                            ¡Participar Ahora!
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE RESEÑAS -->
+        <section class="reviews-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Últimas reseñas</h2>
+                </div>
+                <div class="reviews-grid">
+                    <?php if ($resenas_result && $resenas_result->num_rows > 0): ?>
+                        <?php while ($resena = $resenas_result->fetch_assoc()): ?>
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <div class="review-game">
+                                        <img src="images/juegos/<?php echo $resena['imagen'] ?: 'default.jpg'; ?>" alt="<?php echo htmlspecialchars($resena['juego_titulo']); ?>">
+                                        <div class="review-game-info">
+                                            <h4><?php echo htmlspecialchars($resena['juego_titulo']); ?></h4>
+                                            <p class="review-author">por <?php echo htmlspecialchars($resena['username']); ?></p>
+                                        </div>
+                                    </div>
+                                    <div class="review-rating">
+                                        <?php 
+                                        $rating = round($resena['puntuacion']);
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            echo $i <= $rating ? '<i class="fas fa-star"></i>' : '<i class="fa-regular fa-star"></i>';
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                                <div class="review-content">
+                                    <p><?php echo htmlspecialchars(substr($resena['comentario'], 0, 150)) . (strlen($resena['comentario']) > 150 ? '...' : ''); ?></p>
+                                </div>
+                                <div class="review-date">
+                                    <?php echo date('d/m/Y', strtotime($resena['fecha_resena'])); ?>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </section>
+
         <section class="categories-section">
             <div class="container">
                 <div class="section-header">
