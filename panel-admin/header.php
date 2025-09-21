@@ -31,7 +31,7 @@ require_once __DIR__ . '/controlador_panel/cont_header.php';
                 <span>Usuarios</span>
             </a></li>
             
-            <li><a href="#" class="nav-item">
+            <li><a href="transacciones.php" class="nav-item">
                 <i class="fas fa-exchange-alt"></i>
                 <span>Transacciones</span>
             </a></li>
