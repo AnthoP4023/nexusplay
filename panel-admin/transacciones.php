@@ -3,7 +3,6 @@ session_start();
 require_once '../config_db/database.php';
 require_once 'controlador_panel/cont_transacciones.php';
 
-// --- Solo lógica PHP aquí, nada de HTML ---
 $pagina_actual = isset($_GET['pagina']) ? max(1, intval($_GET['pagina'])) : 1;
 $busqueda = isset($_GET['buscar']) ? $_GET['buscar'] : '';
 $por_pagina = 20;
@@ -27,7 +26,7 @@ $total_paginas = ceil($total_transacciones / $por_pagina);
 </head>
 <body>
 
-    <?php include 'header.php'; ?> <!-- ahora dentro del body -->
+    <?php include 'header.php'; ?> 
 
     <main class="main-content">
         <div class="transacciones-container">

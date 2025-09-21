@@ -41,7 +41,7 @@ require_once __DIR__ . '/controlador_panel/cont_header.php';
                 <span>Pedidos</span>
             </a></li>
             
-            <li><a href="#" class="nav-item">
+            <li><a href="productos.php" class="nav-item">
                 <i class="fas fa-gamepad"></i>
                 <span>Productos</span>
             </a></li>
