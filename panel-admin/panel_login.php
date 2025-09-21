@@ -55,7 +55,7 @@ if (isset($_SESSION['panel_error'])) {
             </form>
             
             <div class="back-link">
-                <a href="../index.php">
+                <a href="../profile/admin/admin.php">
                     <i class="fas fa-arrow-left"></i>
                     Volver al sitio principal
                 </a>
