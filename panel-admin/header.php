@@ -48,7 +48,7 @@ require_once __DIR__ . '/controlador_panel/cont_header.php';
             
             <li class="nav-divider"></li>
             
-            <li><a href="#" class="nav-item">
+            <li><a href="configuraciones.php" class="nav-item">
                 <i class="fas fa-cog"></i>
                 <span>Configuración</span>
             </a></li>

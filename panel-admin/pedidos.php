@@ -131,7 +131,32 @@ require_once __DIR__ . '/controlador_panel/cont_pedidos.php';
         </div>
     </main>
 
+    <div id="completeModal" class="action-modal">
+        <div class="action-modal-content">
+            <h3><i class="fas fa-check-circle"></i> Completar Pedido</h3>
+            <p>¿Estás seguro de que deseas marcar este pedido como completado?</p>
+            <div class="action-buttons">
+                <button class="btn-cancel-action" onclick="closeCompleteModal()">Cancelar</button>
+                <button class="btn-confirm-complete" onclick="confirmComplete()">Completar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cancelModal" class="action-modal">
+        <div class="action-modal-content">
+            <h3><i class="fas fa-times-circle"></i> Cancelar Pedido</h3>
+            <p>¿Estás seguro de que deseas cancelar este pedido?</p>
+            <div class="action-buttons">
+                <button class="btn-cancel-action" onclick="closeCancelModal()">No cancelar</button>
+                <button class="btn-confirm-cancel" onclick="confirmCancel()">Sí, cancelar</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        let pedidoToComplete = null;
+        let pedidoToCancel = null;
+
         function filtrarPedidos() {
             const searchFilter = document.getElementById('search-user').value.toLowerCase();
             const pedidos = document.querySelectorAll('.pedido-card');
@@ -147,42 +172,72 @@ require_once __DIR__ . '/controlador_panel/cont_pedidos.php';
         }
 
         function completarPedido(pedidoId) {
-            if (confirm('¿Estás seguro de marcar este pedido como completado?')) {
-                fetch('functions_panel/fun_pedidos.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: `action=completar&pedido_id=${pedidoId}`
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        location.reload();
-                    } else {
-                        alert('Error: ' + data.message);
-                    }
-                });
-            }
+            pedidoToComplete = pedidoId;
+            document.getElementById('completeModal').style.display = 'block';
         }
 
         function cancelarPedido(pedidoId) {
-            if (confirm('¿Estás seguro de cancelar este pedido?')) {
+            pedidoToCancel = pedidoId;
+            document.getElementById('cancelModal').style.display = 'block';
+        }
+
+        function closeCompleteModal() {
+            document.getElementById('completeModal').style.display = 'none';
+            pedidoToComplete = null;
+        }
+
+        function closeCancelModal() {
+            document.getElementById('cancelModal').style.display = 'none';
+            pedidoToCancel = null;
+        }
+
+        function confirmComplete() {
+            if (pedidoToComplete) {
                 fetch('functions_panel/fun_pedidos.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    body: `action=cancelar&pedido_id=${pedidoId}`
+                    body: `action=completar&pedido_id=${pedidoToComplete}`
                 })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
                         location.reload();
-                    } else {
-                        alert('Error: ' + data.message);
                     }
                 });
+            }
+            closeCompleteModal();
+        }
+
+        function confirmCancel() {
+            if (pedidoToCancel) {
+                fetch('functions_panel/fun_pedidos.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `action=cancelar&pedido_id=${pedidoToCancel}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    }
+                });
+            }
+            closeCancelModal();
+        }
+
+        window.onclick = function(event) {
+            const completeModal = document.getElementById('completeModal');
+            const cancelModal = document.getElementById('cancelModal');
+            
+            if (event.target == completeModal) {
+                closeCompleteModal();
+            }
+            if (event.target == cancelModal) {
+                closeCancelModal();
             }
         }
     </script>
