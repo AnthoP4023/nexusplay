@@ -5,16 +5,13 @@ require_once 'controlador_panel/cont_transacciones.php';
 
 include 'header.php';
 
-// Capturar parámetros
 $pagina_actual = isset($_GET['pagina']) ? max(1, intval($_GET['pagina'])) : 1;
 $busqueda = isset($_GET['buscar']) ? $_GET['buscar'] : '';
 $por_pagina = 20;
 
-// Obtener transacciones según filtros
 $transacciones = getTransacciones($pagina_actual, $por_pagina, '', '', $busqueda);
 $transacciones = array_reverse($transacciones);
 
-// Estadísticas
 $stats = getEstadisticasTransacciones();
 $total_transacciones = getTotalTransacciones('', '', $busqueda);
 $total_paginas = ceil($total_transacciones / $por_pagina);

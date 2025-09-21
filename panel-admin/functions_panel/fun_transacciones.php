@@ -5,12 +5,10 @@ function getTransacciones($pagina = 1, $por_pagina = 20, $tipo = '', $fecha = ''
 
     $where = "WHERE 1=1";
 
-    // FILTRO TIPO
-    if (!empty($tipo)) {
-        $where .= " AND mc.tipo = '$tipo'"; // vulnerable
+   if (!empty($tipo)) {
+        $where .= " AND mc.tipo = '$tipo'";
     }
 
-    // FILTRO FECHA
     if (!empty($fecha)) {
         switch ($fecha) {
             case 'hoy':
@@ -25,7 +23,6 @@ function getTransacciones($pagina = 1, $por_pagina = 20, $tipo = '', $fecha = ''
         }
     }
 
-    // BUSQUEDA (vulnerable)
     if (!empty($busqueda)) {
         $where .= " AND (u.username LIKE '%$busqueda%' OR mc.descripcion LIKE '%$busqueda%')";
     }
@@ -38,7 +35,6 @@ function getTransacciones($pagina = 1, $por_pagina = 20, $tipo = '', $fecha = ''
             ORDER BY mc.fecha ASC
             LIMIT $por_pagina OFFSET $offset";
 
-    // el error de SQL sale automáticamente si hay comilla o payload
     $result = $conn->query($sql) or die($conn->error);
     return $result->fetch_all(MYSQLI_ASSOC);
 }
