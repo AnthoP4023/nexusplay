@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/controlador_panel/cont_pedidos.php';
+require_once __DIR__ . '/controlador_panel/cont_configuraciones.php';
 ?>
 
 <!DOCTYPE html>
