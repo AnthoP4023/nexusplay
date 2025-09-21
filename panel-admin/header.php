@@ -36,7 +36,7 @@ require_once __DIR__ . '/controlador_panel/cont_header.php';
                 <span>Transacciones</span>
             </a></li>
             
-            <li><a href="#" class="nav-item">
+            <li><a href="pedidos.php" class="nav-item">
                 <i class="fas fa-shopping-cart"></i>
                 <span>Pedidos</span>
             </a></li>
@@ -62,30 +62,30 @@ require_once __DIR__ . '/controlador_panel/cont_header.php';
 </aside>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const adminSidebar = document.getElementById('adminSidebar');
-    const mobileOverlay = document.getElementById('mobileOverlay');
-    
-    function toggleMenu() {
-        mobileMenuToggle.classList.toggle('active');
-        adminSidebar.classList.toggle('active');
-        mobileOverlay.classList.toggle('active');
-    }
-    
-    mobileMenuToggle.addEventListener('click', toggleMenu);
-    mobileOverlay.addEventListener('click', toggleMenu);
-    
-    const navItems = document.querySelectorAll('.nav-item');
-    const currentPage = window.location.pathname.split('/').pop();
-    
-    navItems.forEach(item => {
-        const href = item.getAttribute('href');
-        if (href === currentPage) {
-            item.classList.add('active');
-        } else {
-            item.classList.remove('active');
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const adminSidebar = document.getElementById('adminSidebar');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        
+        function toggleMenu() {
+            mobileMenuToggle.classList.toggle('active');
+            adminSidebar.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
         }
+        
+        mobileMenuToggle.addEventListener('click', toggleMenu);
+        mobileOverlay.addEventListener('click', toggleMenu);
+        
+        const navItems = document.querySelectorAll('.nav-item');
+        const currentPage = window.location.pathname.split('/').pop();
+        
+        navItems.forEach(item => {
+            const href = item.getAttribute('href');
+            if (href === currentPage) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
     });
-});
 </script>
