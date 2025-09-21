@@ -21,12 +21,12 @@ require_once __DIR__ . '/controlador_panel/cont_header.php';
 
     <nav class="admin-navigation">
         <ul class="nav-menu">
-            <li><a href="dashboard.php" class="nav-item active">
+            <li><a href="dashboard.php" class="nav-item">
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a></li>
             
-            <li><a href="#" class="nav-item">
+            <li><a href="usuarios.php" class="nav-item">
                 <i class="fas fa-users"></i>
                 <span>Usuarios</span>
             </a></li>
@@ -71,42 +71,20 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileMenuToggle.classList.toggle('active');
         adminSidebar.classList.toggle('active');
         mobileOverlay.classList.toggle('active');
-        
-        if (adminSidebar.classList.contains('active')) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
-    }
-    
-    function closeMenu() {
-        mobileMenuToggle.classList.remove('active');
-        adminSidebar.classList.remove('active');
-        mobileOverlay.classList.remove('active');
-        document.body.style.overflow = '';
     }
     
     mobileMenuToggle.addEventListener('click', toggleMenu);
-    mobileOverlay.addEventListener('click', closeMenu);
+    mobileOverlay.addEventListener('click', toggleMenu);
     
     const navItems = document.querySelectorAll('.nav-item');
+    const currentPage = window.location.pathname.split('/').pop();
+    
     navItems.forEach(item => {
-        item.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                closeMenu();
-            }
-        });
-    });
-    
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            closeMenu();
-        }
-    });
-    
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && adminSidebar.classList.contains('active')) {
-            closeMenu();
+        const href = item.getAttribute('href');
+        if (href === currentPage) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
         }
     });
 });

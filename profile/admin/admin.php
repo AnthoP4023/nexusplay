@@ -40,7 +40,7 @@ include '../../controladores/cont_profile.php';
                             </div>
                             
                             <div class="admin-actions">
-                                <a href="../../panel-admin/panel_login.php" class="btn-admin-panel" target="_blank">
+                                <a href="/nexusplay/panel-admin/panel_login.php" class="btn-admin-panel" target="_blank">
                                     <i class="fas fa-cogs"></i> Panel de Control
                                 </a>
                             </div>
@@ -71,7 +71,6 @@ include '../../controladores/cont_profile.php';
                     </div>
                 </div>
 
-                <!-- Tabs de Navegación Desktop -->
                 <div class="admin-tabs desktop-tabs">
                     <a href="admin.php" class="tab-btn active">
                         <i class="fas fa-chart-bar"></i> Estadísticas
