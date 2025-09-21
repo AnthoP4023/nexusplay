@@ -1,5 +1,4 @@
 <?php
-// Verificar que el usuario esté autenticado como administrador
 require_once __DIR__ . '/../functions_panel/fun_auth_panel.php';
 require_once __DIR__ . '/../../config_db/database.php';
 
@@ -8,14 +7,11 @@ if (!isPanelAdminLoggedIn()) {
     exit();
 }
 
-// Renovar la sesión
 renewPanelSession();
 
-// Obtener datos del administrador
 $admin_id = $_SESSION['panel_admin_id'];
 $admin_name = $_SESSION['panel_admin_username'] ?? 'Administrador';
 
-// Obtener la imagen del administrador desde la base de datos
 try {
     $stmt = $conn->prepare("SELECT imagen_perfil FROM usuarios WHERE id = ?");
     $stmt->bind_param("i", $admin_id);

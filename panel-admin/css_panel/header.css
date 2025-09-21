@@ -1,4 +1,3 @@
-/* Reset y configuración base */
 * {
     margin: 0;
     padding: 0;
@@ -11,7 +10,6 @@ body {
     color: #e5e5e5;
 }
 
-/* Sidebar del administrador */
 .admin-sidebar {
     position: fixed;
     left: 0;
@@ -26,7 +24,6 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Sección de perfil del administrador */
 .admin-profile-section {
     padding: 30px 20px;
     text-align: center;
@@ -64,14 +61,13 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin: 0 auto 10px auto; /* Cambiado: agregado 'auto' para centrar horizontalmente */
+  margin: 0 auto 10px auto;
   border: 1px solid rgba(37, 99, 235, 0.3);
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
   max-width: fit-content;
-  display: block; /* Agregado: asegurar que se comporte como elemento de bloque */
+  display: block; 
 }
-
 
 .admin-name {
     color: #e5e5e5;
@@ -81,7 +77,6 @@ body {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Navegación del administrador */
 .admin-navigation {
     padding: 20px 0;
 }
@@ -145,13 +140,11 @@ body {
     font-weight: 500;
 }
 
-/* Separador */
 .nav-divider {
     height: 1px;
     margin: 20px 25px;
 }
 
-/* Estilo especial para cerrar sesión */
 .nav-item.logout {
     color: #ef4444;
     margin-top: 10px;
@@ -163,7 +156,6 @@ body {
     color: #f87171;
 }
 
-/* Contenido principal (ajuste para el sidebar) */
 .main-content {
     margin-left: 280px;
     min-height: 100vh;
@@ -171,7 +163,6 @@ body {
     transition: margin-left 0.3s ease;
 }
 
-/* Botón hamburguesa para móviles */
 .mobile-menu-toggle {
     display: none;
     position: fixed;
@@ -203,7 +194,6 @@ body {
     border-radius: 1px;
 }
 
-/* Animación del botón hamburguesa */
 .mobile-menu-toggle.active span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
@@ -216,7 +206,6 @@ body {
     transform: rotate(-45deg) translate(7px, -6px);
 }
 
-/* Overlay para móviles */
 .mobile-overlay {
     display: none;
     position: fixed;
@@ -234,7 +223,6 @@ body {
     opacity: 1;
 }
 
-/* Efectos de hover mejorados */
 .nav-item::after {
     content: '';
     position: absolute;
@@ -250,7 +238,6 @@ body {
     width: 100%;
 }
 
-/* Animación de carga */
 @keyframes slideInLeft {
     from {
         transform: translateX(-100%);
@@ -266,7 +253,6 @@ body {
     animation: slideInLeft 0.5s ease-out;
 }
 
-/* Scroll personalizado para el sidebar */
 .admin-sidebar::-webkit-scrollbar {
     width: 6px;
 }
@@ -284,8 +270,6 @@ body {
     background: rgba(37, 99, 235, 0.7);
 }
 
-
-/* Responsive */
 @media (max-width: 768px) {
     .admin-sidebar {
         width: 100%;
@@ -354,7 +338,6 @@ body {
         justify-content: center;
     }
     
-    /* Mostrar overlay cuando esté activo */
     .mobile-overlay {
         display: block;
     }
@@ -365,7 +348,6 @@ body {
 }
 
 @media (max-width: 480px) {
-    /* Ajustes para pantallas muy pequeñas */
     .admin-sidebar {
         width: 100%;
     }

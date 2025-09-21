@@ -158,8 +158,6 @@ body {
     color: #667eea;
 }
 
-
-/* Responsive */
 @media (max-width: 480px) {
     .login-container {
         padding: 100px 10px;
@@ -178,7 +176,6 @@ body {
     }
 }
 
-/* Loading state para el botón */
 .login-btn.loading {
     opacity: 0.7;
     cursor: not-allowed;
