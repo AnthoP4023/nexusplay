@@ -19,7 +19,7 @@ if (isset($_SESSION['panel_error'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Admin - Login</title>
     <link rel="stylesheet" href="css_panel/panel_login.css">
-    <link rel="stylesheet" href="../assests/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/nexusplay/assests/fontawesome/css/all.min.css">
 </head>
 <body>
     <div class="login-container">
