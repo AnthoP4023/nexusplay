@@ -5,6 +5,6 @@ require_once __DIR__ . '/functions_panel/fun_auth_panel.php';
 
 logoutPanelAdmin();
 
-header('Location: panel_login.php');
+header('Location: dashboard.php');
 exit();
 ?>

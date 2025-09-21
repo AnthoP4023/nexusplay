@@ -4,7 +4,7 @@ session_start();
 require_once __DIR__ . '/../functions_panel/fun_auth_panel.php';
 
 if (isPanelAdminLoggedIn()) {
-    header('Location: ../index_panel.php');
+    header('Location: ../dashboard.php');
     exit();
 }
 
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($admin_data) {
             loginPanelAdmin($admin_data);
             
-            header('Location: ../index_panel.php');
+            header('Location: ../dashboard.php');
             exit();
             
         } else {

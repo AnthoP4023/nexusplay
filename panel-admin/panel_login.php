@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION['panel_admin_logged']) && $_SESSION['panel_admin_logged'] === true) {
-    header('Location: index_panel.php');
+    header('Location: dashboard.php');
     exit();
 }
 

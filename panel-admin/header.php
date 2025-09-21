@@ -2,7 +2,15 @@
 require_once __DIR__ . '/controlador_panel/cont_header.php';
 ?>
 
-<aside class="admin-sidebar">
+<button class="mobile-menu-toggle" id="mobileMenuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<aside class="admin-sidebar" id="adminSidebar">
     <div class="admin-profile-section">
         <div class="admin-avatar">
             <img src="<?php echo htmlspecialchars($admin_avatar); ?>" alt="Avatar Administrador" class="avatar-img">
@@ -13,7 +21,7 @@ require_once __DIR__ . '/controlador_panel/cont_header.php';
 
     <nav class="admin-navigation">
         <ul class="nav-menu">
-            <li><a href="#" class="nav-item active">
+            <li><a href="dashboard.php" class="nav-item active">
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a></li>
@@ -52,3 +60,54 @@ require_once __DIR__ . '/controlador_panel/cont_header.php';
         </ul>
     </nav>
 </aside>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const adminSidebar = document.getElementById('adminSidebar');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    
+    function toggleMenu() {
+        mobileMenuToggle.classList.toggle('active');
+        adminSidebar.classList.toggle('active');
+        mobileOverlay.classList.toggle('active');
+        
+        if (adminSidebar.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }
+    
+    function closeMenu() {
+        mobileMenuToggle.classList.remove('active');
+        adminSidebar.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    mobileMenuToggle.addEventListener('click', toggleMenu);
+    mobileOverlay.addEventListener('click', closeMenu);
+    
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                closeMenu();
+            }
+        });
+    });
+    
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            closeMenu();
+        }
+    });
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && adminSidebar.classList.contains('active')) {
+            closeMenu();
+        }
+    });
+});
+</script>
