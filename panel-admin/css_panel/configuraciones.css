@@ -1,15 +1,12 @@
-* {
+html, body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    width: 100%;
 }
 
 body {
-    background: linear-gradient(rgba(0, 0, 0, 0.082), rgba(0, 0, 0, 0.115)), 
-    url('/nexusplay/images/Logo/fondo4.jpg') no-repeat center center fixed;
-    background-size: cover;
     font-family: 'Arial', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: linear-gradient(135deg, #1a1a1a, #2d2d2d, #1a1a1a);
+    color: #e5e5e5;
+    min-height: 100vh;
 }
