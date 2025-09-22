@@ -248,8 +248,6 @@ require_once __DIR__ . '/controlador_panel/cont_dashboard.php';
                 observer.observe(card);
             });
             
-            setInterval(updateTime, 1000);
-
             const hoverElements = document.querySelectorAll('.stat-card, .order-item, .category-item, .game-item, .user-item');
             
             hoverElements.forEach(element => {
