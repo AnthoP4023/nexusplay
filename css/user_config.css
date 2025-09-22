@@ -342,6 +342,22 @@
     border-color: #ef4444;
 }
 
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.alert.error {
+    background-color: #e74c3c;
+}
+
+.alert.success {
+    background-color: #2ecc71;
+}
+
+
 @keyframes slideInUp {
     from {
         opacity: 0;

@@ -90,56 +90,58 @@ include '../../controladores/cont_config_user.php';
                 <div id="configuraciones" class="tab-content active">
                     <h2 class="section-title">Configuraciones de Cuenta</h2>
                     
+                    <!-- Mensajes unificados -->
+                    <?php if (!empty($profile_message) || !empty($image_message) || !empty($password_message)) : ?>
+                        <div class="messages-container">
+                            <?php if (!empty($profile_message)) : ?>
+                                <div class="message <?php echo $profile_message_type; ?>">
+                                    <i class="fas <?php echo $profile_message_type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'; ?>"></i>
+                                    <?php echo htmlspecialchars($profile_message); ?>
+                                </div>
+                            <?php endif; ?>
+                            <?php if (!empty($image_message)) : ?>
+                                <div class="message <?php echo $image_message_type; ?>">
+                                    <i class="fas <?php echo $image_message_type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'; ?>"></i>
+                                    <?php echo htmlspecialchars($image_message); ?>
+                                </div>
+                            <?php endif; ?>
+                            <?php if (!empty($password_message)) : ?>
+                                <div class="message <?php echo $password_message_type; ?>">
+                                    <i class="fas <?php echo $password_message_type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'; ?>"></i>
+                                    <?php echo htmlspecialchars($password_message); ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+
                     <div class="config-container">
+                        <!-- Información Personal -->
                         <div class="config-section">
                             <div class="config-header">
                                 <h3><i class="fas fa-user-edit"></i> Información Personal</h3>
                                 <p>Actualiza tus datos personales</p>
                             </div>
                             
-                            <?php if (!empty($profile_message)): ?>
-                                <div class="message <?php echo $profile_message_type; ?>">
-                                    <i class="fas <?php echo $profile_message_type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'; ?>"></i>
-                                    <?php echo htmlspecialchars($profile_message); ?>
-                                </div>
-                            <?php endif; ?>
-                            
                             <form method="POST" class="config-form">
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <label for="username">
-                                            <i class="fas fa-user"></i> Nombre de Usuario
-                                        </label>
-                                        <input type="text" id="username" name="username" 
-                                               value="<?php echo htmlspecialchars($user_data['username']); ?>" 
-                                               placeholder="Ingresa tu nombre de usuario" required>
+                                        <label for="username"><i class="fas fa-user"></i> Nombre de Usuario</label>
+                                        <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($user_data['username']); ?>" placeholder="Ingresa tu nombre de usuario" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="email">
-                                            <i class="fas fa-envelope"></i> Correo Electrónico
-                                        </label>
-                                        <input type="email" id="email" name="email" 
-                                               value="<?php echo htmlspecialchars($user_data['email']); ?>" 
-                                               placeholder="Ingresa tu correo electrónico" required>
+                                        <label for="email"><i class="fas fa-envelope"></i> Correo Electrónico</label>
+                                        <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user_data['email']); ?>" placeholder="Ingresa tu correo electrónico" required>
                                     </div>
                                 </div>
                                 
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <label for="nombre">
-                                            <i class="fas fa-id-badge"></i> Nombre
-                                        </label>
-                                        <input type="text" id="nombre" name="nombre" 
-                                               value="<?php echo htmlspecialchars($user_data['nombre']); ?>" 
-                                               placeholder="Ingresa tu nombre" required>
+                                        <label for="nombre"><i class="fas fa-id-badge"></i> Nombre</label>
+                                        <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($user_data['nombre']); ?>" placeholder="Ingresa tu nombre" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="apellido">
-                                            <i class="fas fa-id-badge"></i> Apellido
-                                        </label>
-                                        <input type="text" id="apellido" name="apellido" 
-                                               value="<?php echo htmlspecialchars($user_data['apellido']); ?>" 
-                                               placeholder="Ingresa tu apellido" required>
+                                        <label for="apellido"><i class="fas fa-id-badge"></i> Apellido</label>
+                                        <input type="text" id="apellido" name="apellido" value="<?php echo htmlspecialchars($user_data['apellido']); ?>" placeholder="Ingresa tu apellido" required>
                                     </div>
                                 </div>
                                 
@@ -149,19 +151,13 @@ include '../../controladores/cont_config_user.php';
                             </form>
                         </div>
 
+                        <!-- Imagen de Perfil -->
                         <div class="config-section">
                             <div class="config-header">
                                 <h3><i class="fas fa-camera"></i> Imagen de Perfil</h3>
                                 <p>Cambia tu foto de perfil</p>
                             </div>
-                            
-                            <?php if (!empty($image_message)): ?>
-                                <div class="message <?php echo $image_message_type; ?>">
-                                    <i class="fas <?php echo $image_message_type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'; ?>"></i>
-                                    <?php echo htmlspecialchars($image_message); ?>
-                                </div>
-                            <?php endif; ?>
-                            
+
                             <div class="profile-image-section">
                                 <div class="current-image">
                                     <img src="<?php echo htmlspecialchars($perfil_img); ?>" alt="Imagen actual" id="currentProfileImage" class="profile-preview">
@@ -202,27 +198,18 @@ include '../../controladores/cont_config_user.php';
                             </div>
                         </div>
 
+                        <!-- Seguridad -->
                         <div class="config-section">
                             <div class="config-header">
                                 <h3><i class="fas fa-lock"></i> Seguridad de la Cuenta</h3>
                                 <p>Cambia tu contraseña para mantener tu cuenta segura</p>
                             </div>
                             
-                            <?php if (!empty($password_message)): ?>
-                                <div class="message <?php echo $password_message_type; ?>">
-                                    <i class="fas <?php echo $password_message_type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'; ?>"></i>
-                                    <?php echo htmlspecialchars($password_message); ?>
-                                </div>
-                            <?php endif; ?>
-                            
                             <form method="POST" class="config-form">
                                 <div class="form-group">
-                                    <label for="current_password">
-                                        <i class="fas fa-key"></i> Contraseña Actual
-                                    </label>
+                                    <label for="current_password"><i class="fas fa-key"></i> Contraseña Actual</label>
                                     <div class="password-input">
-                                        <input type="password" id="current_password" name="current_password" 
-                                               placeholder="Ingresa tu contraseña actual" required>
+                                        <input type="password" id="current_password" name="current_password" placeholder="Ingresa tu contraseña actual" required>
                                         <button type="button" class="toggle-password" onclick="togglePassword('current_password')">
                                             <i class="fas fa-eye" id="current_password_icon"></i>
                                         </button>
@@ -231,12 +218,9 @@ include '../../controladores/cont_config_user.php';
                                 
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <label for="new_password">
-                                            <i class="fas fa-lock"></i> Nueva Contraseña
-                                        </label>
+                                        <label for="new_password"><i class="fas fa-lock"></i> Nueva Contraseña</label>
                                         <div class="password-input">
-                                            <input type="password" id="new_password" name="new_password" 
-                                                   placeholder="Ingresa tu nueva contraseña" required>
+                                            <input type="password" id="new_password" name="new_password" placeholder="Ingresa tu nueva contraseña" required>
                                             <button type="button" class="toggle-password" onclick="togglePassword('new_password')">
                                                 <i class="fas fa-eye" id="new_password_icon"></i>
                                             </button>
@@ -244,12 +228,9 @@ include '../../controladores/cont_config_user.php';
                                         <small class="password-help">Mínimo 6 caracteres</small>
                                     </div>
                                     <div class="form-group">
-                                        <label for="confirm_password">
-                                            <i class="fas fa-lock"></i> Confirmar Contraseña
-                                        </label>
+                                        <label for="confirm_password"><i class="fas fa-lock"></i> Confirmar Contraseña</label>
                                         <div class="password-input">
-                                            <input type="password" id="confirm_password" name="confirm_password" 
-                                                   placeholder="Confirma tu nueva contraseña" required>
+                                            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirma tu nueva contraseña" required>
                                             <button type="button" class="toggle-password" onclick="togglePassword('confirm_password')">
                                                 <i class="fas fa-eye" id="confirm_password_icon"></i>
                                             </button>
