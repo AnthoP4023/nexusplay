@@ -33,6 +33,35 @@
     align-items: center;
     gap: 12px;
 }
+.file-error-container {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    display: none;
+}
+
+.file-error-container.show {
+    display: block !important;
+    animation: slideInDown 0.3s ease;
+}
+
+.error-message {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-left: 4px solid #ef4444;
+    color: #ef4444;
+    padding: 12px 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.error-message i {
+    color: #ef4444;
+    flex-shrink: 0;
+    font-size: 1rem;
+}
 
 .config-header h3 i {
     color: #10b956;

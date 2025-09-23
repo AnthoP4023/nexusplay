@@ -1,5 +1,20 @@
-<?php 
+<?php
 include 'controladores/cont_cart.php';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Asegurar que la sesión de carrito esté inicializada
+if (!isset($_SESSION['carrito'])) {
+    $_SESSION['carrito'] = [];
+}
+
+// Variables para la vista
+$carrito_items = $_SESSION['carrito'];
+$total_carrito = 0;
+foreach ($carrito_items as $item) {
+    $total_carrito += $item['precio'] * $item['cantidad'];
+}
 ?>
 
 <!DOCTYPE html>

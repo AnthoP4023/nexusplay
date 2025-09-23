@@ -153,50 +153,58 @@ include '../../controladores/cont_config_user.php';
 
                         <!-- Imagen de Perfil -->
                         <div class="config-section">
-                            <div class="config-header">
-                                <h3><i class="fas fa-camera"></i> Imagen de Perfil</h3>
-                                <p>Cambia tu foto de perfil</p>
-                            </div>
+    <div class="config-header">
+        <h3><i class="fas fa-camera"></i> Imagen de Perfil</h3>
+        <p>Cambia tu foto de perfil</p>
+    </div>
 
-                            <div class="profile-image-section">
-                                <div class="current-image">
-                                    <img src="<?php echo htmlspecialchars($perfil_img); ?>" alt="Imagen actual" id="currentProfileImage" class="profile-preview">
-                                    <div class="image-info">
-                                        <h4>Imagen Actual</h4>
-                                        <p class="image-guidelines">
-                                            <i class="fas fa-info-circle"></i>
-                                            Formatos permitidos: JPG, JPEG, PNG, GIF<br>
-                                            Tamaño máximo: 5MB<br>
-                                            Recomendado: 400x400 píxeles
-                                        </p>
-                                    </div>
-                                </div>
-                                
-                                <form method="POST" enctype="multipart/form-data" class="image-upload-form">
-                                    <div class="file-input-container">
-                                        <input type="file" id="profileImageInput" name="profile_image" accept="image/*" required>
-                                        <label for="profileImageInput" class="file-input-label">
-                                            <i class="fas fa-cloud-upload-alt"></i>
-                                            <span>Seleccionar Nueva Imagen</span>
-                                        </label>
-                                        <div id="fileName" class="file-name"></div>
-                                    </div>
-                                    
-                                    <div class="image-preview-container" id="imagePreviewContainer" style="display: none;">
-                                        <img id="imagePreview" class="image-preview" alt="Vista previa">
-                                        <div class="preview-actions">
-                                            <button type="button" id="cancelPreview" class="btn btn-secondary">
-                                                <i class="fas fa-times"></i> Cancelar
-                                            </button>
-                                        </div>
-                                    </div>
-                                    
-                                    <button type="submit" name="update_profile_image" class="btn btn-green" id="uploadBtn" disabled>
-                                        <i class="fas fa-save"></i> Actualizar Imagen
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
+    <div class="profile-image-section">
+        <div class="current-image">
+            <img src="<?php echo htmlspecialchars($perfil_img); ?>" alt="Imagen actual" id="currentProfileImage" class="profile-preview">
+            <div class="image-info">
+                <h4>Imagen Actual</h4>
+                <p class="image-guidelines">
+                    <i class="fas fa-info-circle"></i>
+                    Formatos permitidos: JPG, JPEG, PNG, GIF<br>
+                    Tamaño máximo: 5MB<br>
+                    Recomendado: 400x400 píxeles
+                </p>
+            </div>
+        </div>
+        
+        <form method="POST" enctype="multipart/form-data" class="image-upload-form">
+            <div class="file-input-container">
+                <input type="file" id="profileImageInput" name="profile_image" accept="image/*" required>
+                <label for="profileImageInput" class="file-input-label">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span>Seleccionar Nueva Imagen</span>
+                </label>
+                <div id="fileName" class="file-name"></div>
+            </div>
+            
+            <!-- Contenedor para mostrar errores -->
+            <div id="fileErrorContainer" class="file-error-container">
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span id="fileErrorText"></span>
+                </div>
+            </div>
+            
+            <div class="image-preview-container" id="imagePreviewContainer" style="display: none;">
+                <img id="imagePreview" class="image-preview" alt="Vista previa">
+                <div class="preview-actions">
+                    <button type="button" id="cancelPreview" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                </div>
+            </div>
+            
+            <button type="submit" name="update_profile_image" class="btn btn-green" id="uploadBtn" disabled>
+                <i class="fas fa-save"></i> Actualizar Imagen
+            </button>
+        </form>
+    </div>
+</div>
 
                         <!-- Seguridad -->
                         <div class="config-section">
@@ -252,108 +260,139 @@ include '../../controladores/cont_config_user.php';
     <?php include '../../includes/footer.php'; ?>
 
     <script>
-        function navigateToSection(url) {
-            if (url) {
-                window.location.href = url;
+function navigateToSection(url) {
+    if (url) {
+        window.location.href = url;
+    }
+}
+
+function togglePassword(fieldId) {
+    const field = document.getElementById(fieldId);
+    const icon = document.getElementById(fieldId + '_icon');
+    
+    if (field.type === 'password') {
+        field.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        field.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}
+
+document.getElementById('confirm_password').addEventListener('input', function() {
+    const newPassword = document.getElementById('new_password').value;
+    const confirmPassword = this.value;
+    
+    if (confirmPassword && newPassword !== confirmPassword) {
+        this.setCustomValidity('Las contraseñas no coinciden');
+        this.classList.add('error');
+    } else {
+        this.setCustomValidity('');
+        this.classList.remove('error');
+    }
+});
+
+document.getElementById('new_password').addEventListener('input', function() {
+    if (this.value.length > 0 && this.value.length < 6) {
+        this.setCustomValidity('La contraseña debe tener al menos 6 caracteres');
+        this.classList.add('error');
+    } else {
+        this.setCustomValidity('');
+        this.classList.remove('error');
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('profileImageInput');
+    const fileName = document.getElementById('fileName');
+    const imagePreview = document.getElementById('imagePreview');
+    const previewContainer = document.getElementById('imagePreviewContainer');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const cancelBtn = document.getElementById('cancelPreview');
+    const errorContainer = document.getElementById('fileErrorContainer');
+    const errorText = document.getElementById('fileErrorText');
+    
+    // Función para mostrar errores
+    function showError(message) {
+        errorText.textContent = message;
+        errorContainer.classList.add('show');
+        errorContainer.style.display = 'block';
+        
+        // Ocultar el error después de 5 segundos
+        setTimeout(() => {
+            hideError();
+        }, 5000);
+    }
+    
+    // Función para ocultar errores
+    function hideError() {
+        errorContainer.classList.remove('show');
+        setTimeout(() => {
+            if (!errorContainer.classList.contains('show')) {
+                errorContainer.style.display = 'none';
             }
+        }, 300);
+    }
+    
+    // Función para resetear el input de archivo
+    function resetFileInput() {
+        if (fileInput) fileInput.value = '';
+        if (fileName) {
+            fileName.textContent = '';
+            fileName.style.display = 'none';
         }
-
-        function togglePassword(fieldId) {
-            const field = document.getElementById(fieldId);
-            const icon = document.getElementById(fieldId + '_icon');
+        if (previewContainer) previewContainer.style.display = 'none';
+        if (uploadBtn) uploadBtn.disabled = true;
+        hideError();
+    }
+    
+    if (fileInput) {
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
             
-            if (field.type === 'password') {
-                field.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                field.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        }
-
-        document.getElementById('confirm_password').addEventListener('input', function() {
-            const newPassword = document.getElementById('new_password').value;
-            const confirmPassword = this.value;
-            
-            if (confirmPassword && newPassword !== confirmPassword) {
-                this.setCustomValidity('Las contraseñas no coinciden');
-                this.classList.add('error');
-            } else {
-                this.setCustomValidity('');
-                this.classList.remove('error');
-            }
-        });
-
-        document.getElementById('new_password').addEventListener('input', function() {
-            if (this.value.length > 0 && this.value.length < 6) {
-                this.setCustomValidity('La contraseña debe tener al menos 6 caracteres');
-                this.classList.add('error');
-            } else {
-                this.setCustomValidity('');
-                this.classList.remove('error');
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const fileInput = document.getElementById('profileImageInput');
-            const fileName = document.getElementById('fileName');
-            const imagePreview = document.getElementById('imagePreview');
-            const previewContainer = document.getElementById('imagePreviewContainer');
-            const uploadBtn = document.getElementById('uploadBtn');
-            const cancelBtn = document.getElementById('cancelPreview');
-            
-            if (fileInput) {
-                fileInput.addEventListener('change', function(e) {
-                    const file = e.target.files[0];
-                    
-                    if (file) {
-                        const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
-                        if (!allowedTypes.includes(file.type)) {
-                            alert('Solo se permiten archivos de imagen (JPG, JPEG, PNG, GIF)');
-                            resetFileInput();
-                            return;
-                        }
-                        
-                        if (file.size > 5 * 1024 * 1024) {
-                            alert('El archivo es demasiado grande. Máximo 5MB');
-                            resetFileInput();
-                            return;
-                        }
-                        
-                        fileName.textContent = file.name;
-                        fileName.style.display = 'block';
-                        
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            imagePreview.src = e.target.result;
-                            previewContainer.style.display = 'block';
-                            uploadBtn.disabled = false;
-                        };
-                        reader.readAsDataURL(file);
-                    } else {
-                        resetFileInput();
-                    }
-                });
-            }
-            
-            if (cancelBtn) {
-                cancelBtn.addEventListener('click', function() {
+            if (file) {
+                const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+                
+                // Validar tipo de archivo
+                if (!allowedTypes.includes(file.type)) {
+                    showError('Solo se permiten archivos de imagen (JPG, JPEG, PNG, GIF)');
                     resetFileInput();
-                });
-            }
-            
-            function resetFileInput() {
-                if (fileInput) fileInput.value = '';
-                if (fileName) {
-                    fileName.textContent = '';
-                    fileName.style.display = 'none';
+                    return;
                 }
-                if (previewContainer) previewContainer.style.display = 'none';
-                if (uploadBtn) uploadBtn.disabled = true;
+                
+                // Validar tamaño de archivo (5MB máximo)
+                if (file.size > 5 * 1024 * 1024) {
+                    showError('El archivo es demasiado grande. Tamaño máximo: 5MB');
+                    resetFileInput();
+                    return;
+                }
+                
+                // Si todo está bien, procesar el archivo
+                hideError();
+                fileName.textContent = file.name;
+                fileName.style.display = 'block';
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                    uploadBtn.disabled = false;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                resetFileInput();
             }
         });
-    </script>
+    }
+    
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', function() {
+            resetFileInput();
+        });
+    }
+});
+</script>
 </body>
 </html>
